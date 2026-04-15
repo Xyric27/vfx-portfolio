@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "VFX Portfolio"
+version = "1.0.0"
+id = "artifacts/vfx-portfolio"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24448
+
+[services.development]
+run = "pnpm --filter @workspace/vfx-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/vfx-portfolio", "run", "build" ]
+publicDir = "artifacts/vfx-portfolio/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24448"
+BASE_PATH = "/"
