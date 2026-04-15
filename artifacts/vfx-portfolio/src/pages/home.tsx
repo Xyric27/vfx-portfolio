@@ -1,4 +1,4 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, Clapperboard, Film, Mail, Play, Sparkles, Wand2 } from "lucide-react";
 
 const works = [
@@ -77,9 +77,17 @@ export default function Home() {
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
   const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
+  const scrollScale = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
+  const reelY = useTransform(scrollYProgress, [0.08, 0.45], [90, -70]);
+  const reelRotate = useTransform(scrollYProgress, [0.08, 0.45], [-1.6, 1.4]);
+  const floatY = useTransform(scrollYProgress, [0, 1], [0, -260]);
+  const floatReverseY = useTransform(scrollYProgress, [0, 1], [0, 220]);
 
   return (
     <main className="min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
+      <motion.div className="fixed left-0 top-0 z-[70] h-1 origin-left bg-gradient-to-r from-[#ff2f8e] via-[#fff0cf] to-[#00dcff]" style={{ scaleX: scrollScale }} />
+      <motion.div className="pointer-events-none fixed left-[6vw] top-[22vh] z-0 hidden h-36 w-36 rounded-[42%] bg-[#ff2f8e]/25 blur-xl lg:block" style={{ y: floatY }} />
+      <motion.div className="pointer-events-none fixed right-[7vw] top-[58vh] z-0 hidden h-44 w-44 rounded-full bg-[#00dcff]/20 blur-xl lg:block" style={{ y: floatReverseY }} />
       <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
         <a href="#top" className="font-display text-xl font-black uppercase tracking-tight">
           Motion<span className="text-[#00dcff]">.VFX</span>
@@ -148,6 +156,13 @@ export default function Home() {
         </motion.div>
       </section>
 
+      <section className="relative -mt-10 overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
+        <div className="motion-marquee font-display text-4xl font-black uppercase tracking-[-0.05em] md:text-6xl">
+          <span>Animation</span><span>VFX</span><span>Editing</span><span>Motion Graphics</span><span>Color Grade</span><span>Compositing</span>
+          <span>Animation</span><span>VFX</span><span>Editing</span><span>Motion Graphics</span><span>Color Grade</span><span>Compositing</span>
+        </div>
+      </section>
+
       <section id="showreel" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
@@ -163,6 +178,7 @@ export default function Home() {
 
         <motion.div
           className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black"
+          style={{ y: reelY, rotate: reelRotate }}
           initial={{ opacity: 0, y: 70 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-120px" }}
@@ -170,6 +186,15 @@ export default function Home() {
         >
           <div className="relative aspect-video min-h-[360px]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,#ff2f8e_0,transparent_26%),radial-gradient(circle_at_82%_70%,#00dcff_0,transparent_28%),linear-gradient(135deg,#160b0d,#111_48%,#2a081b)]" />
+            <div className="motion-video-loop absolute inset-0">
+              <span className="loop-shape loop-a" />
+              <span className="loop-shape loop-b" />
+              <span className="loop-shape loop-c" />
+              <span className="loop-shape loop-d" />
+              <span className="loop-frame loop-frame-one" />
+              <span className="loop-frame loop-frame-two" />
+              <span className="loop-scan" />
+            </div>
             <div className="absolute inset-6 rounded-[1.5rem] border border-white/15" />
             <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
             <div className="absolute bottom-8 left-8 right-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
@@ -199,6 +224,7 @@ export default function Home() {
                 className="project-card group overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
                 initial={{ opacity: 0, y: 55 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -12, rotate: index % 2 === 0 ? -0.8 : 0.8 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, delay: index * 0.08 }}
               >
@@ -253,6 +279,7 @@ export default function Home() {
                 className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
+                whileHover={{ x: 12 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.55 }}
               >
