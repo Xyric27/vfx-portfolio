@@ -1,201 +1,289 @@
-import { useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Play, Film, MonitorPlay, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { ArrowUpRight, Clapperboard, Film, Mail, Play, Sparkles, Wand2 } from "lucide-react";
+
+const works = [
+  {
+    title: "Brand Film Burst",
+    type: "2D Animation / Edit",
+    year: "2024",
+    tone: "Launch visuals with playful transitions, punchy timing, and kinetic typography.",
+    gradient: "from-[#ff2f8e] via-[#ff6b2b] to-[#ffd38a]",
+  },
+  {
+    title: "Music Video VFX",
+    type: "Compositing / Grade",
+    year: "2024",
+    tone: "Rotoscope layers, glowing trails, atmosphere, and frame-by-frame polish.",
+    gradient: "from-[#00d7ff] via-[#7a4cff] to-[#ff2f8e]",
+  },
+  {
+    title: "Social Ad Pack",
+    type: "Motion Graphics",
+    year: "2023",
+    tone: "Fast vertical edits for reels, product reveals, titles, and callouts.",
+    gradient: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]",
+  },
+  {
+    title: "Character Loop",
+    type: "Animation Design",
+    year: "2023",
+    tone: "Expressive loops built for campaigns, profile films, and explainer cuts.",
+    gradient: "from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
+  },
+];
+
+const capabilities = [
+  ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation, and expressive loops."],
+  ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits, and director-style selects."],
+  ["03", "VFX & Compositing", "Rotoscope, clean-up, keying, glow passes, atmosphere, match move looks, and shot finishing."],
+  ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems, HUDs, and transitions."],
+];
+
+function Wing({ side }: { side: "left" | "right" }) {
+  const flip = side === "right" ? "scale-x-[-1]" : "";
+  return (
+    <div className={`wing wing-${side} ${flip}`}>
+      <span className="wing-panel panel-one" />
+      <span className="wing-panel panel-two" />
+      <span className="wing-panel panel-three" />
+      <span className="wing-orbit orbit-one" />
+      <span className="wing-orbit orbit-two" />
+      <span className="wing-line line-one" />
+      <span className="wing-line line-two" />
+    </div>
+  );
+}
+
+function Doodle({ className = "" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 220 82" fill="none" aria-hidden="true">
+      <motion.path
+        d="M7 51C30 30 42 74 67 47C81 31 89 9 103 29C117 49 121 76 143 55C159 40 166 8 181 27C194 44 191 69 213 47"
+        stroke="currentColor"
+        strokeWidth="6"
+        strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }}
+        whileInView={{ pathLength: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
+      />
+      <circle cx="83" cy="13" r="5" fill="currentColor" />
+      <circle cx="171" cy="15" r="5" fill="currentColor" />
+    </svg>
+  );
+}
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
-  const y = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
+  const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-black">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 w-full z-40 px-6 py-6 mix-blend-difference flex justify-between items-center">
-        <div className="font-mono text-xl font-bold tracking-tighter uppercase">
-          Kaelen<span className="text-primary">.VFX</span>
-        </div>
-        <div className="flex items-center gap-8 font-mono text-sm uppercase tracking-widest hidden md:flex">
-          <a href="#work" className="hover:text-primary transition-colors">Work</a>
-          <a href="#services" className="hover:text-primary transition-colors">Services</a>
-          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
+    <main className="min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
+        <a href="#top" className="font-display text-xl font-black uppercase tracking-tight">
+          Motion<span className="text-[#00dcff]">.VFX</span>
+        </a>
+        <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white md:flex">
+          <a href="#showreel" className="transition hover:text-[#00dcff]">Showreel</a>
+          <a href="#work" className="transition hover:text-[#00dcff]">Work</a>
+          <a href="#about" className="transition hover:text-[#00dcff]">About</a>
+          <a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-background to-background z-0"></div>
-        
-        <motion.div 
-          className="z-10 text-center px-4 max-w-5xl mx-auto mt-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-        >
-          <div className="font-mono text-primary uppercase tracking-[0.3em] mb-6 text-sm md:text-base">
-            Freelance Animation & Post-Production
+      <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-28">
+        <div className="grain" />
+        <motion.div style={{ y: coverY, scale: coverScale }} className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
+          <motion.div
+            className="mb-7 font-hand text-4xl text-[#fff7e8] md:text-6xl"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+          >
+            An Animation
+          </motion.div>
+
+          <div className="portfolio-lockup relative w-full">
+            <Wing side="left" />
+            <Wing side="right" />
+            <motion.h1
+              className="relative z-20 font-display text-[19vw] font-black leading-[0.73] tracking-[-0.08em] text-[#fff0cf] md:text-[10.7rem] lg:text-[13.5rem]"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1 }}
+            >
+              Portfolio
+            </motion.h1>
+            <motion.div
+              className="absolute left-1/2 top-[18%] z-30 -translate-x-1/2 font-display text-[15vw] font-black leading-none tracking-[-0.08em] text-[#00dcff] mix-blend-screen md:text-[8.8rem] lg:text-[11rem]"
+              initial={{ opacity: 0, x: -80 }}
+              animate={{ opacity: 0.9, x: 0 }}
+              transition={{ duration: 1, delay: 0.25 }}
+            >
+              Portfo
+            </motion.div>
           </div>
-          <h1 className="text-6xl md:text-8xl lg:text-[10rem] font-black uppercase leading-[0.8] tracking-tighter mb-8">
-            Visual <br />
-            <span className="text-stroke">Impact.</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 font-light leading-relaxed">
-            Crafting high-end visual experiences for brands, artists, and creators. 
-            From subtle motion graphics to heavy VFX composites.
+
+          <motion.div
+            className="mt-8 flex flex-col items-center gap-5"
+            initial={{ opacity: 0, y: 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.45 }}
+          >
+            <span className="font-hand text-4xl text-[#fff7e8] md:text-6xl">of Creative Editor</span>
+            <p className="max-w-2xl text-balance text-lg font-semibold leading-relaxed text-white md:text-xl">
+              An animation designer and video editor who turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals.
+            </p>
+            <Doodle className="h-12 w-36 text-[#f7d39c]" />
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]">
+                View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" />
+              </a>
+              <a href="#contact" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be]">
+                Hire for project <ArrowUpRight className="h-4 w-4" />
+              </a>
+            </div>
+          </motion.div>
+        </motion.div>
+      </section>
+
+      <section id="showreel" className="relative px-5 py-24 md:px-10">
+        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
+          <div>
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
+            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-8xl">
+              First frame should feel hired.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-xl leading-relaxed text-white/70">
+            Use this section for the client’s YouTube/Vimeo showreel. For now it works as a cinematic reel block with credits, categories, and a clear play action.
           </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Button size="lg" className="h-14 px-8 text-lg font-mono uppercase tracking-wider bg-primary text-black hover:bg-white transition-colors rounded-none w-full sm:w-auto glitch-hover group">
-              View Showreel
-              <Play className="ml-3 h-5 w-5 fill-current group-hover:translate-x-1 transition-transform" />
-            </Button>
-            <Button size="lg" variant="outline" className="h-14 px-8 text-lg font-mono uppercase tracking-wider border-white/20 hover:bg-white/5 rounded-none w-full sm:w-auto">
-              Get in touch
-            </Button>
-          </div>
-        </motion.div>
+        </div>
 
-        {/* Scroll indicator */}
-        <motion.div 
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-10"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        <motion.div
+          className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black"
+          initial={{ opacity: 0, y: 70 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="w-[1px] h-16 bg-gradient-to-b from-primary to-transparent"></div>
-        </motion.div>
-      </section>
-
-      {/* Showreel Highlight */}
-      <section className="py-24 px-4 md:px-12 bg-black relative z-10">
-        <motion.div 
-          style={{ y }}
-          className="max-w-7xl mx-auto"
-        >
-          <div className="aspect-video bg-zinc-900 border border-white/5 relative group cursor-pointer overflow-hidden">
-            {/* Placeholder for actual video reel */}
-            <div className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity duration-700" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=2874&auto=format&fit=crop')" }}></div>
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 rounded-full border border-white/20 backdrop-blur-md flex items-center justify-center group-hover:scale-110 transition-transform duration-500 bg-black/20">
-                <Play className="h-8 w-8 text-white ml-2" />
+          <div className="relative aspect-video min-h-[360px]">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,#ff2f8e_0,transparent_26%),radial-gradient(circle_at_82%_70%,#00dcff_0,transparent_28%),linear-gradient(135deg,#160b0d,#111_48%,#2a081b)]" />
+            <div className="absolute inset-6 rounded-[1.5rem] border border-white/15" />
+            <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
+            <div className="absolute bottom-8 left-8 right-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
+              <div>
+                <h3 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.05em] md:text-8xl">Showreel</h3>
+                <p className="mt-4 max-w-xl text-white/70">Editing, animation, compositing, title design, transitions, and color finishing.</p>
               </div>
-            </div>
-            <div className="absolute bottom-8 left-8 text-white">
-              <h3 className="text-3xl font-bold uppercase tracking-tight">Director's Cut 2024</h3>
-              <p className="font-mono text-primary mt-2 uppercase tracking-widest text-sm">2:45 / Select Works</p>
+              <button className="group flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black transition hover:scale-105 hover:bg-[#00dcff]" aria-label="Play showreel">
+                <Play className="ml-1 h-8 w-8 fill-current" />
+              </button>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* Selected Works */}
-      <section id="work" className="py-32 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex justify-between items-end mb-16 border-b border-white/10 pb-8">
-            <div>
-              <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tighter">Selected <span className="text-primary">Works</span></h2>
-            </div>
-            <Button variant="link" className="hidden md:flex font-mono uppercase text-muted-foreground hover:text-white">
-              View Archive <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+      <section id="work" className="px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-center">
+            <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Selected<br />Frames</h2>
+            <p className="max-w-md text-lg leading-relaxed text-white/65">Main portfolio pieces can go here. Each card is made to feel like a Behance project preview: visual first, title second, service tags last.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-            {[
-              { title: "Neon Genesis", category: "VFX / Compositing", image: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2940&auto=format&fit=crop" },
-              { title: "Chrome Heart", category: "3D Animation", image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2864&auto=format&fit=crop", offset: true },
-              { title: "Urban Decay", category: "Color Grading", image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2940&auto=format&fit=crop" },
-              { title: "Void Walker", category: "Motion Graphics", image: "https://images.unsplash.com/photo-1634152962476-4b8a00e1915c?q=80&w=2874&auto=format&fit=crop", offset: true },
-            ].map((work, i) => (
-              <motion.div 
-                key={i}
-                initial={{ opacity: 0, y: 50 }}
+          <div className="grid gap-6 md:grid-cols-2">
+            {works.map((work, index) => (
+              <motion.article
+                key={work.title}
+                className="project-card group overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
+                initial={{ opacity: 0, y: 55 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: i * 0.1 }}
-                className={`group cursor-pointer ${work.offset ? 'md:mt-24' : ''}`}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.7, delay: index * 0.08 }}
               >
-                <div className="overflow-hidden aspect-[4/5] bg-zinc-900 relative">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-1000"
-                    style={{ backgroundImage: `url(${work.image})` }}
-                  />
-                  <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-                </div>
-                <div className="mt-6 flex justify-between items-start">
-                  <div>
-                    <h3 className="text-2xl font-bold uppercase tracking-tight group-hover:text-primary transition-colors">{work.title}</h3>
-                    <p className="font-mono text-muted-foreground mt-2 text-sm uppercase tracking-wider">{work.category}</p>
-                  </div>
-                  <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center group-hover:bg-primary group-hover:border-primary group-hover:text-black transition-all">
-                    <ArrowRight className="h-4 w-4" />
+                <div className={`relative min-h-[360px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
+                  <div className="absolute inset-0 opacity-40 mix-blend-overlay pattern" />
+                  <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45%] bg-[#111]/80 blur-[1px] transition duration-700 group-hover:rotate-[-8deg]" />
+                  <div className="absolute right-8 top-8 font-hand text-6xl text-white/90">{String(index + 1).padStart(2, "0")}</div>
+                  <div className="absolute bottom-6 left-6 right-6 rounded-[1.4rem] border border-white/20 bg-black/35 p-5 backdrop-blur-md">
+                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#fff0cf]">{work.type} / {work.year}</p>
+                    <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.04em] text-white">{work.title}</h3>
                   </div>
                 </div>
+                <div className="flex items-start justify-between gap-4 p-6">
+                  <p className="text-white/65">{work.tone}</p>
+                  <ArrowUpRight className="h-6 w-6 shrink-0 text-[#00dcff] transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="relative px-5 py-24 md:px-10">
+        <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-white/10 bg-[#fff0cf] p-7 text-black md:p-12 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p className="font-hand text-5xl text-[#ff2f8e] md:text-7xl">About the artist</p>
+            <h2 className="mt-6 font-display text-6xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-8xl">Creative cuts with animated soul.</h2>
+          </div>
+          <div className="space-y-7 text-lg font-semibold leading-relaxed text-black/75">
+            <p>
+              This portfolio is made for an editor who does more than join clips. It presents them as a visual storyteller: someone who can shape rhythm, emotion, illustration, VFX, and branded motion into one polished final film.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              <div className="rounded-3xl bg-black p-5 text-[#fff0cf]"><strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span></div>
+              <div className="rounded-3xl bg-[#ff2f8e] p-5 text-white"><strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span></div>
+              <div className="rounded-3xl bg-[#00dcff] p-5 text-black"><strong className="block font-display text-4xl">4K</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Delivery</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-10 flex items-end justify-between gap-8">
+            <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Process<br />& Services</h2>
+            <Wand2 className="hidden h-16 w-16 text-[#ff2f8e] md:block" />
+          </div>
+          <div className="divide-y divide-white/10 border-y border-white/10">
+            {capabilities.map(([num, title, body]) => (
+              <motion.div
+                key={title}
+                className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center"
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.55 }}
+              >
+                <span className="font-hand text-5xl text-[#f7d39c]">{num}</span>
+                <h3 className="font-display text-3xl font-black uppercase tracking-[-0.04em] md:text-5xl">{title}</h3>
+                <p className="text-lg leading-relaxed text-white/65">{body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services */}
-      <section id="services" className="py-32 bg-zinc-950 border-y border-white/5">
-        <div className="max-w-7xl mx-auto px-4 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
-            <div className="lg:col-span-1">
-              <h2 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter mb-6">Capabilities</h2>
-              <p className="text-muted-foreground font-light leading-relaxed">
-                Specialized in high-end post-production. From raw footage to final delivery, ensuring every frame serves the narrative.
-              </p>
-            </div>
-            <div className="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-              <div className="group">
-                <Film className="h-8 w-8 text-primary mb-6" />
-                <h3 className="text-xl font-bold uppercase tracking-tight mb-4">Video Editing</h3>
-                <p className="text-muted-foreground font-light leading-relaxed">Pacing, narrative structure, and dynamic cuts for commercials, music videos, and social campaigns.</p>
-              </div>
-              <div className="group">
-                <Sparkles className="h-8 w-8 text-primary mb-6" />
-                <h3 className="text-xl font-bold uppercase tracking-tight mb-4">Visual Effects</h3>
-                <p className="text-muted-foreground font-light leading-relaxed">Compositing, rotoscoping, chroma keying, and seamless integration of CGI elements into live-action footage.</p>
-              </div>
-              <div className="group">
-                <MonitorPlay className="h-8 w-8 text-primary mb-6" />
-                <h3 className="text-xl font-bold uppercase tracking-tight mb-4">Motion Graphics</h3>
-                <p className="text-muted-foreground font-light leading-relaxed">Kinetic typography, 2D/3D animation, HUD design, and branded motion systems.</p>
-              </div>
-              <div className="group">
-                <div className="h-8 w-8 text-primary mb-6 font-bold text-2xl">C/G</div>
-                <h3 className="text-xl font-bold uppercase tracking-tight mb-4">Color Grading</h3>
-                <p className="text-muted-foreground font-light leading-relaxed">Cinematic color correction, look development, and matching shots across different camera sensors.</p>
-              </div>
+      <section id="contact" className="px-5 pb-10 pt-24 md:px-10">
+        <div className="relative mx-auto overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] p-8 text-center md:p-16">
+          <div className="absolute left-[-8%] top-[10%] h-64 w-64 rounded-full bg-[#ff2f8e] blur-[90px]" />
+          <div className="absolute bottom-[-8%] right-[-8%] h-72 w-72 rounded-full bg-[#00dcff] blur-[95px]" />
+          <div className="relative z-10 mx-auto max-w-4xl">
+            <Sparkles className="mx-auto mb-7 h-10 w-10 text-[#fff0cf]" />
+            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.07em] md:text-9xl">Let’s animate your next idea.</h2>
+            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/70">Replace this with the client’s real WhatsApp, email, Instagram, Vimeo, and Behance links. The portfolio is ready for real showreel and project content.</p>
+            <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <a href="mailto:hello@motionvfx.com" className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#00dcff]"><Mail className="h-4 w-4" /> hello@motionvfx.com</a>
+              <a href="#showreel" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e]"><Clapperboard className="h-4 w-4" /> Watch reel</a>
             </div>
           </div>
         </div>
+        <footer className="mx-auto flex max-w-7xl flex-col justify-between gap-4 py-8 font-mono text-xs uppercase tracking-[0.22em] text-white/45 md:flex-row">
+          <span>Motion.VFX Portfolio 2024</span>
+          <span>Behance / Vimeo / Instagram / WhatsApp</span>
+        </footer>
       </section>
-
-      {/* Contact / CTA */}
-      <section id="contact" className="py-32 px-4 md:px-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_right,_var(--tw-gradient-stops))] from-accent/20 via-background to-background z-0"></div>
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <h2 className="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-8 leading-none">
-            Ready to <br />
-            <span className="text-primary">Collaborate?</span>
-          </h2>
-          <p className="text-xl text-muted-foreground mb-12 font-light">
-            Currently accepting bookings for Q3 2024. Let's make something unforgettable.
-          </p>
-          <Button size="lg" className="h-16 px-12 text-xl font-mono uppercase tracking-widest bg-white text-black hover:bg-primary transition-colors rounded-none">
-            Start a project
-          </Button>
-          
-          <div className="mt-32 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            <div>© {new Date().getFullYear()} Kaelen VFX</div>
-            <div className="flex gap-8">
-              <a href="#" className="hover:text-white transition-colors">Instagram</a>
-              <a href="#" className="hover:text-white transition-colors">Vimeo</a>
-              <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    </main>
   );
 }

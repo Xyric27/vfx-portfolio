@@ -20,7 +20,7 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 
 - **API Server**: shared Express backend at `artifacts/api-server`.
 - **Canvas**: mockup sandbox at `artifacts/mockup-sandbox`.
-- **VFX Portfolio**: React + Vite single-page portfolio at `artifacts/vfx-portfolio`, served at `/`. Cinematic portfolio for a freelance animation/VFX video editor with showreel, work highlights, capabilities, and contact CTA.
+- **VFX Portfolio**: React + Vite single-page portfolio at `artifacts/vfx-portfolio`, served at `/`. Cinematic animation/VFX editor portfolio inspired by a Behance-style animation portfolio cover, with a black illustrated hero, showreel section, selected frame/project previews, about/process, services, and contact CTA.
 
 ## Key Commands
 
