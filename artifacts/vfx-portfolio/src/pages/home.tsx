@@ -32,6 +32,33 @@ const works = [
   },
 ];
 
+const clients = [
+  {
+    name: "Aarav Studios",
+    role: "Music video label",
+    initials: "AS",
+    stats: "7 projects",
+    avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]",
+    projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"],
+  },
+  {
+    name: "Nova Skin",
+    role: "Beauty campaign",
+    initials: "NS",
+    stats: "5 projects",
+    avatar: "from-[#00dcff] via-[#7a4cff] to-[#ff2f8e]",
+    projects: ["Product Reveal", "Reels Pack", "Launch Cut"],
+  },
+  {
+    name: "Flux Motion",
+    role: "Tech creator",
+    initials: "FM",
+    stats: "9 projects",
+    avatar: "from-[#fff0cf] via-[#ff8a00] to-[#ff006a]",
+    projects: ["Explainer Film", "HUD Overlay", "Ad Series"],
+  },
+];
+
 const capabilities = [
   ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation, and expressive loops."],
   ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits, and director-style selects."],
@@ -73,6 +100,18 @@ function Doodle({ className = "" }: { className?: string }) {
   );
 }
 
+function AnimatedHand() {
+  return (
+    <div className="animated-hand" aria-label="Animated open and close hand">
+      <span className="hand-palm" />
+      <span className="hand-finger finger-one" />
+      <span className="hand-finger finger-two" />
+      <span className="hand-finger finger-three" />
+      <span className="hand-thumb" />
+    </div>
+  );
+}
+
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
@@ -93,6 +132,7 @@ export default function Home() {
           Motion<span className="text-[#00dcff]">.VFX</span>
         </a>
         <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white md:flex">
+          <a href="#clients" className="transition hover:text-[#00dcff]">Clients</a>
           <a href="#showreel" className="transition hover:text-[#00dcff]">Showreel</a>
           <a href="#work" className="transition hover:text-[#00dcff]">Work</a>
           <a href="#about" className="transition hover:text-[#00dcff]">About</a>
@@ -100,11 +140,11 @@ export default function Home() {
         </div>
       </nav>
 
-      <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-28">
+      <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 md:py-28">
         <div className="grain" />
         <motion.div style={{ y: coverY, scale: coverScale }} className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
           <motion.div
-            className="mb-7 font-hand text-4xl text-[#fff7e8] md:text-6xl"
+            className="hero-script mb-4 font-hand text-4xl text-[#fff7e8] md:text-6xl"
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
@@ -134,29 +174,101 @@ export default function Home() {
           </div>
 
           <motion.div
-            className="mt-8 flex flex-col items-center gap-5"
+            className="mt-2 flex flex-col items-center gap-4"
             initial={{ opacity: 0, y: 22 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.45 }}
           >
-            <span className="font-hand text-4xl text-[#fff7e8] md:text-6xl">of Creative Editor</span>
-            <p className="max-w-2xl text-balance text-lg font-semibold leading-relaxed text-white md:text-xl">
-              An animation designer and video editor who turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals.
-            </p>
+            <span className="font-hand text-2xl text-[#fff7e8]/80 md:text-4xl">of</span>
+            <span className="hero-name font-hand text-4xl text-[#fff7e8] md:text-6xl">Abhishek Kumar</span>
+            <AnimatedHand />
             <Doodle className="h-12 w-36 text-[#f7d39c]" />
+            <p className="max-w-3xl text-balance text-lg font-semibold leading-relaxed text-white md:text-xl">
+              An <span className="text-[#f7d39c]">Animation Designer</span> who is passionate about creativity, dedicated to endless explorations, and builds cinematic edits for brands, artists, and creators.
+            </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]">
                 View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" />
               </a>
-              <a href="#contact" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be]">
-                Hire for project <ArrowUpRight className="h-4 w-4" />
+              <a href="#clients" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be]">
+                Client projects <ArrowUpRight className="h-4 w-4" />
               </a>
             </div>
           </motion.div>
         </motion.div>
       </section>
 
-      <section className="relative -mt-10 overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
+      <section id="clients" className="relative px-5 py-24 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-end">
+            <div>
+              <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client rooms</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Profiles<br />& Reels</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/65">
+              Each card can hold one client profile. Hover pe us client ke saare project previews animated reel ki tarah reveal hote hain.
+            </p>
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-3">
+            {clients.map((client, index) => (
+              <motion.article
+                key={client.name}
+                className="client-card group relative min-h-[560px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]"
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -14, rotate: index === 1 ? 0 : index === 0 ? -0.8 : 0.8 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.75, delay: index * 0.08 }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} />
+                <div className="client-card-glow" />
+                <div className="relative z-10 flex h-full min-h-[560px] flex-col justify-between p-7">
+                  <div>
+                    <div className={`client-avatar bg-gradient-to-br ${client.avatar}`}>
+                      <span>{client.initials}</span>
+                    </div>
+                    <div className="mt-7">
+                      <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p>
+                      <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
+                      <p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p>
+                    </div>
+                  </div>
+
+                  <div className="client-project-panel">
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Project reels</span>
+                      <Film className="h-5 w-5 text-[#00dcff]" />
+                    </div>
+                    <div className="grid gap-3">
+                      {client.projects.map((project, projectIndex) => (
+                        <div key={project} className="client-video-row">
+                          <div className="client-video-thumb">
+                            <span className={`client-video-orb orb-${projectIndex + 1}`} />
+                            <span className="client-video-scan" />
+                            <Play className="relative z-10 h-4 w-4 fill-current text-white" />
+                          </div>
+                          <div>
+                            <p className="font-display text-lg font-black uppercase leading-none text-white">{project}</p>
+                            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Looping preview</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-end justify-between border-t border-white/10 pt-5">
+                    <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Hover to reveal</span>
+                    <ArrowUpRight className="h-6 w-6 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
         <div className="motion-marquee font-display text-4xl font-black uppercase tracking-[-0.05em] md:text-6xl">
           <span>Animation</span><span>VFX</span><span>Editing</span><span>Motion Graphics</span><span>Color Grade</span><span>Compositing</span>
           <span>Animation</span><span>VFX</span><span>Editing</span><span>Motion Graphics</span><span>Color Grade</span><span>Compositing</span>
