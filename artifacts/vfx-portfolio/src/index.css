@@ -1033,10 +1033,56 @@
 
   .whatsapp-float:hover::before { opacity: 1; }
 
-  .stats-bar {
-    display: grid;
-    gap: 1px;
+  .booking-slot {
+    border-radius: 1.2rem;
+    padding: 1.1rem 1.4rem;
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    transition: transform .25s ease;
   }
+
+  .booking-slot:hover { transform: translateY(-4px); }
+
+  .social-link-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    border: 1px solid rgba(255,255,255,.12);
+    background: rgba(255,255,255,.04);
+    padding: .85rem 1.5rem;
+    border-radius: 999px;
+    font-family: var(--app-font-mono);
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .18em;
+    color: rgba(255,255,255,.6);
+    text-decoration: none;
+    transition: border-color .25s ease, color .25s ease, background .25s ease, transform .25s ease;
+  }
+
+  .social-link-pill:hover {
+    border-color: rgba(0,220,255,.5);
+    color: #00dcff;
+    background: rgba(0,220,255,.07);
+    transform: translateY(-3px);
+  }
+
+  .stats-ticker-track {
+    display: flex;
+    gap: 0;
+    animation: tickerScroll 28s linear infinite;
+    width: max-content;
+  }
+
+  .stats-ticker-track:hover { animation-play-state: paused; }
+}
+
+@keyframes tickerScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
 @keyframes wingFloat {

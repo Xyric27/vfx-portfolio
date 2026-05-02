@@ -1,9 +1,33 @@
 import { AnimatePresence, motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Mail, MessageCircle, Play, Quote, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Globe, Instagram, Mail, MessageCircle, Play, Quote, Sparkles, Stamp, Wand2, Youtube, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const CLIENT_PORTAL_URL = "https://forms.gle/YOUR_FORM_LINK_HERE";
 const WHATSAPP_URL = "https://wa.me/919999999999";
+const SOCIAL_LINKS = {
+  instagram: "https://instagram.com/YOUR_HANDLE",
+  youtube: "https://youtube.com/@YOUR_CHANNEL",
+  behance: "https://behance.net/YOUR_PROFILE",
+  vimeo: "https://vimeo.com/YOUR_PROFILE",
+};
+
+const bookingSlots = [
+  { month: "May 2025", status: "booked", label: "Full" },
+  { month: "Jun 2025", status: "available", label: "2 Slots" },
+  { month: "Jul 2025", status: "available", label: "Open" },
+  { month: "Aug 2025", status: "open", label: "Open" },
+];
+
+const statsTicker = [
+  "48+ Projects Delivered",
+  "12 Brand Clients",
+  "5+ Years Experience",
+  "100% Delivery Rate",
+  "4K Always",
+  "2M+ Views Generated",
+  "7 Music Labels",
+  "Zero Missed Deadlines",
+];
 
 const works = [
   {
@@ -431,8 +455,8 @@ function AnimatedHand() {
 function SimpleCursor() {
   const cursorX = useMotionValue(-200);
   const cursorY = useMotionValue(-200);
-  const springX = useSpring(cursorX, { stiffness: 300, damping: 30 });
-  const springY = useSpring(cursorY, { stiffness: 300, damping: 30 });
+  const springX = useSpring(cursorX, { stiffness: 80, damping: 16, mass: 0.4 });
+  const springY = useSpring(cursorY, { stiffness: 80, damping: 16, mass: 0.4 });
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
@@ -1185,6 +1209,109 @@ export default function Home() {
             <p className="max-w-md text-lg leading-relaxed text-white/60">The 7 questions every client asks. Answered once, right here.</p>
           </div>
           <FaqList />
+        </div>
+      </section>
+
+      {/* STATS TICKER */}
+      <div className="relative overflow-hidden border-y border-white/8 bg-[#0e0e0e] py-5">
+        <div className="stats-ticker-track">
+          {[...statsTicker, ...statsTicker].map((item, i) => (
+            <span key={i} className="inline-flex items-center gap-4 px-8 font-display text-2xl font-black uppercase tracking-[-0.03em] text-white/25 md:text-3xl">
+              {item}
+              <span className="h-1.5 w-1.5 rounded-full bg-[#00dcff]/60 shrink-0" />
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* CURRENTLY BOOKING */}
+      <section id="booking" className="px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-14 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <div className="mb-4 flex items-center gap-3">
+                <span className="portal-live-dot" />
+                <span className="font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Real-time availability</span>
+              </div>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">Book a<br />Slot</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">Slots fill up fast. Check availability and lock yours before it's gone.</p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {bookingSlots.map((slot, i) => (
+              <motion.div
+                key={slot.month}
+                className="booking-slot"
+                style={{
+                  borderColor: slot.status === "booked" ? "rgba(255,47,142,.3)" : slot.status === "available" ? "rgba(0,220,255,.3)" : "rgba(255,255,255,.1)",
+                  background: slot.status === "booked" ? "rgba(255,47,142,.05)" : slot.status === "available" ? "rgba(0,220,255,.05)" : "rgba(255,255,255,.03)",
+                }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.07, type: "spring", stiffness: 240, damping: 22 }}
+              >
+                <span className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color: slot.status === "booked" ? "#ff2f8e" : slot.status === "available" ? "#00dcff" : "rgba(255,255,255,.4)" }}>
+                  {slot.status === "booked" ? "● Booked" : slot.status === "available" ? "● Available" : "● Coming Soon"}
+                </span>
+                <span className="font-display text-2xl font-black uppercase text-white">{slot.month}</span>
+                <span className="font-mono text-sm font-bold" style={{ color: slot.status === "booked" ? "rgba(255,47,142,.7)" : slot.status === "available" ? "rgba(0,220,255,.8)" : "rgba(255,255,255,.3)" }}>{slot.label}</span>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            className="mt-10 flex flex-col items-start gap-5 rounded-[2rem] border border-[#00dcff]/20 bg-[#0a0f14] p-7 md:flex-row md:items-center md:justify-between md:p-10"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <div>
+              <p className="font-display text-2xl font-black uppercase text-white md:text-3xl">Ready to lock your spot?</p>
+              <p className="mt-2 text-white/55">Fill the brief in the Client Portal — Meet responds within 24 hours.</p>
+            </div>
+            <motion.a
+              href={CLIENT_PORTAL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black"
+              whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}
+            >
+              <FolderOpen className="h-4 w-4" /> Reserve my slot
+            </motion.a>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CONNECT / SOCIAL */}
+      <section id="connect" className="px-5 py-20 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border-white/10 bg-[#171717] px-8 py-14 text-center">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p>
+              <h2 className="font-display text-5xl font-black uppercase leading-tight tracking-[-0.05em] md:text-7xl">Follow the<br />Work</h2>
+              <p className="mx-auto mt-5 max-w-lg text-white/55">Behind-the-scenes, reels, project drops, and motion experiments — across every platform.</p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <motion.a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                <Instagram className="h-4 w-4" /> Instagram
+              </motion.a>
+              <motion.a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                <Youtube className="h-4 w-4" /> YouTube
+              </motion.a>
+              <motion.a href={SOCIAL_LINKS.behance} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                <Globe className="h-4 w-4" /> Behance
+              </motion.a>
+              <motion.a href={SOCIAL_LINKS.vimeo} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                <Film className="h-4 w-4" /> Vimeo
+              </motion.a>
+              <motion.a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
+                <MessageCircle className="h-4 w-4" /> WhatsApp
+              </motion.a>
+            </div>
+          </div>
         </div>
       </section>
 
