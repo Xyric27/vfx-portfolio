@@ -1224,67 +1224,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CURRENTLY BOOKING */}
-      <section id="booking" className="px-5 py-28 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-14 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
-            <div>
-              <div className="mb-4 flex items-center gap-3">
-                <span className="portal-live-dot" />
-                <span className="font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Real-time availability</span>
-              </div>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">Book a<br />Slot</h2>
-            </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">Slots fill up fast. Check availability and lock yours before it's gone.</p>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {bookingSlots.map((slot, i) => (
-              <motion.div
-                key={slot.month}
-                className="booking-slot"
-                style={{
-                  borderColor: slot.status === "booked" ? "rgba(255,47,142,.3)" : slot.status === "available" ? "rgba(0,220,255,.3)" : "rgba(255,255,255,.1)",
-                  background: slot.status === "booked" ? "rgba(255,47,142,.05)" : slot.status === "available" ? "rgba(0,220,255,.05)" : "rgba(255,255,255,.03)",
-                }}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07, type: "spring", stiffness: 240, damping: 22 }}
-              >
-                <span className="font-mono text-xs uppercase tracking-[0.25em]" style={{ color: slot.status === "booked" ? "#ff2f8e" : slot.status === "available" ? "#00dcff" : "rgba(255,255,255,.4)" }}>
-                  {slot.status === "booked" ? "● Booked" : slot.status === "available" ? "● Available" : "● Coming Soon"}
-                </span>
-                <span className="font-display text-2xl font-black uppercase text-white">{slot.month}</span>
-                <span className="font-mono text-sm font-bold" style={{ color: slot.status === "booked" ? "rgba(255,47,142,.7)" : slot.status === "available" ? "rgba(0,220,255,.8)" : "rgba(255,255,255,.3)" }}>{slot.label}</span>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            className="mt-10 flex flex-col items-start gap-5 rounded-[2rem] border border-[#00dcff]/20 bg-[#0a0f14] p-7 md:flex-row md:items-center md:justify-between md:p-10"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
-            <div>
-              <p className="font-display text-2xl font-black uppercase text-white md:text-3xl">Ready to lock your spot?</p>
-              <p className="mt-2 text-white/55">Fill the brief in the Client Portal — Meet responds within 24 hours.</p>
-            </div>
-            <motion.a
-              href={CLIENT_PORTAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black"
-              whileHover={{ scale: 1.06 }} whileTap={{ scale: 0.95 }}
-            >
-              <FolderOpen className="h-4 w-4" /> Reserve my slot
-            </motion.a>
-          </motion.div>
-        </div>
-      </section>
-
       {/* CONNECT / SOCIAL */}
       <section id="connect" className="px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
