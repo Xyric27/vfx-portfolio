@@ -1,4 +1,4 @@
-import { AnimatePresence, motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { AnimatePresence, motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Globe, Instagram, Mail, MessageCircle, Play, Quote, Sparkles, Stamp, Wand2, Youtube, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
@@ -11,7 +11,7 @@ const SOCIAL_LINKS = {
   vimeo: "https://vimeo.com/YOUR_PROFILE",
 };
 
-const bookingSlots = [
+const _bookingSlots = [
   { month: "May 2025", status: "booked", label: "Full" },
   { month: "Jun 2025", status: "available", label: "2 Slots" },
   { month: "Jul 2025", status: "available", label: "Open" },
@@ -288,66 +288,29 @@ function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: strin
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
+// ── Place your intro GIF at: artifacts/vfx-portfolio/public/intro.gif
+// ── Set GIF_DURATION_MS to match your GIF's length in milliseconds
+const GIF_DURATION_MS = 3500;
+
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
-    const t = setTimeout(onDone, 3000);
+    const t = setTimeout(onDone, GIF_DURATION_MS);
     return () => clearTimeout(t);
   }, [onDone]);
 
   return (
     <motion.div
-      className="nf-screen"
+      className="gif-screen"
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.35, ease: "easeIn" }}
+      transition={{ duration: 0.4, ease: "easeIn" }}
     >
-      {/* White flash on zoom punch */}
-      <motion.div
-        className="nf-flash"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: [0, 0.55, 0] }}
-        transition={{ delay: 0.55, duration: 0.45, ease: "easeOut" }}
+      <img
+        src="/intro.gif"
+        alt="intro"
+        className="gif-intro"
+        draggable={false}
       />
-
-      {/* Horizontal light ray sweep */}
-      <motion.div
-        className="nf-ray"
-        initial={{ x: "-110%", opacity: 0 }}
-        animate={{ x: "110%", opacity: [0, 1, 1, 0] }}
-        transition={{ delay: 0.65, duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
-      />
-
-      {/* MEET — punches in from huge */}
-      <div className="nf-center">
-        <motion.h1
-          className="nf-title"
-          initial={{ scale: 7, opacity: 0, filter: "blur(18px)" }}
-          animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-        >
-          MEET
-        </motion.h1>
-
-        {/* red underline like Netflix */}
-        <motion.div
-          className="nf-underline"
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-        />
-
-        <motion.p
-          className="nf-tagline"
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1, duration: 0.5 }}
-        >
-          Animation &nbsp;·&nbsp; VFX &nbsp;·&nbsp; Motion
-        </motion.p>
-      </div>
-
-      {/* vignette */}
-      <div className="nf-vignette" />
     </motion.div>
   );
 }
@@ -443,28 +406,6 @@ function AnimatedHand() {
   );
 }
 
-function SimpleCursor() {
-  const cursorX = useMotionValue(-200);
-  const cursorY = useMotionValue(-200);
-  const springX = useSpring(cursorX, { stiffness: 35, damping: 10, mass: 0.6 });
-  const springY = useSpring(cursorY, { stiffness: 35, damping: 10, mass: 0.6 });
-
-  useEffect(() => {
-    const move = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
-    };
-    window.addEventListener("mousemove", move);
-    return () => window.removeEventListener("mousemove", move);
-  }, [cursorX, cursorY]);
-
-  return (
-    <motion.div
-      className="cursor-dot"
-      style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
-    />
-  );
-}
 
 function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean }) {
   const colors = ["#ff2f8e", "#00dcff", "#fff0cf", "#ff7a1a", "#7a4cff", "#fff"];
@@ -569,9 +510,8 @@ export default function Home() {
   };
 
   return (
-    <main className="custom-cursor min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
+    <main className="min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
       <AnimatePresence>{!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}</AnimatePresence>
-      <SimpleCursor />
       <ConfettiBurst x={confetti.x} y={confetti.y} active={confetti.active} />
       <HiredStamp show={stampVisible} />
 
