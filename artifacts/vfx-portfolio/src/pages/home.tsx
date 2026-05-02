@@ -1,5 +1,6 @@
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Clapperboard, Film, Mail, Play, Sparkles, Wand2 } from "lucide-react";
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { ArrowUpRight, Clapperboard, Film, Mail, Play, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
 const works = [
   {
@@ -66,10 +67,35 @@ const capabilities = [
   ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems, HUDs, and transitions."],
 ];
 
-function Wing({ side }: { side: "left" | "right" }) {
+const funnyTaglines = [
+  "Coffee → Frames → Render → Repeat ☕",
+  "Still rendering... pls hold 🙏",
+  "My PC fans go BRRRRR 💨",
+  "Frame 1 of 9,999,999",
+  "VFX artist by day, render slave by night 😭",
+  "I speak fluent timeline 🎞️",
+  "Motion graphics and mild panic 🔥",
+  "Ctrl+Z is my love language",
+];
+
+const heroStickers = [
+  { emoji: "⚡", cx: "12%", cy: "22%", delay: 0, rot: -18 },
+  { emoji: "🎞️", cx: "88%", cy: "18%", delay: 0.3, rot: 12 },
+  { emoji: "✨", cx: "7%", cy: "74%", delay: 0.6, rot: 8 },
+  { emoji: "🎨", cx: "92%", cy: "68%", delay: 0.9, rot: -22 },
+  { emoji: "🔥", cx: "50%", cy: "8%", delay: 1.1, rot: 5 },
+];
+
+function Wing({ side, mouseX, mouseY }: { side: "left" | "right"; mouseX: number; mouseY: number }) {
   const flip = side === "right" ? "scale-x-[-1]" : "";
+  const dx = side === "left" ? -mouseX * 18 : mouseX * 18;
+  const dy = -mouseY * 12;
   return (
-    <div className={`wing wing-${side} ${flip}`}>
+    <motion.div
+      className={`wing wing-${side} ${flip}`}
+      animate={{ x: dx, y: dy }}
+      transition={{ type: "spring", stiffness: 60, damping: 18 }}
+    >
       <span className="wing-panel panel-one" />
       <span className="wing-panel panel-two" />
       <span className="wing-panel panel-three" />
@@ -77,7 +103,7 @@ function Wing({ side }: { side: "left" | "right" }) {
       <span className="wing-orbit orbit-two" />
       <span className="wing-line line-one" />
       <span className="wing-line line-two" />
-    </div>
+    </motion.div>
   );
 }
 
@@ -112,21 +138,149 @@ function AnimatedHand() {
   );
 }
 
+function CursorTrail() {
+  const cursorX = useMotionValue(-200);
+  const cursorY = useMotionValue(-200);
+  const springX = useSpring(cursorX, { stiffness: 280, damping: 28 });
+  const springY = useSpring(cursorY, { stiffness: 280, damping: 28 });
+  const trailX = useSpring(cursorX, { stiffness: 90, damping: 22 });
+  const trailY = useSpring(cursorY, { stiffness: 90, damping: 22 });
+
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
+    };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, [cursorX, cursorY]);
+
+  return (
+    <>
+      <motion.div
+        className="cursor-dot"
+        style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
+      />
+      <motion.div
+        className="cursor-ring"
+        style={{ x: trailX, y: trailY, translateX: "-50%", translateY: "-50%" }}
+      />
+    </>
+  );
+}
+
+function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean }) {
+  const colors = ["#ff2f8e", "#00dcff", "#fff0cf", "#ff7a1a", "#7a4cff", "#fff"];
+  const pieces = Array.from({ length: 22 });
+  return (
+    <AnimatePresence>
+      {active && (
+        <div className="pointer-events-none fixed inset-0 z-[999]" aria-hidden="true">
+          {pieces.map((_, i) => {
+            const angle = (i / pieces.length) * 360;
+            const dist = 90 + Math.random() * 110;
+            const tx = Math.cos((angle * Math.PI) / 180) * dist;
+            const ty = Math.sin((angle * Math.PI) / 180) * dist - 60;
+            return (
+              <motion.span
+                key={i}
+                className="confetti-piece"
+                style={{
+                  left: x,
+                  top: y,
+                  background: colors[i % colors.length],
+                  rotate: angle,
+                  width: 8 + (i % 4) * 3,
+                  height: 8 + (i % 3) * 2,
+                  borderRadius: i % 2 === 0 ? "50%" : "2px",
+                }}
+                initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
+                animate={{ x: tx, y: ty, opacity: 0, scale: 0.4, rotate: angle + 360 }}
+                exit={{}}
+                transition={{ duration: 0.75 + Math.random() * 0.3, ease: "easeOut" }}
+              />
+            );
+          })}
+        </div>
+      )}
+    </AnimatePresence>
+  );
+}
+
+function HiredStamp({ show }: { show: boolean }) {
+  return (
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          className="hired-stamp"
+          initial={{ scale: 3.5, rotate: -24, opacity: 0 }}
+          animate={{ scale: 1, rotate: -18, opacity: 1 }}
+          exit={{ scale: 0.6, opacity: 0, y: 40 }}
+          transition={{ type: "spring", stiffness: 500, damping: 22 }}
+        >
+          HIRED!
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function Home() {
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
   const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
-  const scrollScale = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
+  const scrollBarScale = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
   const reelY = useTransform(scrollYProgress, [0.08, 0.45], [90, -70]);
   const reelRotate = useTransform(scrollYProgress, [0.08, 0.45], [-1.6, 1.4]);
   const floatY = useTransform(scrollYProgress, [0, 1], [0, -260]);
   const floatReverseY = useTransform(scrollYProgress, [0, 1], [0, 220]);
 
+  const [taglineIndex, setTaglineIndex] = useState(0);
+  const [mouseNorm, setMouseNorm] = useState({ x: 0, y: 0 });
+  const [stampVisible, setStampVisible] = useState(false);
+  const [confetti, setConfetti] = useState<{ x: number; y: number; active: boolean }>({ x: 0, y: 0, active: false });
+  const stampTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const confettiTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    const id = setInterval(() => setTaglineIndex((i) => (i + 1) % funnyTaglines.length), 2800);
+    return () => clearInterval(id);
+  }, []);
+
+  useEffect(() => {
+    const handleMouse = (e: MouseEvent) => {
+      setMouseNorm({
+        x: (e.clientX / window.innerWidth - 0.5) * 2,
+        y: (e.clientY / window.innerHeight - 0.5) * 2,
+      });
+    };
+    window.addEventListener("mousemove", handleMouse);
+    return () => window.removeEventListener("mousemove", handleMouse);
+  }, []);
+
+  const handleStamp = () => {
+    setStampVisible(true);
+    if (stampTimeout.current) clearTimeout(stampTimeout.current);
+    stampTimeout.current = setTimeout(() => setStampVisible(false), 1800);
+  };
+
+  const handleConfetti = (e: React.MouseEvent) => {
+    const rect = (e.currentTarget as HTMLElement).getBoundingClientRect();
+    setConfetti({ x: rect.left + rect.width / 2, y: rect.top + rect.height / 2, active: true });
+    if (confettiTimeout.current) clearTimeout(confettiTimeout.current);
+    confettiTimeout.current = setTimeout(() => setConfetti((c) => ({ ...c, active: false })), 1200);
+  };
+
   return (
-    <main className="min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
-      <motion.div className="fixed left-0 top-0 z-[70] h-1 origin-left bg-gradient-to-r from-[#ff2f8e] via-[#fff0cf] to-[#00dcff]" style={{ scaleX: scrollScale }} />
+    <main className="custom-cursor min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
+      <CursorTrail />
+      <ConfettiBurst x={confetti.x} y={confetti.y} active={confetti.active} />
+      <HiredStamp show={stampVisible} />
+
+      <motion.div className="fixed left-0 top-0 z-[70] h-1 origin-left bg-gradient-to-r from-[#ff2f8e] via-[#fff0cf] to-[#00dcff]" style={{ scaleX: scrollBarScale }} />
       <motion.div className="pointer-events-none fixed left-[6vw] top-[22vh] z-0 hidden h-36 w-36 rounded-[42%] bg-[#ff2f8e]/25 blur-xl lg:block" style={{ y: floatY }} />
       <motion.div className="pointer-events-none fixed right-[7vw] top-[58vh] z-0 hidden h-44 w-44 rounded-full bg-[#00dcff]/20 blur-xl lg:block" style={{ y: floatReverseY }} />
+
       <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
         <a href="#top" className="font-display text-xl font-black uppercase tracking-tight">
           Motion<span className="text-[#00dcff]">.VFX</span>
@@ -142,6 +296,21 @@ export default function Home() {
 
       <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 md:py-28">
         <div className="grain" />
+
+        {heroStickers.map((s) => (
+          <motion.span
+            key={s.emoji}
+            className="hero-sticker"
+            style={{ left: s.cx, top: s.cy, rotate: s.rot }}
+            initial={{ opacity: 0, scale: 0, rotate: s.rot - 30 }}
+            animate={{ opacity: 1, scale: 1, rotate: s.rot }}
+            transition={{ delay: 1 + s.delay, type: "spring", stiffness: 280, damping: 16 }}
+            whileHover={{ scale: 1.5, rotate: s.rot + 15 }}
+          >
+            {s.emoji}
+          </motion.span>
+        ))}
+
         <motion.div style={{ y: coverY, scale: coverScale }} className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
           <motion.div
             className="hero-script mb-4 font-hand text-4xl text-[#fff7e8] md:text-6xl"
@@ -153,13 +322,14 @@ export default function Home() {
           </motion.div>
 
           <div className="portfolio-lockup relative w-full">
-            <Wing side="left" />
-            <Wing side="right" />
+            <Wing side="left" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
+            <Wing side="right" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
             <motion.h1
               className="relative z-20 font-display text-[19vw] font-black leading-[0.73] tracking-[-0.08em] text-[#fff0cf] md:text-[10.7rem] lg:text-[13.5rem]"
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.1 }}
+              whileHover={{ scale: 1.04, rotate: [-0.5, 0.5, -0.5, 0] }}
             >
               Portfolio
             </motion.h1>
@@ -183,16 +353,39 @@ export default function Home() {
             <span className="hero-name font-hand text-4xl text-[#fff7e8] md:text-6xl">Abhishek Kumar</span>
             <AnimatedHand />
             <Doodle className="h-12 w-36 text-[#f7d39c]" />
+
+            <div className="tagline-box">
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={taglineIndex}
+                  className="font-mono text-sm uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-base"
+                  initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
+                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, y: -14, filter: "blur(4px)" }}
+                  transition={{ duration: 0.42 }}
+                >
+                  {funnyTaglines[taglineIndex]}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
             <p className="max-w-3xl text-balance text-lg font-semibold leading-relaxed text-white md:text-xl">
               An <span className="text-[#f7d39c]">Animation Designer</span> who is passionate about creativity, dedicated to endless explorations, and builds cinematic edits for brands, artists, and creators.
             </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]">
+              <a
+                href="#showreel"
+                className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]"
+                onClick={handleConfetti}
+              >
                 View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" />
               </a>
-              <a href="#clients" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be]">
-                Client projects <ArrowUpRight className="h-4 w-4" />
-              </a>
+              <button
+                onClick={handleStamp}
+                className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95"
+              >
+                <Stamp className="h-4 w-4" /> Hire me!
+              </button>
             </div>
           </motion.div>
         </motion.div>
@@ -206,7 +399,7 @@ export default function Home() {
               <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Profiles<br />& Reels</h2>
             </div>
             <p className="max-w-md text-lg leading-relaxed text-white/65">
-              Each card can hold one client profile. Hover pe us client ke saare project previews animated reel ki tarah reveal hote hain.
+              Hover each card to reveal the client's project reels. They slide up like a reel strip. Go on, try it. 👀
             </p>
           </div>
 
@@ -217,9 +410,9 @@ export default function Home() {
                 className="client-card group relative min-h-[560px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]"
                 initial={{ opacity: 0, y: 70 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -14, rotate: index === 1 ? 0 : index === 0 ? -0.8 : 0.8 }}
+                whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.75, delay: index * 0.08 }}
+                transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} />
                 <div className="client-card-glow" />
@@ -270,8 +463,26 @@ export default function Home() {
 
       <section className="relative overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
         <div className="motion-marquee font-display text-4xl font-black uppercase tracking-[-0.05em] md:text-6xl">
-          <span>Animation</span><span>VFX</span><span>Editing</span><span>Motion Graphics</span><span>Color Grade</span><span>Compositing</span>
-          <span>Animation</span><span>VFX</span><span>Editing</span><span>Motion Graphics</span><span>Color Grade</span><span>Compositing</span>
+          <span>Animation</span>
+          <span className="marquee-fun">Send Help 💀</span>
+          <span>VFX</span>
+          <span>Editing</span>
+          <span className="marquee-fun">5AM Renders 😵</span>
+          <span>Motion Graphics</span>
+          <span>Color Grade</span>
+          <span className="marquee-fun">Still Rendering...</span>
+          <span>Compositing</span>
+          <span className="marquee-fun">Ctrl+Z Everything 🔁</span>
+          <span>Animation</span>
+          <span className="marquee-fun">Send Help 💀</span>
+          <span>VFX</span>
+          <span>Editing</span>
+          <span className="marquee-fun">5AM Renders 😵</span>
+          <span>Motion Graphics</span>
+          <span>Color Grade</span>
+          <span className="marquee-fun">Still Rendering...</span>
+          <span>Compositing</span>
+          <span className="marquee-fun">Ctrl+Z Everything 🔁</span>
         </div>
       </section>
 
@@ -284,7 +495,7 @@ export default function Home() {
             </h2>
           </div>
           <p className="max-w-2xl text-xl leading-relaxed text-white/70">
-            Use this section for the client’s YouTube/Vimeo showreel. For now it works as a cinematic reel block with credits, categories, and a clear play action.
+            Use this section for the client's YouTube/Vimeo showreel. For now it works as a cinematic reel block with credits, categories, and a clear play action.
           </p>
         </div>
 
@@ -314,9 +525,15 @@ export default function Home() {
                 <h3 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.05em] md:text-8xl">Showreel</h3>
                 <p className="mt-4 max-w-xl text-white/70">Editing, animation, compositing, title design, transitions, and color finishing.</p>
               </div>
-              <button className="group flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black transition hover:scale-105 hover:bg-[#00dcff]" aria-label="Play showreel">
+              <motion.button
+                className="group flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black"
+                aria-label="Play showreel"
+                whileHover={{ scale: 1.18, rotate: [0, -8, 8, -4, 0] }}
+                whileTap={{ scale: 0.88 }}
+                transition={{ type: "spring", stiffness: 400, damping: 14 }}
+              >
                 <Play className="ml-1 h-8 w-8 fill-current" />
-              </button>
+              </motion.button>
             </div>
           </div>
         </motion.div>
@@ -326,7 +543,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-center">
             <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Selected<br />Frames</h2>
-            <p className="max-w-md text-lg leading-relaxed text-white/65">Main portfolio pieces can go here. Each card is made to feel like a Behance project preview: visual first, title second, service tags last.</p>
+            <p className="max-w-md text-lg leading-relaxed text-white/65">Main portfolio pieces. Each card hover has a rubbery snap. Go jiggle them.</p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2">
@@ -336,9 +553,9 @@ export default function Home() {
                 className="project-card group overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
                 initial={{ opacity: 0, y: 55 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -12, rotate: index % 2 === 0 ? -0.8 : 0.8 }}
+                whileHover={{ y: -14, rotate: index % 2 === 0 ? -1.2 : 1.2, scale: 1.015 }}
                 viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.7, delay: index * 0.08 }}
+                transition={{ type: "spring", stiffness: 260, damping: 18, delay: index * 0.08 }}
               >
                 <div className={`relative min-h-[360px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
                   <div className="absolute inset-0 opacity-40 mix-blend-overlay pattern" />
@@ -367,12 +584,18 @@ export default function Home() {
           </div>
           <div className="space-y-7 text-lg font-semibold leading-relaxed text-black/75">
             <p>
-              This portfolio is made for an editor who does more than join clips. It presents them as a visual storyteller: someone who can shape rhythm, emotion, illustration, VFX, and branded motion into one polished final film.
+              Abhishek turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.
             </p>
             <div className="grid gap-4 sm:grid-cols-3">
-              <div className="rounded-3xl bg-black p-5 text-[#fff0cf]"><strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span></div>
-              <div className="rounded-3xl bg-[#ff2f8e] p-5 text-white"><strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span></div>
-              <div className="rounded-3xl bg-[#00dcff] p-5 text-black"><strong className="block font-display text-4xl">4K</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Delivery</span></div>
+              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5 text-[#fff0cf]">
+                <strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.06, rotate: 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#ff2f8e] p-5 text-white">
+                <strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span>
+              </motion.div>
+              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#00dcff] p-5 text-black">
+                <strong className="block font-display text-4xl">4K</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Delivery</span>
+              </motion.div>
             </div>
           </div>
         </div>
@@ -382,18 +605,23 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex items-end justify-between gap-8">
             <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Process<br />& Services</h2>
-            <Wand2 className="hidden h-16 w-16 text-[#ff2f8e] md:block" />
+            <motion.div
+              animate={{ rotate: [0, 15, -15, 10, 0] }}
+              transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 2 }}
+            >
+              <Wand2 className="hidden h-16 w-16 text-[#ff2f8e] md:block" />
+            </motion.div>
           </div>
           <div className="divide-y divide-white/10 border-y border-white/10">
-            {capabilities.map(([num, title, body]) => (
+            {capabilities.map(([num, title, body], i) => (
               <motion.div
                 key={title}
                 className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ x: 12 }}
+                whileHover={{ x: 18, scale: 1.012 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.55 }}
+                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}
               >
                 <span className="font-hand text-5xl text-[#f7d39c]">{num}</span>
                 <h3 className="font-display text-3xl font-black uppercase tracking-[-0.04em] md:text-5xl">{title}</h3>
@@ -409,17 +637,48 @@ export default function Home() {
           <div className="absolute left-[-8%] top-[10%] h-64 w-64 rounded-full bg-[#ff2f8e] blur-[90px]" />
           <div className="absolute bottom-[-8%] right-[-8%] h-72 w-72 rounded-full bg-[#00dcff] blur-[95px]" />
           <div className="relative z-10 mx-auto max-w-4xl">
-            <Sparkles className="mx-auto mb-7 h-10 w-10 text-[#fff0cf]" />
-            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.07em] md:text-9xl">Let’s animate your next idea.</h2>
-            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/70">Replace this with the client’s real WhatsApp, email, Instagram, Vimeo, and Behance links. The portfolio is ready for real showreel and project content.</p>
+            <motion.div
+              animate={{ rotate: [0, 20, -20, 10, 0], scale: [1, 1.2, 1] }}
+              transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3 }}
+            >
+              <Sparkles className="mx-auto mb-7 h-10 w-10 text-[#fff0cf]" />
+            </motion.div>
+            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.07em] md:text-9xl">Let's animate your next idea.</h2>
+            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/70">
+              Replace this with the client's real WhatsApp, email, Instagram, Vimeo, and Behance links. The portfolio is ready for real showreel and project content.
+            </p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <a href="mailto:hello@motionvfx.com" className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#00dcff]"><Mail className="h-4 w-4" /> hello@motionvfx.com</a>
-              <a href="#showreel" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e]"><Clapperboard className="h-4 w-4" /> Watch reel</a>
+              <motion.a
+                href="mailto:hello@motionvfx.com"
+                className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black"
+                whileHover={{ scale: 1.08, rotate: -2 }}
+                whileTap={{ scale: 0.93 }}
+                transition={{ type: "spring", stiffness: 340, damping: 14 }}
+                onClick={handleConfetti}
+              >
+                <Mail className="h-4 w-4" /> hello@motionvfx.com
+              </motion.a>
+              <motion.a
+                href="#showreel"
+                className="inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white"
+                whileHover={{ scale: 1.08, rotate: 2, borderColor: "#ff2f8e" }}
+                whileTap={{ scale: 0.93 }}
+                transition={{ type: "spring", stiffness: 340, damping: 14 }}
+              >
+                <Clapperboard className="h-4 w-4" /> Watch reel
+              </motion.a>
             </div>
+            <motion.div
+              className="mt-12 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-mono text-xs uppercase tracking-[0.22em] text-white/40"
+              animate={{ opacity: [0.4, 1, 0.4] }}
+              transition={{ duration: 2.4, repeat: Infinity }}
+            >
+              <Zap className="h-3 w-3 text-[#00dcff]" /> Available for freelance projects
+            </motion.div>
           </div>
         </div>
         <footer className="mx-auto flex max-w-7xl flex-col justify-between gap-4 py-8 font-mono text-xs uppercase tracking-[0.22em] text-white/45 md:flex-row">
-          <span>Motion.VFX Portfolio 2024</span>
+          <span>Motion.VFX Portfolio 2024 · Abhishek Kumar</span>
           <span>Behance / Vimeo / Instagram / WhatsApp</span>
         </footer>
       </section>
