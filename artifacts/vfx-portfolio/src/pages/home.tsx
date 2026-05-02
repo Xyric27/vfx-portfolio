@@ -1,6 +1,8 @@
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Clapperboard, Film, Mail, Play, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
+import { ArrowUpRight, Clapperboard, ExternalLink, Film, FolderOpen, Mail, Play, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+
+const CLIENT_PORTAL_URL = "https://forms.gle/YOUR_FORM_LINK_HERE";
 
 const works = [
   {
@@ -65,6 +67,48 @@ const capabilities = [
   ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits, and director-style selects."],
   ["03", "VFX & Compositing", "Rotoscope, clean-up, keying, glow passes, atmosphere, match move looks, and shot finishing."],
   ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems, HUDs, and transitions."],
+];
+
+const tools = [
+  { name: "After Effects", icon: "Ae", color: "#9999FF", level: 97 },
+  { name: "Premiere Pro", icon: "Pr", color: "#9999FF", level: 94 },
+  { name: "DaVinci Resolve", icon: "DV", color: "#FF8A00", level: 88 },
+  { name: "Cinema 4D", icon: "C4", color: "#00DCFF", level: 78 },
+  { name: "Blender", icon: "Bl", color: "#FF7F2A", level: 72 },
+  { name: "Photoshop", icon: "Ps", color: "#31A8FF", level: 91 },
+  { name: "Illustrator", icon: "Ai", color: "#FF9A00", level: 85 },
+  { name: "Final Cut Pro", icon: "FC", color: "#FF2F8E", level: 80 },
+];
+
+const expertiseCards = [
+  {
+    num: "01",
+    title: "Storytelling Through Motion",
+    body: "Every edit has a heartbeat — a rhythm that decides how the viewer feels. Abhishek reads that rhythm and builds it from scratch.",
+    accent: "#00dcff",
+    tag: "Pacing & Feel",
+  },
+  {
+    num: "02",
+    title: "VFX That Blend, Not Break",
+    body: "Rotoscope, colour grade, glow passes, clean-up, and compositing that makes VFX look native — not pasted.",
+    accent: "#ff2f8e",
+    tag: "Visual Effects",
+  },
+  {
+    num: "03",
+    title: "Brand-First Motion Graphics",
+    body: "Titles, lower thirds, kinetic type, HUDs, icon systems — all built to stay on-brand while screaming premium.",
+    accent: "#ff7a1a",
+    tag: "Motion Design",
+  },
+  {
+    num: "04",
+    title: "Social-Ready Delivery",
+    body: "Vertical, horizontal, square — every format at 4K with proper captions, export presets, and platform-optimised cuts.",
+    accent: "#f7d39c",
+    tag: "Multi-Format",
+  },
 ];
 
 const funnyTaglines = [
@@ -138,13 +182,11 @@ function AnimatedHand() {
   );
 }
 
-function CursorTrail() {
+function SimpleCursor() {
   const cursorX = useMotionValue(-200);
   const cursorY = useMotionValue(-200);
-  const springX = useSpring(cursorX, { stiffness: 280, damping: 28 });
-  const springY = useSpring(cursorY, { stiffness: 280, damping: 28 });
-  const trailX = useSpring(cursorX, { stiffness: 90, damping: 22 });
-  const trailY = useSpring(cursorY, { stiffness: 90, damping: 22 });
+  const springX = useSpring(cursorX, { stiffness: 300, damping: 30 });
+  const springY = useSpring(cursorY, { stiffness: 300, damping: 30 });
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
@@ -156,29 +198,23 @@ function CursorTrail() {
   }, [cursorX, cursorY]);
 
   return (
-    <>
-      <motion.div
-        className="cursor-dot"
-        style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
-      />
-      <motion.div
-        className="cursor-ring"
-        style={{ x: trailX, y: trailY, translateX: "-50%", translateY: "-50%" }}
-      />
-    </>
+    <motion.div
+      className="cursor-dot"
+      style={{ x: springX, y: springY, translateX: "-50%", translateY: "-50%" }}
+    />
   );
 }
 
 function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean }) {
   const colors = ["#ff2f8e", "#00dcff", "#fff0cf", "#ff7a1a", "#7a4cff", "#fff"];
-  const pieces = Array.from({ length: 22 });
+  const pieces = Array.from({ length: 20 });
   return (
     <AnimatePresence>
       {active && (
         <div className="pointer-events-none fixed inset-0 z-[999]" aria-hidden="true">
           {pieces.map((_, i) => {
             const angle = (i / pieces.length) * 360;
-            const dist = 90 + Math.random() * 110;
+            const dist = 80 + Math.random() * 100;
             const tx = Math.cos((angle * Math.PI) / 180) * dist;
             const ty = Math.sin((angle * Math.PI) / 180) * dist - 60;
             return (
@@ -186,8 +222,7 @@ function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean
                 key={i}
                 className="confetti-piece"
                 style={{
-                  left: x,
-                  top: y,
+                  left: x, top: y,
                   background: colors[i % colors.length],
                   rotate: angle,
                   width: 8 + (i % 4) * 3,
@@ -197,7 +232,7 @@ function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean
                 initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
                 animate={{ x: tx, y: ty, opacity: 0, scale: 0.4, rotate: angle + 360 }}
                 exit={{}}
-                transition={{ duration: 0.75 + Math.random() * 0.3, ease: "easeOut" }}
+                transition={{ duration: 0.7 + Math.random() * 0.3, ease: "easeOut" }}
               />
             );
           })}
@@ -273,7 +308,7 @@ export default function Home() {
 
   return (
     <main className="custom-cursor min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
-      <CursorTrail />
+      <SimpleCursor />
       <ConfettiBurst x={confetti.x} y={confetti.y} active={confetti.active} />
       <HiredStamp show={stampVisible} />
 
@@ -281,43 +316,46 @@ export default function Home() {
       <motion.div className="pointer-events-none fixed left-[6vw] top-[22vh] z-0 hidden h-36 w-36 rounded-[42%] bg-[#ff2f8e]/25 blur-xl lg:block" style={{ y: floatY }} />
       <motion.div className="pointer-events-none fixed right-[7vw] top-[58vh] z-0 hidden h-44 w-44 rounded-full bg-[#00dcff]/20 blur-xl lg:block" style={{ y: floatReverseY }} />
 
-      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-5 mix-blend-difference md:px-10">
-        <a href="#top" className="font-display text-xl font-black uppercase tracking-tight">
+      <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-4 backdrop-blur-md bg-black/40 border-b border-white/5 md:px-10">
+        <a href="#top" className="font-display text-xl font-black uppercase tracking-tight text-[#fff7e8]">
           Motion<span className="text-[#00dcff]">.VFX</span>
         </a>
-        <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white md:flex">
+        <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white/70 md:flex">
+          <a href="#expertise" className="transition hover:text-[#00dcff]">Skills</a>
+          <a href="#tools" className="transition hover:text-[#00dcff]">Tools</a>
           <a href="#clients" className="transition hover:text-[#00dcff]">Clients</a>
-          <a href="#showreel" className="transition hover:text-[#00dcff]">Showreel</a>
           <a href="#work" className="transition hover:text-[#00dcff]">Work</a>
-          <a href="#about" className="transition hover:text-[#00dcff]">About</a>
           <a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
         </div>
+        <a
+          href={CLIENT_PORTAL_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-2 rounded-full bg-[#00dcff] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf] hover:scale-105"
+        >
+          <FolderOpen className="h-3.5 w-3.5" /> Client Portal
+        </a>
       </nav>
 
+      {/* HERO */}
       <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 md:py-28">
         <div className="grain" />
-
         {heroStickers.map((s) => (
           <motion.span
             key={s.emoji}
             className="hero-sticker"
             style={{ left: s.cx, top: s.cy, rotate: s.rot }}
-            initial={{ opacity: 0, scale: 0, rotate: s.rot - 30 }}
-            animate={{ opacity: 1, scale: 1, rotate: s.rot }}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1 + s.delay, type: "spring", stiffness: 280, damping: 16 }}
-            whileHover={{ scale: 1.5, rotate: s.rot + 15 }}
+            whileHover={{ scale: 1.5 }}
           >
             {s.emoji}
           </motion.span>
         ))}
 
         <motion.div style={{ y: coverY, scale: coverScale }} className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
-          <motion.div
-            className="hero-script mb-4 font-hand text-4xl text-[#fff7e8] md:text-6xl"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-          >
+          <motion.div className="hero-script mb-4 font-hand text-4xl text-[#fff7e8] md:text-6xl" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             An Animation
           </motion.div>
 
@@ -326,29 +364,22 @@ export default function Home() {
             <Wing side="right" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
             <motion.h1
               className="relative z-20 font-display text-[19vw] font-black leading-[0.73] tracking-[-0.08em] text-[#fff0cf] md:text-[10.7rem] lg:text-[13.5rem]"
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, delay: 0.1 }}
-              whileHover={{ scale: 1.04, rotate: [-0.5, 0.5, -0.5, 0] }}
+              whileHover={{ scale: 1.03 }}
             >
               Portfolio
             </motion.h1>
             <motion.div
               className="absolute left-1/2 top-[18%] z-30 -translate-x-1/2 font-display text-[15vw] font-black leading-none tracking-[-0.08em] text-[#00dcff] mix-blend-screen md:text-[8.8rem] lg:text-[11rem]"
-              initial={{ opacity: 0, x: -80 }}
-              animate={{ opacity: 0.9, x: 0 }}
+              initial={{ opacity: 0, x: -80 }} animate={{ opacity: 0.9, x: 0 }}
               transition={{ duration: 1, delay: 0.25 }}
             >
               Portfo
             </motion.div>
           </div>
 
-          <motion.div
-            className="mt-2 flex flex-col items-center gap-4"
-            initial={{ opacity: 0, y: 22 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.45 }}
-          >
+          <motion.div className="mt-2 flex flex-col items-center gap-4" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}>
             <span className="font-hand text-2xl text-[#fff7e8]/80 md:text-4xl">of</span>
             <span className="hero-name font-hand text-4xl text-[#fff7e8] md:text-6xl">Abhishek Kumar</span>
             <AnimatedHand />
@@ -370,20 +401,13 @@ export default function Home() {
             </div>
 
             <p className="max-w-3xl text-balance text-lg font-semibold leading-relaxed text-white md:text-xl">
-              An <span className="text-[#f7d39c]">Animation Designer</span> who is passionate about creativity, dedicated to endless explorations, and builds cinematic edits for brands, artists, and creators.
+              An <span className="text-[#f7d39c]">Animation Designer & VFX Editor</span> who builds cinematic films, motion graphics, and scroll-stopping brand visuals for artists, labels, and brands.
             </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <a
-                href="#showreel"
-                className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]"
-                onClick={handleConfetti}
-              >
+              <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]" onClick={handleConfetti}>
                 View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" />
               </a>
-              <button
-                onClick={handleStamp}
-                className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95"
-              >
+              <button onClick={handleStamp} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95">
                 <Stamp className="h-4 w-4" /> Hire me!
               </button>
             </div>
@@ -391,6 +415,147 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* EXPERTISE DEEP-DIVE */}
+      <section id="expertise" className="relative px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">What makes the difference</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">What I<br />Do Best</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">
+              Four things that separate a good editor from one that makes clients come back every time.
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {expertiseCards.map((card, i) => (
+              <motion.div
+                key={card.num}
+                className="expertise-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10, scale: 1.015 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}
+              >
+                <div className="expertise-card-bg" style={{ background: `radial-gradient(circle at 80% 20%, ${card.accent}22, transparent 55%)` }} />
+                <div className="relative z-10">
+                  <div className="mb-5 flex items-start justify-between">
+                    <span className="font-hand text-5xl" style={{ color: card.accent }}>{card.num}</span>
+                    <span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55`, color: card.accent }}>{card.tag}</span>
+                  </div>
+                  <h3 className="mb-4 font-display text-3xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-4xl">{card.title}</h3>
+                  <p className="text-base leading-relaxed text-white/60">{card.body}</p>
+                </div>
+                <div className="expertise-corner-line" style={{ borderColor: `${card.accent}40` }} />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TOOLS ARSENAL */}
+      <section id="tools" className="relative overflow-hidden px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">The arsenal</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">Tools &<br />Software</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">
+              8 industry-standard tools, used daily. No learning curves, just output.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {tools.map((tool, i) => (
+              <motion.div
+                key={tool.name}
+                className="tool-bar-card group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#171717] p-6"
+                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                whileHover={{ y: -8, scale: 1.03 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.05 }}
+              >
+                <div className="mb-5 flex items-center justify-between">
+                  <div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44`, color: tool.color }}>
+                    {tool.icon}
+                  </div>
+                  <span className="font-mono text-xs font-bold" style={{ color: tool.color }}>{tool.level}%</span>
+                </div>
+                <p className="mb-4 font-display text-lg font-black uppercase tracking-[-0.03em] text-white">{tool.name}</p>
+                <div className="tool-bar-track">
+                  <motion.div
+                    className="tool-bar-fill"
+                    style={{ background: `linear-gradient(90deg, ${tool.color}99, ${tool.color})` }}
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${tool.level}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, delay: 0.3 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CLIENT PORTAL CTA */}
+      <section id="portal" className="px-5 py-10 md:px-10">
+        <motion.div
+          className="client-portal-banner mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#00dcff]/30 bg-[#0a0f14]"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.7 }}
+        >
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute left-[-5%] top-[-10%] h-72 w-72 rounded-full bg-[#00dcff]/15 blur-[80px]" />
+            <div className="absolute right-[-5%] bottom-[-10%] h-72 w-72 rounded-full bg-[#ff2f8e]/12 blur-[80px]" />
+            <div className="portal-grid-lines" />
+          </div>
+          <div className="relative z-10 grid gap-8 p-8 md:grid-cols-[1fr_auto] md:items-center md:p-12 lg:p-16">
+            <div>
+              <div className="mb-3 flex items-center gap-3">
+                <span className="portal-live-dot" />
+                <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00dcff]">Client Panel — Open for projects</span>
+              </div>
+              <h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] text-white md:text-6xl lg:text-7xl">
+                Got a project?<br /><span className="text-[#00dcff]">Let's build it.</span>
+              </h2>
+              <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/60">
+                Submit your project brief — reference links, timeline, deliverables, and budget — through the client portal. Abhishek reviews every submission personally and responds within 24 hours.
+              </p>
+              <ul className="mt-6 flex flex-wrap gap-3">
+                {["Brief Submission", "File Handoff", "Revision Tracking", "Final Delivery"].map((item) => (
+                  <li key={item} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-white/70">{item}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex flex-col items-start gap-4 md:items-end">
+              <motion.a
+                href={CLIENT_PORTAL_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="portal-btn"
+                whileHover={{ scale: 1.06, rotate: -1 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 360, damping: 16 }}
+                onClick={handleConfetti}
+              >
+                <FolderOpen className="h-5 w-5" />
+                Open Client Portal
+                <ExternalLink className="h-4 w-4 opacity-70" />
+              </motion.a>
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/35">Replace link in code → CLIENT_PORTAL_URL</p>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* CLIENTS */}
       <section id="clients" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-end">
@@ -398,9 +563,7 @@ export default function Home() {
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client rooms</p>
               <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Profiles<br />& Reels</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/65">
-              Hover each card to reveal the client's project reels. They slide up like a reel strip. Go on, try it. 👀
-            </p>
+            <p className="max-w-md text-lg leading-relaxed text-white/65">Hover each card to reveal that client's project reel list. Go on, try it. 👀</p>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
@@ -418,16 +581,13 @@ export default function Home() {
                 <div className="client-card-glow" />
                 <div className="relative z-10 flex h-full min-h-[560px] flex-col justify-between p-7">
                   <div>
-                    <div className={`client-avatar bg-gradient-to-br ${client.avatar}`}>
-                      <span>{client.initials}</span>
-                    </div>
+                    <div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div>
                     <div className="mt-7">
                       <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p>
                       <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
                       <p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p>
                     </div>
                   </div>
-
                   <div className="client-project-panel">
                     <div className="mb-4 flex items-center justify-between">
                       <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Project reels</span>
@@ -449,7 +609,6 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-
                   <div className="flex items-end justify-between border-t border-white/10 pt-5">
                     <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Hover to reveal</span>
                     <ArrowUpRight className="h-6 w-6 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -461,62 +620,44 @@ export default function Home() {
         </div>
       </section>
 
+      {/* MARQUEE */}
       <section className="relative overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
         <div className="motion-marquee font-display text-4xl font-black uppercase tracking-[-0.05em] md:text-6xl">
-          <span>Animation</span>
-          <span className="marquee-fun">Send Help 💀</span>
-          <span>VFX</span>
-          <span>Editing</span>
+          <span>Animation</span><span className="marquee-fun">Send Help 💀</span>
+          <span>VFX</span><span>Editing</span>
           <span className="marquee-fun">5AM Renders 😵</span>
-          <span>Motion Graphics</span>
-          <span>Color Grade</span>
+          <span>Motion Graphics</span><span>Color Grade</span>
           <span className="marquee-fun">Still Rendering...</span>
-          <span>Compositing</span>
-          <span className="marquee-fun">Ctrl+Z Everything 🔁</span>
-          <span>Animation</span>
-          <span className="marquee-fun">Send Help 💀</span>
-          <span>VFX</span>
-          <span>Editing</span>
+          <span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
+          <span>Animation</span><span className="marquee-fun">Send Help 💀</span>
+          <span>VFX</span><span>Editing</span>
           <span className="marquee-fun">5AM Renders 😵</span>
-          <span>Motion Graphics</span>
-          <span>Color Grade</span>
+          <span>Motion Graphics</span><span>Color Grade</span>
           <span className="marquee-fun">Still Rendering...</span>
-          <span>Compositing</span>
-          <span className="marquee-fun">Ctrl+Z Everything 🔁</span>
+          <span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
         </div>
       </section>
 
+      {/* SHOWREEL */}
       <section id="showreel" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
-            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-8xl">
-              First frame should feel hired.
-            </h2>
+            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-8xl">First frame should feel hired.</h2>
           </div>
-          <p className="max-w-2xl text-xl leading-relaxed text-white/70">
-            Use this section for the client's YouTube/Vimeo showreel. For now it works as a cinematic reel block with credits, categories, and a clear play action.
-          </p>
+          <p className="max-w-2xl text-xl leading-relaxed text-white/70">Use this section for the client's YouTube/Vimeo showreel embed.</p>
         </div>
-
         <motion.div
           className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black"
           style={{ y: reelY, rotate: reelRotate }}
-          initial={{ opacity: 0, y: 70 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-120px" }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}
         >
           <div className="relative aspect-video min-h-[360px]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,#ff2f8e_0,transparent_26%),radial-gradient(circle_at_82%_70%,#00dcff_0,transparent_28%),linear-gradient(135deg,#160b0d,#111_48%,#2a081b)]" />
             <div className="motion-video-loop absolute inset-0">
-              <span className="loop-shape loop-a" />
-              <span className="loop-shape loop-b" />
-              <span className="loop-shape loop-c" />
-              <span className="loop-shape loop-d" />
-              <span className="loop-frame loop-frame-one" />
-              <span className="loop-frame loop-frame-two" />
-              <span className="loop-scan" />
+              <span className="loop-shape loop-a" /><span className="loop-shape loop-b" /><span className="loop-shape loop-c" /><span className="loop-shape loop-d" />
+              <span className="loop-frame loop-frame-one" /><span className="loop-frame loop-frame-two" /><span className="loop-scan" />
             </div>
             <div className="absolute inset-6 rounded-[1.5rem] border border-white/15" />
             <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
@@ -539,20 +680,19 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* SELECTED FRAMES */}
       <section id="work" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-center">
             <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Selected<br />Frames</h2>
-            <p className="max-w-md text-lg leading-relaxed text-white/65">Main portfolio pieces. Each card hover has a rubbery snap. Go jiggle them.</p>
+            <p className="max-w-md text-lg leading-relaxed text-white/65">Portfolio pieces — visual first, service tags last.</p>
           </div>
-
           <div className="grid gap-6 md:grid-cols-2">
             {works.map((work, index) => (
               <motion.article
                 key={work.title}
                 className="project-card group overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
-                initial={{ opacity: 0, y: 55 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, y: 55 }} whileInView={{ opacity: 1, y: 0 }}
                 whileHover={{ y: -14, rotate: index % 2 === 0 ? -1.2 : 1.2, scale: 1.015 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ type: "spring", stiffness: 260, damping: 18, delay: index * 0.08 }}
@@ -576,6 +716,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ABOUT */}
       <section id="about" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-white/10 bg-[#fff0cf] p-7 text-black md:p-12 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
@@ -583,32 +724,22 @@ export default function Home() {
             <h2 className="mt-6 font-display text-6xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-8xl">Creative cuts with animated soul.</h2>
           </div>
           <div className="space-y-7 text-lg font-semibold leading-relaxed text-black/75">
-            <p>
-              Abhishek turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.
-            </p>
+            <p>Abhishek turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
             <div className="grid gap-4 sm:grid-cols-3">
-              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5 text-[#fff0cf]">
-                <strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.06, rotate: 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#ff2f8e] p-5 text-white">
-                <strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#00dcff] p-5 text-black">
-                <strong className="block font-display text-4xl">4K</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Delivery</span>
-              </motion.div>
+              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5 text-[#fff0cf]"><strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span></motion.div>
+              <motion.div whileHover={{ scale: 1.06, rotate: 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#ff2f8e] p-5 text-white"><strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span></motion.div>
+              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#00dcff] p-5 text-black"><strong className="block font-display text-4xl">4K</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Delivery</span></motion.div>
             </div>
           </div>
         </div>
       </section>
 
+      {/* SERVICES */}
       <section id="services" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex items-end justify-between gap-8">
             <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Process<br />& Services</h2>
-            <motion.div
-              animate={{ rotate: [0, 15, -15, 10, 0] }}
-              transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 2 }}
-            >
+            <motion.div animate={{ rotate: [0, 15, -15, 10, 0] }} transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 2 }}>
               <Wand2 className="hidden h-16 w-16 text-[#ff2f8e] md:block" />
             </motion.div>
           </div>
@@ -617,8 +748,7 @@ export default function Home() {
               <motion.div
                 key={title}
                 className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
                 whileHover={{ x: 18, scale: 1.012 }}
                 viewport={{ once: true }}
                 transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}
@@ -632,47 +762,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CONTACT */}
       <section id="contact" className="px-5 pb-10 pt-24 md:px-10">
         <div className="relative mx-auto overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] p-8 text-center md:p-16">
           <div className="absolute left-[-8%] top-[10%] h-64 w-64 rounded-full bg-[#ff2f8e] blur-[90px]" />
           <div className="absolute bottom-[-8%] right-[-8%] h-72 w-72 rounded-full bg-[#00dcff] blur-[95px]" />
           <div className="relative z-10 mx-auto max-w-4xl">
-            <motion.div
-              animate={{ rotate: [0, 20, -20, 10, 0], scale: [1, 1.2, 1] }}
-              transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3 }}
-            >
+            <motion.div animate={{ rotate: [0, 20, -20, 10, 0], scale: [1, 1.2, 1] }} transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3 }}>
               <Sparkles className="mx-auto mb-7 h-10 w-10 text-[#fff0cf]" />
             </motion.div>
             <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.07em] md:text-9xl">Let's animate your next idea.</h2>
-            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/70">
-              Replace this with the client's real WhatsApp, email, Instagram, Vimeo, and Behance links. The portfolio is ready for real showreel and project content.
-            </p>
+            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/70">Replace with real WhatsApp, email, Instagram, Vimeo, and Behance links when ready.</p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <motion.a
-                href="mailto:hello@motionvfx.com"
-                className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black"
-                whileHover={{ scale: 1.08, rotate: -2 }}
-                whileTap={{ scale: 0.93 }}
-                transition={{ type: "spring", stiffness: 340, damping: 14 }}
-                onClick={handleConfetti}
-              >
+              <motion.a href="mailto:hello@motionvfx.com" className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black" whileHover={{ scale: 1.08, rotate: -2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }} onClick={handleConfetti}>
                 <Mail className="h-4 w-4" /> hello@motionvfx.com
               </motion.a>
-              <motion.a
-                href="#showreel"
-                className="inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white"
-                whileHover={{ scale: 1.08, rotate: 2, borderColor: "#ff2f8e" }}
-                whileTap={{ scale: 0.93 }}
-                transition={{ type: "spring", stiffness: 340, damping: 14 }}
-              >
+              <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#00dcff]/40 bg-[#00dcff]/10 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-[#00dcff]" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }}>
+                <FolderOpen className="h-4 w-4" /> Client Portal
+              </motion.a>
+              <motion.a href="#showreel" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }}>
                 <Clapperboard className="h-4 w-4" /> Watch reel
               </motion.a>
             </div>
-            <motion.div
-              className="mt-12 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-mono text-xs uppercase tracking-[0.22em] text-white/40"
-              animate={{ opacity: [0.4, 1, 0.4] }}
-              transition={{ duration: 2.4, repeat: Infinity }}
-            >
+            <motion.div className="mt-12 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-mono text-xs uppercase tracking-[0.22em] text-white/40" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.4, repeat: Infinity }}>
               <Zap className="h-3 w-3 text-[#00dcff]" /> Available for freelance projects
             </motion.div>
           </div>
