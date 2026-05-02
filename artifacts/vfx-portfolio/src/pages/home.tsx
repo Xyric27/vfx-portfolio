@@ -1,5 +1,5 @@
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, Clapperboard, ExternalLink, Film, FolderOpen, Mail, Play, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
+import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Mail, Play, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const CLIENT_PORTAL_URL = "https://forms.gle/YOUR_FORM_LINK_HERE";
@@ -111,6 +111,76 @@ const expertiseCards = [
   },
 ];
 
+const processSteps = [
+  { num: "01", title: "Brief", body: "Share your idea, references, deadline, and vibe. The more details, the better the output.", color: "#00dcff", emoji: "📋" },
+  { num: "02", title: "Concept", body: "Meet maps out the structure, style frames, and a rough timeline. No surprises mid-project.", color: "#ff2f8e", emoji: "🎨" },
+  { num: "03", title: "Build", body: "Animation, editing, VFX, sound sync — built in stages with milestone previews for feedback.", color: "#ff7a1a", emoji: "⚙️" },
+  { num: "04", title: "Deliver", body: "Final export in your format (4K, web, vertical, horizontal) + project files if requested.", color: "#f7d39c", emoji: "🚀" },
+];
+
+const packages = [
+  {
+    name: "Quick Cut",
+    price: "₹4,999",
+    tag: "Best for reels & shorts",
+    color: "#00dcff",
+    features: [
+      "Up to 60 seconds edit",
+      "Music sync & pacing",
+      "Basic colour grade",
+      "Titles & lower thirds",
+      "2 revision rounds",
+      "Delivery in 3–5 days",
+    ],
+    cta: "Get started",
+    highlight: false,
+  },
+  {
+    name: "Full Production",
+    price: "₹14,999",
+    tag: "Most popular",
+    color: "#ff2f8e",
+    features: [
+      "Up to 5 min edit or animation",
+      "Motion graphics & transitions",
+      "VFX compositing",
+      "Professional colour grade",
+      "Sound design & mix",
+      "4 revision rounds",
+      "Delivery in 7–10 days",
+    ],
+    cta: "Let's work",
+    highlight: true,
+  },
+  {
+    name: "Cinematic VFX",
+    price: "₹29,999+",
+    tag: "Premium projects",
+    color: "#ff7a1a",
+    features: [
+      "Full film / campaign",
+      "Advanced VFX & compositing",
+      "Character animation",
+      "Full sound production",
+      "Multi-format delivery",
+      "Unlimited revisions",
+      "Priority turnaround",
+    ],
+    cta: "Discuss scope",
+    highlight: false,
+  },
+];
+
+const faqs = [
+  ["How long does a project take?", "Quick Cut edits are done in 3–5 days. Full Production projects take 7–10 days. Cinematic / VFX projects are scoped individually. Rush delivery is available for an additional fee."],
+  ["How many revisions do I get?", "It depends on the package — Quick Cut gets 2 rounds, Full Production gets 4, and Cinematic gets unlimited. Each revision round covers one consolidated set of changes."],
+  ["What format will I receive the final file in?", "By default: MP4 (H.264, 4K or 1080p). Can also deliver ProRes, MOV, vertical (9:16), square (1:1), or any specific platform format you need."],
+  ["Do you provide the project files (AE, Premiere)?", "Project files are included in the Cinematic VFX package. For other packages, they can be added for a small extra fee."],
+  ["How do I share my footage and references?", "Through the Client Portal — you'll get a shared folder link after booking. WeTransfer and Google Drive also work fine."],
+  ["What if I don't like the final output?", "That almost never happens because we align on style before production starts. But if it does — your revision rounds exist exactly for this. If the brief changed mid-project, we'll discuss scope adjustment."],
+  ["Do you work with international clients?", "Absolutely. Payments accepted via PayPal, Wise, and Razorpay. Time zone overlap is handled via async updates in the Client Portal."],
+];
+
 const funnyTaglines = [
   "Coffee → Frames → Render → Repeat ☕",
   "Still rendering... pls hold 🙏",
@@ -129,6 +199,45 @@ const heroStickers = [
   { emoji: "🎨", cx: "92%", cy: "68%", delay: 0.9, rot: -22 },
   { emoji: "🔥", cx: "50%", cy: "8%", delay: 1.1, rot: 5 },
 ];
+
+function FaqList() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <div className="divide-y divide-white/10 border-y border-white/10">
+      {faqs.map(([q, a], i) => (
+        <motion.div key={i} initial={false}>
+          <button
+            className="flex w-full items-center justify-between gap-6 py-7 text-left"
+            onClick={() => setOpen(open === i ? null : i)}
+          >
+            <span className="font-display text-xl font-black uppercase tracking-[-0.03em] text-white md:text-2xl">{q}</span>
+            <motion.div
+              animate={{ rotate: open === i ? 180 : 0 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              className="shrink-0"
+            >
+              <ChevronDown className="h-6 w-6 text-[#00dcff]" />
+            </motion.div>
+          </button>
+          <AnimatePresence initial={false}>
+            {open === i && (
+              <motion.div
+                key="answer"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden"
+              >
+                <p className="pb-7 text-lg leading-relaxed text-white/60">{a}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
+      ))}
+    </div>
+  );
+}
 
 function Wing({ side, mouseX, mouseY }: { side: "left" | "right"; mouseX: number; mouseY: number }) {
   const flip = side === "right" ? "scale-x-[-1]" : "";
@@ -759,6 +868,127 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* HOW IT WORKS */}
+      <section id="process" className="px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff7a1a]">Zero confusion</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">How It<br />Works</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">Four steps from "I have an idea" to "this is exactly what I wanted."</p>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={step.num}
+                className="process-step-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-7"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10, scale: 1.03 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.08 }}
+              >
+                <div className="process-step-glow" style={{ background: `radial-gradient(circle at 30% 30%, ${step.color}22, transparent 60%)` }} />
+                <div className="relative z-10">
+                  <div className="mb-5 flex items-start justify-between">
+                    <span className="process-step-num font-display text-6xl font-black leading-none tracking-[-0.05em]" style={{ color: `${step.color}40` }}>{step.num}</span>
+                    <span className="text-3xl">{step.emoji}</span>
+                  </div>
+                  <div className="mb-3 h-0.5 w-10 rounded-full" style={{ background: step.color }} />
+                  <h3 className="mb-3 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white">{step.title}</h3>
+                  <p className="text-sm leading-relaxed text-white/55">{step.body}</p>
+                </div>
+                {i < processSteps.length - 1 && (
+                  <div className="absolute -right-3 top-1/2 z-20 hidden h-6 w-6 -translate-y-1/2 items-center justify-center lg:flex">
+                    <ArrowUpRight className="h-4 w-4 rotate-45 text-white/20" />
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PACKAGES */}
+      <section id="packages" className="px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">No hidden costs</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">Packages<br />& Pricing</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">Pick a tier, or drop a message for something custom. Everything is negotiable except quality.</p>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {packages.map((pkg, i) => (
+              <motion.div
+                key={pkg.name}
+                className={`package-card relative overflow-hidden rounded-[2rem] border p-8 ${pkg.highlight ? "border-[#ff2f8e]/50 bg-[#1a0910]" : "border-white/10 bg-[#171717]"}`}
+                initial={{ opacity: 0, y: 55 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -12, scale: 1.02 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.08 }}
+              >
+                {pkg.highlight && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#ff2f8e]/10 via-transparent to-transparent" />
+                  </div>
+                )}
+                <div className="relative z-10">
+                  <div className="mb-6 flex items-start justify-between">
+                    <div>
+                      <span className="mb-2 block rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ background: `${pkg.color}22`, color: pkg.color }}>{pkg.tag}</span>
+                      <h3 className="font-display text-3xl font-black uppercase tracking-[-0.04em] text-white">{pkg.name}</h3>
+                    </div>
+                    {pkg.highlight && <span className="rounded-full bg-[#ff2f8e] px-3 py-1 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-white">Popular</span>}
+                  </div>
+                  <div className="mb-8 border-b border-white/10 pb-8">
+                    <span className="font-display text-5xl font-black tracking-[-0.05em] text-white">{pkg.price}</span>
+                    <span className="ml-2 font-mono text-xs uppercase tracking-[0.2em] text-white/40">per project</span>
+                  </div>
+                  <ul className="mb-8 space-y-3">
+                    {pkg.features.map((feat) => (
+                      <li key={feat} className="flex items-center gap-3 text-sm text-white/70">
+                        <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: pkg.color }} />
+                        {feat}
+                      </li>
+                    ))}
+                  </ul>
+                  <motion.a
+                    href={CLIENT_PORTAL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full rounded-full py-4 text-center font-mono text-sm font-black uppercase tracking-[0.18em] transition"
+                    style={pkg.highlight ? { background: pkg.color, color: "#000" } : { border: `1px solid ${pkg.color}55`, color: pkg.color }}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.96 }}
+                  >
+                    {pkg.cta}
+                  </motion.a>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+          <p className="mt-8 text-center font-mono text-xs uppercase tracking-[0.25em] text-white/35">All prices are starting rates · Custom scopes always welcome · GST extra if applicable</p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" className="px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Before you ask</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">FAQs</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">The 7 questions every client asks. Answered once, right here.</p>
+          </div>
+          <FaqList />
         </div>
       </section>
 
