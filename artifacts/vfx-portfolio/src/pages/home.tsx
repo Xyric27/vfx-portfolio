@@ -1,8 +1,9 @@
-import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
-import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Mail, Play, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
+import { AnimatePresence, motion, useInView, useMotionValue, useScroll, useSpring, useTransform } from "framer-motion";
+import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Mail, MessageCircle, Play, Quote, Sparkles, Stamp, Wand2, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 const CLIENT_PORTAL_URL = "https://forms.gle/YOUR_FORM_LINK_HERE";
+const WHATSAPP_URL = "https://wa.me/919999999999";
 
 const works = [
   {
@@ -181,6 +182,48 @@ const faqs = [
   ["Do you work with international clients?", "Absolutely. Payments accepted via PayPal, Wise, and Razorpay. Time zone overlap is handled via async updates in the Client Portal."],
 ];
 
+const testimonials = [
+  {
+    name: "Aarav Shah",
+    role: "Music Label — Aarav Studios",
+    quote: "Meet delivered 7 projects with us and every single one was better than what we briefed. He just gets it — the vibe, the timing, everything.",
+    color: "#00dcff",
+    initials: "AS",
+    rating: 5,
+  },
+  {
+    name: "Priya Mathur",
+    role: "Founder — Nova Skin",
+    quote: "Our product launch reel got 2M views in 48 hours. Meet's edit made our brand look premium even on a bootstrap budget.",
+    color: "#ff2f8e",
+    initials: "PM",
+    rating: 5,
+  },
+  {
+    name: "Kunal Desai",
+    role: "Tech Creator — Flux Motion",
+    quote: "The explainer Meet made is still our best performing video after 18 months. Clients still comment on it. Worth every rupee.",
+    color: "#ff7a1a",
+    initials: "KD",
+    rating: 5,
+  },
+  {
+    name: "Sneha Pillai",
+    role: "Brand Manager — Vibe Co.",
+    quote: "Turnaround in 4 days, zero revisions needed. That has never happened with any other editor we've worked with. Genuinely shocked.",
+    color: "#f7d39c",
+    initials: "SP",
+    rating: 5,
+  },
+];
+
+const stats = [
+  { value: 48, suffix: "+", label: "Projects Delivered", color: "#fff0cf" },
+  { value: 12, suffix: "", label: "Brand Clients", color: "#ff2f8e" },
+  { value: 5, suffix: "+", label: "Years Experience", color: "#00dcff" },
+  { value: 100, suffix: "%", label: "Delivery Rate", color: "#ff7a1a" },
+];
+
 const funnyTaglines = [
   "Coffee → Frames → Render → Repeat ☕",
   "Still rendering... pls hold 🙏",
@@ -199,6 +242,100 @@ const heroStickers = [
   { emoji: "🎨", cx: "92%", cy: "68%", delay: 0.9, rot: -22 },
   { emoji: "🔥", cx: "50%", cy: "8%", delay: 1.1, rot: 5 },
 ];
+
+function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!inView) return;
+    let start = 0;
+    const duration = 1400;
+    const fps = 60;
+    const steps = (duration / 1000) * fps;
+    const increment = value / steps;
+    const timer = setInterval(() => {
+      start += increment;
+      if (start >= value) { setCount(value); clearInterval(timer); }
+      else setCount(Math.floor(start));
+    }, 1000 / fps);
+    return () => clearInterval(timer);
+  }, [inView, value]);
+  return <span ref={ref}>{count}{suffix}</span>;
+}
+
+function LoadingScreen({ onDone }: { onDone: () => void }) {
+  useEffect(() => {
+    const t = setTimeout(onDone, 2400);
+    return () => clearTimeout(t);
+  }, [onDone]);
+  return (
+    <motion.div
+      className="loading-screen"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 0.96 }}
+      transition={{ duration: 0.55, ease: [0.4, 0, 0.2, 1] }}
+    >
+      <div className="loading-grid" />
+      <motion.div
+        className="loading-content"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.15 }}
+      >
+        <motion.p
+          className="loading-eyebrow"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+        >
+          Animation · VFX · Motion
+        </motion.p>
+        <motion.h1
+          className="loading-name"
+          initial={{ clipPath: "inset(0 100% 0 0)" }}
+          animate={{ clipPath: "inset(0 0% 0 0)" }}
+          transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Meet
+        </motion.h1>
+        <motion.div
+          className="loading-bar-track"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.div
+            className="loading-bar-fill"
+            initial={{ width: "0%" }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          />
+        </motion.div>
+        <motion.p
+          className="loading-sub"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.9 }}
+        >
+          Loading portfolio...
+        </motion.p>
+      </motion.div>
+      <motion.div
+        className="loading-corner loading-corner-tl"
+        initial={{ width: 0, height: 0 }}
+        animate={{ width: 48, height: 48 }}
+        transition={{ delay: 0.2, duration: 0.5 }}
+      />
+      <motion.div
+        className="loading-corner loading-corner-br"
+        initial={{ width: 0, height: 0 }}
+        animate={{ width: 48, height: 48 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      />
+    </motion.div>
+  );
+}
 
 function FaqList() {
   const [open, setOpen] = useState<number | null>(null);
@@ -370,6 +507,7 @@ function HiredStamp({ show }: { show: boolean }) {
 }
 
 export default function Home() {
+  const [loaded, setLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
   const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
@@ -417,6 +555,7 @@ export default function Home() {
 
   return (
     <main className="custom-cursor min-h-screen overflow-hidden bg-[#111] text-[#fff7e8] selection:bg-[#00dcff] selection:text-black">
+      <AnimatePresence>{!loaded && <LoadingScreen onDone={() => setLoaded(true)} />}</AnimatePresence>
       <SimpleCursor />
       <ConfettiBurst x={confetti.x} y={confetti.y} active={confetti.active} />
       <HiredStamp show={stampVisible} />
@@ -834,10 +973,21 @@ export default function Home() {
           </div>
           <div className="space-y-7 text-lg font-semibold leading-relaxed text-black/75">
             <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
-            <div className="grid gap-4 sm:grid-cols-3">
-              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5 text-[#fff0cf]"><strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span></motion.div>
-              <motion.div whileHover={{ scale: 1.06, rotate: 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#ff2f8e] p-5 text-white"><strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span></motion.div>
-              <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#00dcff] p-5 text-black"><strong className="block font-display text-4xl">4K</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Delivery</span></motion.div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  whileHover={{ scale: 1.06, rotate: i % 2 === 0 ? -2 : 2 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 14 }}
+                  className="rounded-3xl bg-black p-5"
+                  style={{ color: stat.color }}
+                >
+                  <strong className="block font-display text-4xl">
+                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  </strong>
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/60">{stat.label}</span>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
@@ -978,6 +1128,52 @@ export default function Home() {
         </div>
       </section>
 
+      {/* TESTIMONIALS */}
+      <section id="testimonials" className="px-5 py-28 md:px-10">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Don't take our word for it</p>
+              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">What<br />Clients Say</h2>
+            </div>
+            <p className="max-w-md text-lg leading-relaxed text-white/60">Real words from real clients. No fluff, no marketing speak.</p>
+          </div>
+          <div className="grid gap-5 md:grid-cols-2">
+            {testimonials.map((t, i) => (
+              <motion.div
+                key={t.name}
+                className="testimonial-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8"
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -10, scale: 1.015 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}
+              >
+                <div className="absolute right-0 top-0 h-40 w-40 rounded-full blur-[60px]" style={{ background: `${t.color}18` }} />
+                <div className="relative z-10">
+                  <div className="mb-5 flex items-start justify-between">
+                    <Quote className="h-8 w-8" style={{ color: `${t.color}80` }} />
+                    <div className="flex gap-0.5">
+                      {Array.from({ length: t.rating }).map((_, s) => (
+                        <span key={s} className="text-sm text-[#f7d39c]">★</span>
+                      ))}
+                    </div>
+                  </div>
+                  <p className="mb-8 text-xl font-semibold leading-relaxed text-white/85">"{t.quote}"</p>
+                  <div className="flex items-center gap-4 border-t border-white/10 pt-6">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25`, color: t.color }}>{t.initials}</div>
+                    <div>
+                      <p className="font-display text-lg font-black uppercase tracking-[-0.03em] text-white">{t.name}</p>
+                      <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{t.role}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" className="px-5 py-28 md:px-10">
         <div className="mx-auto max-w-5xl">
@@ -1024,6 +1220,21 @@ export default function Home() {
           <span>Behance / Vimeo / Instagram / WhatsApp</span>
         </footer>
       </section>
+      {/* WHATSAPP FLOAT */}
+      <motion.a
+        href={WHATSAPP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="whatsapp-float"
+        initial={{ opacity: 0, scale: 0.6, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ delay: 3, type: "spring", stiffness: 280, damping: 18 }}
+        whileHover={{ scale: 1.08, y: -3 }}
+        whileTap={{ scale: 0.94 }}
+      >
+        <MessageCircle className="h-4 w-4 fill-current" />
+        Chat on WhatsApp
+      </motion.a>
     </main>
   );
 }
