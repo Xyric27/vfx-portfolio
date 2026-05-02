@@ -949,11 +949,57 @@
     font-size: clamp(5rem, 18vw, 14rem);
     font-weight: 900;
     line-height: .85;
-    letter-spacing: -.06em;
-    color: #fff0cf;
+    letter-spacing: -.04em;
     text-transform: uppercase;
     white-space: nowrap;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .02em;
+  }
+
+  .loading-letter {
+    display: inline-block;
+    font-family: var(--app-font-display);
+    font-size: inherit;
+    font-weight: 900;
+    line-height: .85;
+    min-width: .58em;
+    text-align: center;
+    will-change: transform, color, filter;
+    color: #00dcff;
+  }
+
+  .loading-orb {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(80px);
+    opacity: .18;
+    animation: orbFloat 6s ease-in-out infinite alternate;
+  }
+
+  .loading-orb-1 {
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, #ff2f8e, transparent 70%);
+    top: -10%;
+    left: -8%;
+    animation-delay: 0s;
+  }
+
+  .loading-orb-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, #00dcff, transparent 70%);
+    bottom: -10%;
+    right: -8%;
+    animation-delay: -3s;
+  }
+
+  @keyframes orbFloat {
+    from { transform: translate(0, 0) scale(1); }
+    to   { transform: translate(30px, 20px) scale(1.12); }
   }
 
   .loading-bar-track {
