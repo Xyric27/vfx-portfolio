@@ -84,7 +84,7 @@ const expertiseCards = [
   {
     num: "01",
     title: "Storytelling Through Motion",
-    body: "Every edit has a heartbeat — a rhythm that decides how the viewer feels. Abhishek reads that rhythm and builds it from scratch.",
+    body: "Every edit has a heartbeat — a rhythm that decides how the viewer feels. Meet reads that rhythm and builds it from scratch.",
     accent: "#00dcff",
     tag: "Pacing & Feel",
   },
@@ -381,7 +381,7 @@ export default function Home() {
 
           <motion.div className="mt-2 flex flex-col items-center gap-4" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}>
             <span className="font-hand text-2xl text-[#fff7e8]/80 md:text-4xl">of</span>
-            <span className="hero-name font-hand text-4xl text-[#fff7e8] md:text-6xl">Abhishek Kumar</span>
+            <span className="hero-name font-hand text-4xl text-[#fff7e8] md:text-6xl">Meet</span>
             <AnimatedHand />
             <Doodle className="h-12 w-36 text-[#f7d39c]" />
 
@@ -526,7 +526,7 @@ export default function Home() {
                 Got a project?<br /><span className="text-[#00dcff]">Let's build it.</span>
               </h2>
               <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/60">
-                Submit your project brief — reference links, timeline, deliverables, and budget — through the client portal. Abhishek reviews every submission personally and responds within 24 hours.
+                Submit your project brief — reference links, timeline, deliverables, and budget — through the client portal. Meet reviews every submission personally and responds within 24 hours.
               </p>
               <ul className="mt-6 flex flex-wrap gap-3">
                 {["Brief Submission", "File Handoff", "Revision Tracking", "Final Delivery"].map((item) => (
@@ -724,7 +724,7 @@ export default function Home() {
             <h2 className="mt-6 font-display text-6xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-8xl">Creative cuts with animated soul.</h2>
           </div>
           <div className="space-y-7 text-lg font-semibold leading-relaxed text-black/75">
-            <p>Abhishek turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
+            <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
             <div className="grid gap-4 sm:grid-cols-3">
               <motion.div whileHover={{ scale: 1.06, rotate: -2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5 text-[#fff0cf]"><strong className="block font-display text-4xl">48+</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Edits</span></motion.div>
               <motion.div whileHover={{ scale: 1.06, rotate: 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-[#ff2f8e] p-5 text-white"><strong className="block font-display text-4xl">12</strong><span className="font-mono text-xs uppercase tracking-[0.2em]">Brands</span></motion.div>
@@ -790,7 +790,7 @@ export default function Home() {
           </div>
         </div>
         <footer className="mx-auto flex max-w-7xl flex-col justify-between gap-4 py-8 font-mono text-xs uppercase tracking-[0.22em] text-white/45 md:flex-row">
-          <span>Motion.VFX Portfolio 2024 · Abhishek Kumar</span>
+          <span>Motion.VFX Portfolio 2024 · Meet</span>
           <span>Behance / Vimeo / Instagram / WhatsApp</span>
         </footer>
       </section>
