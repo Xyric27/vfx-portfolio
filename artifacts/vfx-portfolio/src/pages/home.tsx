@@ -267,51 +267,6 @@ const heroStickers = [
   { emoji: "🔥", cx: "50%", cy: "8%", delay: 1.1, rot: 5 },
 ];
 
-const SCRAMBLE_CHARS = [
-  '🎬','🎨','⚡','💥','🔥','✦','◆','▓','░','▀','@','#','$','%','&','?','!','^','~','*','<','>','|','\\','/','{','}','[',']',
-];
-
-function ScrambleLetter({ target, startDelay }: { target: string; startDelay: number }) {
-  const [display, setDisplay] = useState<string>(SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]);
-  const [settled, setSettled] = useState(false);
-
-  useEffect(() => {
-    const t0 = setTimeout(() => {
-      let count = 0;
-      const total = 16;
-      const iv = setInterval(() => {
-        if (count >= total) {
-          setDisplay(target);
-          setSettled(true);
-          clearInterval(iv);
-        } else {
-          setDisplay(SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)]);
-          count++;
-        }
-      }, 50);
-      return () => { clearInterval(iv); };
-    }, startDelay);
-    return () => clearTimeout(t0);
-  }, [target, startDelay]);
-
-  return (
-    <motion.span
-      className="loading-letter"
-      animate={
-        settled
-          ? { color: '#fff0cf', scale: [1.35, 0.88, 1.05, 1], y: [0, -12, 4, 0], filter: 'drop-shadow(0 0 24px #fff0cf)' }
-          : { color: '#00dcff', scale: 1, y: 0, filter: 'drop-shadow(0 0 14px #00dcff)' }
-      }
-      transition={settled
-        ? { type: 'spring', stiffness: 420, damping: 18, duration: 0.4 }
-        : { duration: 0.04 }
-      }
-    >
-      {display}
-    </motion.span>
-  );
-}
-
 function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -335,81 +290,64 @@ function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: strin
 
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
-    const t = setTimeout(onDone, 3200);
+    const t = setTimeout(onDone, 3000);
     return () => clearTimeout(t);
   }, [onDone]);
 
   return (
     <motion.div
-      className="loading-screen"
+      className="nf-screen"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.35, ease: "easeIn" }}
     >
-      <div className="loading-grid" />
-
-      {/* floating ambient orbs */}
-      <div className="loading-orb loading-orb-1" />
-      <div className="loading-orb loading-orb-2" />
-
+      {/* White flash on zoom punch */}
       <motion.div
-        className="loading-content"
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
-      >
-        <motion.p
-          className="loading-eyebrow"
-          initial={{ opacity: 0, letterSpacing: "0.1em" }}
-          animate={{ opacity: 1, letterSpacing: "0.35em" }}
-          transition={{ delay: 0.25, duration: 0.6 }}
+        className="nf-flash"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: [0, 0.55, 0] }}
+        transition={{ delay: 0.55, duration: 0.45, ease: "easeOut" }}
+      />
+
+      {/* Horizontal light ray sweep */}
+      <motion.div
+        className="nf-ray"
+        initial={{ x: "-110%", opacity: 0 }}
+        animate={{ x: "110%", opacity: [0, 1, 1, 0] }}
+        transition={{ delay: 0.65, duration: 0.7, ease: [0.4, 0, 0.2, 1] }}
+      />
+
+      {/* MEET — punches in from huge */}
+      <div className="nf-center">
+        <motion.h1
+          className="nf-title"
+          initial={{ scale: 7, opacity: 0, filter: "blur(18px)" }}
+          animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
         >
-          Animation · VFX · Motion
-        </motion.p>
+          MEET
+        </motion.h1>
 
-        {/* Scramble letters */}
-        <div className="loading-name">
-          {"MEET".split("").map((letter, i) => (
-            <ScrambleLetter key={i} target={letter} startDelay={300 + i * 200} />
-          ))}
-        </div>
-
+        {/* red underline like Netflix */}
         <motion.div
-          className="loading-bar-track"
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-        >
-          <motion.div
-            className="loading-bar-fill"
-            initial={{ width: "0%" }}
-            animate={{ width: "100%" }}
-            transition={{ duration: 2.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          />
-        </motion.div>
+          className="nf-underline"
+          initial={{ scaleX: 0, opacity: 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        />
 
         <motion.p
-          className="loading-sub"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.0 }}
+          className="nf-tagline"
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1, duration: 0.5 }}
         >
-          Loading portfolio...
+          Animation &nbsp;·&nbsp; VFX &nbsp;·&nbsp; Motion
         </motion.p>
-      </motion.div>
+      </div>
 
-      <motion.div
-        className="loading-corner loading-corner-tl"
-        initial={{ width: 0, height: 0 }}
-        animate={{ width: 48, height: 48 }}
-        transition={{ delay: 0.15, duration: 0.5 }}
-      />
-      <motion.div
-        className="loading-corner loading-corner-br"
-        initial={{ width: 0, height: 0 }}
-        animate={{ width: 48, height: 48 }}
-        transition={{ delay: 0.25, duration: 0.5 }}
-      />
+      {/* vignette */}
+      <div className="nf-vignette" />
     </motion.div>
   );
 }
