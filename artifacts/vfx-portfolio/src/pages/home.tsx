@@ -455,8 +455,8 @@ function AnimatedHand() {
 function SimpleCursor() {
   const cursorX = useMotionValue(-200);
   const cursorY = useMotionValue(-200);
-  const springX = useSpring(cursorX, { stiffness: 80, damping: 16, mass: 0.4 });
-  const springY = useSpring(cursorY, { stiffness: 80, damping: 16, mass: 0.4 });
+  const springX = useSpring(cursorX, { stiffness: 35, damping: 10, mass: 0.6 });
+  const springY = useSpring(cursorY, { stiffness: 35, damping: 10, mass: 0.6 });
 
   useEffect(() => {
     const move = (e: MouseEvent) => {
