@@ -296,7 +296,7 @@ function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: strin
 
 // ── Place your intro GIF at: artifacts/vfx-portfolio/public/intro.gif
 // ── Set GIF_DURATION_MS to match your GIF's length in milliseconds
-const GIF_DURATION_MS = 1000;
+const GIF_DURATION_MS = 0;
 
 function LoadingScreen({ onDone }: { onDone: () => void }) {
   useEffect(() => {
