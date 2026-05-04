@@ -29,6 +29,8 @@ const statsTicker = [
   "Zero Missed Deadlines",
 ];
 
+const BASE_VIDEO_URL = "https://raw.githubusercontent.com/Xyric27/vfx-portfolio/main/artifacts/vfx-portfolio/public/videos";
+
 const works = [
   {
     title: "Brand Film Burst",
@@ -36,6 +38,7 @@ const works = [
     year: "2024",
     tone: "Launch visuals with playful transitions, punchy timing, and kinetic typography.",
     gradient: "from-[#ff2f8e] via-[#ff6b2b] to-[#ffd38a]",
+    videoUrl: "/videos/project1.mp4",
   },
   {
     title: "Music Video VFX",
@@ -43,6 +46,7 @@ const works = [
     year: "2024",
     tone: "Rotoscope layers, glowing trails, atmosphere, and frame-by-frame polish.",
     gradient: "from-[#00d7ff] via-[#7a4cff] to-[#ff2f8e]",
+    videoUrl: "/videos/project2.mp4",
   },
   {
     title: "Social Ad Pack",
@@ -50,6 +54,7 @@ const works = [
     year: "2023",
     tone: "Fast vertical edits for reels, product reveals, titles, and callouts.",
     gradient: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]",
+    videoUrl: "/videos/project3.mp4",
   },
   {
     title: "Character Loop",
@@ -57,6 +62,7 @@ const works = [
     year: "2023",
     tone: "Expressive loops built for campaigns, profile films, and explainer cuts.",
     gradient: "from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
+    videoUrl: "/videos/project4.mp4",
   },
 ];
 
@@ -459,6 +465,69 @@ function HiredStamp({ show }: { show: boolean }) {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+
+/* ─── WORK CARD WITH HOVER VIDEO ─── */
+function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
+  return (
+    <motion.article
+      className="project-card group overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
+      initial={{ opacity: 0, y: 55 }} whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -14, rotate: index % 2 === 0 ? -1.2 : 1.2, scale: 1.015 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ type: "spring", stiffness: 260, damping: 18, delay: index * 0.08 }}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <div className={`relative min-h-[360px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
+        {/* Hover Video */}
+        <video
+          ref={videoRef}
+          src={work.videoUrl}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}
+          muted
+          loop
+          playsInline
+          preload="none"
+        />
+        {/* Gradient overlay — fades when video plays */}
+        <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? "opacity-0" : "opacity-100"}`}>
+          <div className="absolute inset-0 opacity-40 mix-blend-overlay pattern" />
+          <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45%] bg-[#111]/80 blur-[1px] transition duration-700 group-hover:rotate-[-8deg]" />
+        </div>
+        {/* Dark overlay on video for text readability */}
+        {isHovered && <div className="absolute inset-0 bg-black/30" />}
+        <div className="absolute right-8 top-8 font-hand text-6xl text-white/90">{String(index + 1).padStart(2, "0")}</div>
+        <div className="absolute bottom-6 left-6 right-6 rounded-[1.4rem] border border-white/20 bg-black/35 p-5 backdrop-blur-md">
+          <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#fff0cf]">{work.type} / {work.year}</p>
+          <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.04em] text-white">{work.title}</h3>
+        </div>
+      </div>
+      <div className="flex items-start justify-between gap-4 p-6">
+        <p className="text-white/65">{work.tone}</p>
+        <ArrowUpRight className="h-6 w-6 shrink-0 text-[#00dcff] transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+      </div>
+    </motion.article>
   );
 }
 
@@ -892,28 +961,7 @@ export default function Home() {
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {works.map((work, index) => (
-              <motion.article
-                key={work.title}
-                className="project-card group overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
-                initial={{ opacity: 0, y: 55 }} whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -14, rotate: index % 2 === 0 ? -1.2 : 1.2, scale: 1.015 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ type: "spring", stiffness: 260, damping: 18, delay: index * 0.08 }}
-              >
-                <div className={`relative min-h-[360px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
-                  <div className="absolute inset-0 opacity-40 mix-blend-overlay pattern" />
-                  <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45%] bg-[#111]/80 blur-[1px] transition duration-700 group-hover:rotate-[-8deg]" />
-                  <div className="absolute right-8 top-8 font-hand text-6xl text-white/90">{String(index + 1).padStart(2, "0")}</div>
-                  <div className="absolute bottom-6 left-6 right-6 rounded-[1.4rem] border border-white/20 bg-black/35 p-5 backdrop-blur-md">
-                    <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#fff0cf]">{work.type} / {work.year}</p>
-                    <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.04em] text-white">{work.title}</h3>
-                  </div>
-                </div>
-                <div className="flex items-start justify-between gap-4 p-6">
-                  <p className="text-white/65">{work.tone}</p>
-                  <ArrowUpRight className="h-6 w-6 shrink-0 text-[#00dcff] transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-                </div>
-              </motion.article>
+              <WorkCard key={work.title} work={work} index={index} />
             ))}
           </div>
         </div>
