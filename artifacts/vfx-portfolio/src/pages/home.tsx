@@ -103,12 +103,8 @@ const capabilities = [
 const tools = [
   { name: "After Effects", icon: "Ae", color: "#9999FF", level: 97 },
   { name: "Premiere Pro", icon: "Pr", color: "#9999FF", level: 94 },
-  { name: "DaVinci Resolve", icon: "DV", color: "#FF8A00", level: 88 },
-  { name: "Cinema 4D", icon: "C4", color: "#00DCFF", level: 78 },
-  { name: "Blender", icon: "Bl", color: "#FF7F2A", level: 72 },
   { name: "Photoshop", icon: "Ps", color: "#31A8FF", level: 91 },
   { name: "Illustrator", icon: "Ai", color: "#FF9A00", level: 85 },
-  { name: "Final Cut Pro", icon: "FC", color: "#FF2F8E", level: 80 },
 ];
 
 const expertiseCards = [
