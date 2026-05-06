@@ -29,7 +29,7 @@ const statsTicker = [
   "Zero Missed Deadlines",
 ];
 
-const BASE_VIDEO_URL = "https://raw.githubusercontent.com/Xyric27/vfx-portfolio/main/artifacts/vfx-portfolio/public/videos";
+const BASE_VIDEO_URL = "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing";
 
 const works = [
   {
