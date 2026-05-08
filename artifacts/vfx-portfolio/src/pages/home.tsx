@@ -2,7 +2,7 @@ import { AnimatePresence, motion, useInView, useScroll, useSpring, useTransform 
 import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Globe, Instagram, Mail, MessageCircle, Play, Quote, Sparkles, Stamp, Wand2, Youtube, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const CLIENT_PORTAL_URL = "https://xyric27.github.io/cutstudio-pro:;
+const CLIENT_PORTAL_URL = "https://xyric27.github.io/cutstudio-pro";
 const WHATSAPP_URL = "https://wa.me/919034879858";
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/meeeet_27/",
