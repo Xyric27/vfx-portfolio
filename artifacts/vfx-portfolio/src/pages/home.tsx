@@ -619,7 +619,7 @@ export default function Home() {
       </section>
 
       {/* SHOWREEL */}
-      <section id="showreel" className="relative px-5 py-24 md:px-10">
+      <section id="showreel" className="relative px-5 py-50 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
