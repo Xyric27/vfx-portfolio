@@ -306,12 +306,15 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
     </motion.article>
   );
 }
+
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
   const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
   const scrollBarScale = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
+  const reelY = useTransform(scrollYProgress, [0.45, 0.65], [100, -100]);
+  const reelRotate = useTransform(scrollYProgress, [0.45, 0.65], [8, -4]);
 
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [mouseNorm, setMouseNorm] = useState({ x: 0, y: 0 });
@@ -374,7 +377,8 @@ export default function Home() {
               <button onClick={handleStamp} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95"><Stamp className="h-4 w-4" /> Hire me!</button>
             </div>
           </motion.div>
-        </section>
+        </motion.div>
+      </section>
 
       {/* EXPERTISE */}
       <section id="expertise" className="relative px-5 py-24 md:px-10">
@@ -388,14 +392,15 @@ export default function Home() {
               <motion.div key={card.num} className="expertise-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -10, scale: 1.015 }} viewport={{ once: true, margin: "-60px" }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}>
                 <div className="expertise-card-bg" style={{ background: `radial-gradient(circle at 80% 20%, ${card.accent}22, transparent 55%)` }} />
                 <div className="relative z-10">
-                  <div className="mb-5 flex items-start justify-between"><span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span><span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55}`, color: card.accent }}>{card.tag}</span></div>
+                  <div className="mb-5 flex items-start justify-between"><span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span><span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55`, color: card.accent }}>{card.tag}</span></div>
                   <h3 className="mb-4 font-display text-2xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-3xl">{card.title}</h3>
                   <p className="text-sm leading-relaxed text-white/60">{card.body}</p>
                 </div>
               </motion.div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* TOOLS */}
       <section id="tools" className="relative overflow-hidden px-5 py-24 md:px-10">
@@ -407,13 +412,14 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {tools.map((tool, i) => (
               <motion.div key={tool.name} className="tool-bar-card group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#171717] p-6" initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ y: -8, scale: 1.03 }} viewport={{ once: true, margin: "-40px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.05 }}>
-                <div className="mb-5 flex items-center justify-between"><div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44}`, color: tool.color }}>{tool.icon}</div><span className="font-mono text-xs font-bold" style={{ color: tool.color }}>{tool.level}%</span></div>
+                <div className="mb-5 flex items-center justify-between"><div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44`, color: tool.color }}>{tool.icon}</div><span className="font-mono text-xs font-bold" style={{ color: tool.color }}>{tool.level}%</span></div>
                 <p className="mb-4 font-display text-base font-black uppercase tracking-[-0.03em] text-white">{tool.name}</p>
                 <div className="tool-bar-track"><motion.div className="tool-bar-fill" style={{ background: `linear-gradient(90deg, ${tool.color}99, ${tool.color})` }} initial={{ width: 0 }} whileInView={{ width: `${tool.level}%` }} viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.3 + i * 0.06 }} /></div>
               </motion.div>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* CLIENT PORTAL */}
       <section id="portal" className="px-5 py-10 md:px-10">
@@ -446,7 +452,7 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-3">
             {clients.map((client, index) => (
               <motion.article key={client.name} className="client-card group relative min-h-[520px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }} viewport={{ once: true, margin: "-80px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}>
-                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45}`} /><div className="client-card-glow" />
+                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} /><div className="client-card-glow" />
                 <div className="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7">
                   <div><div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div><div className="mt-7"><p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p><h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3><p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p></div></div>
                   <div className="client-project-panel"><div className="mb-4 flex items-center justify-between"><span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Project reels</span><Film className="h-5 w-5 text-[#00dcff]" /></div><div className="grid gap-3">{client.projects.map((project, projectIndex) => (<div key={project} className="client-video-row"><div className="client-video-thumb"><span className={`client-video-orb orb-${projectIndex + 1}`} /><span className="client-video-scan" /><Play className="relative z-10 h-4 w-4 fill-current text-white" /></div><div><p className="font-display text-base font-black uppercase leading-none text-white">{project}</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Looping preview</p></div></div>))}</div></div>
@@ -523,7 +529,7 @@ export default function Home() {
           </div>
           <div className="divide-y divide-white/10 border-y border-white/10">{capabilities.map(([num, title, body], i) => (
             <motion.div key={title} className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ x: 18, scale: 1.012 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}><span className="font-hand text-4xl text-[#f7d39c]">{num}</span><h3 className="font-display text-2xl font-black uppercase tracking-[-0.04em] md:text-4xl">{title}</h3><p className="text-base leading-relaxed text-white/65">{body}</p></motion.div>
-))}</div>
+          ))}</div>
         </div>
       </section>
 
@@ -565,7 +571,7 @@ export default function Home() {
                 <div className="relative z-10">
                   <div className="mb-5 flex items-start justify-between"><Quote className="h-7 w-7" style={{ color: `${t.color}80` }} /><div className="flex gap-0.5">{Array.from({ length: t.rating }).map((_, s) => (<span key={s} className="text-sm text-[#f7d39c]">★</span>))}</div></div>
                   <p className="mb-8 text-lg font-semibold leading-relaxed text-white/85">"{t.quote}"</p>
-                  <div className="flex items-center gap-4 border-t border-white/10 pt-6"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25}`, color: t.color }}>{t.initials}}</div><div><p className="font-display text-base font-black uppercase tracking-[-0.03em] text-white">{t.name}</p><p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{t.role}</p></div></div>
+                  <div className="flex items-center gap-4 border-t border-white/10 pt-6"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25`, color: t.color }}>{t.initials}</div><div><p className="font-display text-base font-black uppercase tracking-[-0.03em] text-white">{t.name}</p><p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{t.role}</p></div></div>
                 </div>
               </motion.div>
             ))}
@@ -592,7 +598,7 @@ export default function Home() {
       {/* SOCIAL */}
       <section id="connect" className="px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border white/10 bg-[#171717] px-8 py-14 text-center">
+          <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border-white/10 bg-[#171717] px-8 py-14 text-center">
             <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p><h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] md:text-6xl">Follow the<br />Work</h2><p className="mx-auto mt-5 max-w-lg text-sm text-white/55">Behind-the-scenes, reels, experiments across every platform.</p></div>
             <div className="flex flex-wrap justify-center gap-3">
               <motion.a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}><Instagram className="h-4 w-4" /> Instagram</motion.a>
