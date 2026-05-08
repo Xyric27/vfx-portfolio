@@ -244,7 +244,10 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Video Container with 16:9 aspect ratio */}
-      <div className="relative overflow-hidden bg-gradient-to-br {work.gradient}" style={{ paddingBottom: "56.25%" }}>
+      <div 
+        className={`relative overflow-hidden bg-gradient-to-br ${work.gradient}`}
+        style={{ paddingBottom: "56.25%" }}
+      >
         
         {/* Background Layer */}
         <div className="absolute inset-0 z-[1]">
@@ -294,15 +297,15 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
           </div>
         </div>
 
-        {/* Card Footer */}
-        <div className="flex items-start justify-between gap-4 p-4 md:p-6">
+        {/* Card Footer - MOVED OUTSIDE absolute container */}
+        <div className="flex items-start justify-between gap-4 p-4 md:p-6 relative z-20">
           <p className="text-xs md:text-sm text-white/65">{work.tone}</p>
           <ArrowUpRight className="h-5 w-5 md:h-6 shrink-0 text-[#00dcff]" />
         </div>
-      </motion.article>
+      </div>
+    </motion.article>
   );
 }
-
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
