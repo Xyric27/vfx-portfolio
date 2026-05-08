@@ -2,31 +2,18 @@ import { AnimatePresence, motion, useInView, useScroll, useSpring, useTransform 
 import { ArrowUpRight, CheckCircle2, ChevronDown, Clapperboard, ExternalLink, Film, FolderOpen, Globe, Instagram, Mail, MessageCircle, Play, Quote, Sparkles, Stamp, Wand2, Youtube, Zap } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const CLIENT_PORTAL_URL = "https://forms.gle/YOUR_FORM_LINK_HERE";
-const WHATSAPP_URL = "https://wa.me/919999999999";
+const CLIENT_PORTAL_URL = "https://xyric27.github.io/cutstudio-pro/;
+const WHATSAPP_URL = "https://wa.me/919034879858";
 const SOCIAL_LINKS = {
-  instagram: "https://instagram.com/YOUR_HANDLE",
-  youtube: "https://youtube.com/@YOUR_CHANNEL",
-  behance: "https://behance.net/YOUR_PROFILE",
-  vimeo: "https://vimeo.com/YOUR_PROFILE",
+  instagram: "https://www.instagram.com/meeeet_27/",
+  behance: "https://www.behance.net/meetsharma14",
 };
-
-const _bookingSlots = [
-  { month: "May 2025", status: "booked", label: "Full" },
-  { month: "Jun 2025", status: "available", label: "2 Slots" },
-  { month: "Jul 2025", status: "available", label: "Open" },
-  { month: "Aug 2025", status: "open", label: "Open" },
-];
 
 const statsTicker = [
   "48+ Projects Delivered",
   "12 Brand Clients",
-  "5+ Years Experience",
+  "3+ Years Experience",
   "100% Delivery Rate",
-  "4K Always",
-  "2M+ Views Generated",
-  "7 Music Labels",
-  "Zero Missed Deadlines",
 ];
 
 const BASE_VIDEO_URL = "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing";
@@ -68,30 +55,11 @@ const works = [
 
 const clients = [
   {
-    name: "Aarav Studios",
-    role: "Music video label",
-    initials: "AS",
-    stats: "7 projects",
+    name: "Dev Agarwal",
+    role: "Content Creater",
+    stats: "38 projects",
     avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]",
     projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"],
-  },
-  {
-    name: "Nova Skin",
-    role: "Beauty campaign",
-    initials: "NS",
-    stats: "5 projects",
-    avatar: "from-[#00dcff] via-[#7a4cff] to-[#ff2f8e]",
-    projects: ["Product Reveal", "Reels Pack", "Launch Cut"],
-  },
-  {
-    name: "Flux Motion",
-    role: "Tech creator",
-    initials: "FM",
-    stats: "9 projects",
-    avatar: "from-[#fff0cf] via-[#ff8a00] to-[#ff006a]",
-    projects: ["Explainer Film", "HUD Overlay", "Ad Series"],
-  },
-];
 
 const capabilities = [
   ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation, and expressive loops."],
@@ -143,59 +111,6 @@ const processSteps = [
   { num: "02", title: "Concept", body: "Meet maps out the structure, style frames, and a rough timeline. No surprises mid-project.", color: "#ff2f8e", emoji: "🎨" },
   { num: "03", title: "Build", body: "Animation, editing, VFX, sound sync — built in stages with milestone previews for feedback.", color: "#ff7a1a", emoji: "⚙️" },
   { num: "04", title: "Deliver", body: "Final export in your format (4K, web, vertical, horizontal) + project files if requested.", color: "#f7d39c", emoji: "🚀" },
-];
-
-const packages = [
-  {
-    name: "Quick Cut",
-    price: "₹4,999",
-    tag: "Best for reels & shorts",
-    color: "#00dcff",
-    features: [
-      "Up to 60 seconds edit",
-      "Music sync & pacing",
-      "Basic colour grade",
-      "Titles & lower thirds",
-      "2 revision rounds",
-      "Delivery in 3–5 days",
-    ],
-    cta: "Get started",
-    highlight: false,
-  },
-  {
-    name: "Full Production",
-    price: "₹14,999",
-    tag: "Most popular",
-    color: "#ff2f8e",
-    features: [
-      "Up to 5 min edit or animation",
-      "Motion graphics & transitions",
-      "VFX compositing",
-      "Professional colour grade",
-      "Sound design & mix",
-      "4 revision rounds",
-      "Delivery in 7–10 days",
-    ],
-    cta: "Let's work",
-    highlight: true,
-  },
-  {
-    name: "Cinematic VFX",
-    price: "₹29,999+",
-    tag: "Premium projects",
-    color: "#ff7a1a",
-    features: [
-      "Full film / campaign",
-      "Advanced VFX & compositing",
-      "Character animation",
-      "Full sound production",
-      "Multi-format delivery",
-      "Unlimited revisions",
-      "Priority turnaround",
-    ],
-    cta: "Discuss scope",
-    highlight: false,
-  },
 ];
 
 const faqs = [
