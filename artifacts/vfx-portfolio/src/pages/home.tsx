@@ -60,7 +60,11 @@ const clients = [
     avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]", 
     initials: "DA", 
     videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
-    projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"] 
+    projects: [
+      { name: "Neon Intro", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" },
+      { name: "Lyric Visualizer", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" },
+      { name: "Stage Promo", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" }
+    ]
   },
   { 
     name: "Priya Mathur", 
@@ -69,7 +73,11 @@ const clients = [
     avatar: "from-[#00dcff] via-[#7a4cff] to-[#ff2f8e]", 
     initials: "PM", 
     videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
-    projects: ["Brand Film", "Social Pack", "Explainer"] 
+    projects: [
+      { name: "Brand Film", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" },
+      { name: "Social Pack", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" },
+      { name: "Explainer", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" }
+    ]
   },
   { 
     name: "Kunal Desai", 
@@ -78,7 +86,11 @@ const clients = [
     avatar: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]", 
     initials: "KD", 
     videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
-    projects: ["Tech Demo", "Tutorial Series", "Product Launch"] 
+    projects: [
+      { name: "Tech Demo", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" },
+      { name: "Tutorial Series", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" },
+      { name: "Product Launch", videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" }
+    ]
   }
 ];
 
@@ -333,6 +345,120 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
   );
 }
 
+// ✅ CLIENT CARD WITH PROJECT PREVIEW
+function ClientCardWithProjects({ client, index }: { client: typeof clients[0]; index: number }) {
+  const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+
+  return (
+    <motion.article
+      className="client-card group relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]"
+      initial={{ opacity: 0, y: 70 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} />
+      <div className="client-card-glow" />
+      <div className="relative z-10 flex h-full flex-col justify-between p-7">
+        {/* Header */}
+        <div>
+          <div className={`client-avatar bg-gradient-to-br ${client.avatar} h-16 w-16 rounded-2xl flex items-center justify-center font-display text-2xl font-black text-white`}>
+            {client.initials}
+          </div>
+          <div className="mt-7">
+            <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p>
+            <h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
+            <p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p>
+          </div>
+        </div>
+
+        {/* Main Video Preview */}
+        <div className="my-6">
+          <div className="mb-4 flex items-center justify-between">
+            <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Portfolio reel</span>
+            <Film className="h-5 w-5 text-[#00dcff]" />
+          </div>
+          <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black" style={{ paddingBottom: "56.25%", height: 0 }}>
+            <iframe
+              src={client.videoUrl}
+              frameBorder="0"
+              allowFullScreen
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%"
+              }}
+              title={`${client.name} Reel`}
+            />
+          </div>
+        </div>
+
+        {/* Projects List with Side Preview */}
+        <div className="border-t border-white/10 pt-5">
+          <p className="font-mono text-xs uppercase tracking-[0.28em] text-white/60 mb-3 flex items-center gap-2">
+            <Play className="h-3 w-3 text-[#ff2f8e]" /> Projects
+          </p>
+          
+          {/* Grid: Left Projects / Right Preview */}
+          <div className="grid grid-cols-[1fr_1.2fr] gap-3 min-h-[140px]">
+            {/* LEFT: Projects List */}
+            <div className="space-y-2">
+              {client.projects.map((project, projectIndex) => (
+                <motion.div
+                  key={project.name}
+                  className={`cursor-pointer rounded-lg border transition p-2 flex items-center gap-2 ${
+                    selectedProjectIndex === projectIndex
+                      ? 'border-[#ff2f8e] bg-[#ff2f8e]/10'
+                      : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/10'
+                  }`}
+                  whileHover={{ x: 2 }}
+                  onClick={() => setSelectedProjectIndex(projectIndex)}
+                >
+                  <div className={`h-1.5 w-1.5 rounded-full flex-shrink-0 ${selectedProjectIndex === projectIndex ? 'bg-[#ff2f8e]' : 'bg-[#00dcff]'}`} />
+                  <p className="font-display text-[10px] font-black uppercase leading-none text-white flex-1 truncate">{project.name}</p>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* RIGHT: Project Video Preview */}
+            <motion.div
+              key={selectedProjectIndex}
+              className="relative overflow-hidden rounded-lg border border-white/10 bg-black"
+              style={{ paddingBottom: "100%", height: 0, position: "relative" }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              <iframe
+                src={client.projects[selectedProjectIndex].videoUrl}
+                frameBorder="0"
+                allowFullScreen
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%"
+                }}
+                title={`${client.projects[selectedProjectIndex].name} Preview`}
+              />
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="flex items-center justify-between border-t border-white/10 pt-5 mt-5">
+          <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Hover projects</span>
+          <ArrowUpRight className="h-5 w-5 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -473,82 +599,11 @@ export default function Home() {
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client Reels</p>
               <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Profiles<br />& Reels</h2>
             </div>
-            <p className="max-w-md text-base leading-relaxed text-white/65">Each client card showcases their portfolio reel & projects.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">Hover projects to see preview videos.</p>
           </div>
           <div className="grid gap-6 lg:grid-cols-3">
-            {clients.map((client, index) => (
-              <motion.article
-                key={client.name}
-                className="client-card group relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]"
-                initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} />
-                <div className="client-card-glow" />
-                <div className="relative z-10 flex h-full flex-col justify-between p-7">
-                  {/* Header */}
-                  <div>
-                    <div className={`client-avatar bg-gradient-to-br ${client.avatar} h-16 w-16 rounded-2xl flex items-center justify-center font-display text-2xl font-black text-white`}>
-                      {client.initials}
-                    </div>
-                    <div className="mt-7">
-                      <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p>
-                      <h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
-                      <p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p>
-                    </div>
-                  </div>
-
-                  {/* Video Reel Preview */}
-                  <div className="my-6">
-                    <div className="mb-4 flex items-center justify-between">
-                      <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Portfolio reel</span>
-                      <Film className="h-5 w-5 text-[#00dcff]" />
-                    </div>
-                    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black" style={{ paddingBottom: "56.25%", height: 0 }}>
-                      <iframe
-                        src={client.videoUrl}
-                        frameBorder="0"
-                        allowFullScreen
-                        style={{
-                          position: "absolute",
-                          top: 0,
-                          left: 0,
-                          width: "100%",
-                          height: "100%"
-                        }}
-                        title={`${client.name} Reel`}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Projects List */}
-                  <div className="border-t border-white/10 pt-5">
-                    <p className="font-mono text-xs uppercase tracking-[0.28em] text-white/60 mb-3">Projects</p>
-                    <div className="space-y-2">
-                      {client.projects.map((project, projectIndex) => (
-                        <motion.div
-                          key={project}
-                          className="group cursor-pointer flex items-center gap-2 rounded-lg p-2 transition hover:bg-white/5"
-                          whileHover={{ x: 4 }}
-                        >
-                          <div className="h-1.5 w-1.5 rounded-full bg-[#ff2f8e] flex-shrink-0" />
-                          <p className="font-display text-xs font-black uppercase leading-none text-white flex-1 truncate">{project}</p>
-                          <ChevronDown className="h-3 w-3 text-white/40 transition group-hover:translate-x-0.5" style={{ transform: "rotate(-90deg)" }} />
-                        </motion.div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Footer */}
-                  <div className="flex items-center justify-between border-t border-white/10 pt-5 mt-5">
-                    <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Click to play</span>
-                    <ArrowUpRight className="h-5 w-5 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </div>
-                </div>
-              </motion.article>
+            {clients.map((client, clientIndex) => (
+              <ClientCardWithProjects key={client.name} client={client} index={clientIndex} />
             ))}
           </div>
         </div>
