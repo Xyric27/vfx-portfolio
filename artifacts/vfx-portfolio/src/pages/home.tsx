@@ -76,7 +76,7 @@ const works = [
     gradient: "from-[#ff2f8e] via-[#ff6b2b] to-[#ffd38a]",
     // 👇 BAS YAHAN APNA NORMAL GOOGLE DRIVE LINK PASTE KARO!
     // Example: https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing
-    googleDriveUrl: "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing",
+    googleDriveUrl: "https://drive.google.com/file/d/1JIl-GH-jy0e84UpLGLibQqknCsEUORhw/view?usp=sharing",
   },
   {
     title: "Music Video VFX",
@@ -85,7 +85,7 @@ const works = [
     tone: "Rotoscope layers, glowing trails, atmosphere, and frame-by-frame polish.",
     gradient: "from-[#00d7ff] via-[#7a4cff] to-[#ff2f8e]",
     // 👇 AGAR ALAG VIDEO HAI TOH YAHAN NAYA LINK PASTE KARO
-    googleDriveUrl: "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing",
+    googleDriveUrl: "https://drive.google.com/file/d/1JIl-GH-jy0e84UpLGLibQqknCsEUORhw/view?usp=sharing",
   },
   {
     title: "Social Ad Pack",
@@ -93,7 +93,7 @@ const works = [
     year: "2023",
     tone: "Fast vertical edits for reels, product reveals, titles, and callouts.",
     gradient: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]",
-    googleDriveUrl: "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing",
+    googleDriveUrl: "https://drive.google.com/file/d/1JIl-GH-jy0e84UpLGLibQqknCsEUORhw/view?usp=sharing",
   },
   {
     title: "Character Loop",
@@ -101,7 +101,7 @@ const works = [
     year: "2023",
     tone: "Expressive loops built for campaigns, profile films, and explainer cuts.",
     gradient: "from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
-    googleDriveUrl: "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing",
+    googleDriveUrl: "https://drive.google.com/file/d/1JIl-GH-jy0e84UpLGLibQqknCsEUORhw/view?usp=sharing",
   },
 ];
 
