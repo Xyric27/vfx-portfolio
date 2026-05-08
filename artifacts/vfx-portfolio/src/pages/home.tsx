@@ -60,7 +60,8 @@ const clients = [
     stats: "38 projects",
     avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]",
     projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"],
- },
+  },
+ ];
 const capabilities = [
   ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation, and expressive loops."],
   ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits, and director-style selects."],
