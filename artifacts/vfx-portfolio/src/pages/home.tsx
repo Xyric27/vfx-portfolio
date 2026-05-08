@@ -14,7 +14,7 @@ const SOCIAL_LINKS = {
 
 const statsTicker = ["48+ Projects Delivered", "12 Brand Clients", "3+ Years Experience", "100% Delivery Rate"];
 
-// ✅✅✅ JUMPSHARE/FRAME.IO LINKS ✅✅✅
+// ✅ WORKS ARRAY - CLEAN SYNTAX!
 const works = [
   {
     title: "Brand Film Burst",
@@ -22,9 +22,7 @@ const works = [
     year: "2024",
     tone: "Launch visuals with playful transitions, punchy timing, and kinetic typography.",
     gradient: "from-[#ff2f8e] via-[#ff6b2b] to-[#ffd38a]",
-    
-    // 👇 JUMPSHARE LINK (ya Frame.io link)
-    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g"
   },
   {
     title: "Music Video VFX",
@@ -32,9 +30,7 @@ const works = [
     year: "2024",
     tone: "Rotoscope layers, glowing trails, atmosphere, and frame-by-frame polish.",
     gradient: "from-[#00d7ff] via-[#7a4cff] to-[#ff2f8e]",
-    
-    // 👇 AGAR ALAG VIDEO HAI TOH LINK REPLACE KARO
-    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g"
   },
   {
     title: "Social Ad Pack",
@@ -42,48 +38,50 @@ const works = [
     year: "2023",
     tone: "Fast vertical edits for reels, product reveals, titles, and callouts.",
     gradient: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]",
-    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g"
   },
   {
     title: "Character Loop",
     type: "Animation Design",
     year: "2023",
     tone: "Expressive loops built for campaigns, profile films, and explainer cuts.",
-    gradient:from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
-    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
-  },
+    gradient: "from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g"
+  }
 ];
 
+// ... rest of the code remains same (clients, capabilities, tools, etc.)
+
 const clients = [
-  { name: "Dev Agarwal", role: "Content Creater", stats: "38 projects", avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]", initials: "DA", projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"] },
+  { name: "Dev Agarwal", role: "Content Creater", stats: "38 projects", avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]", initials: "DA", projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"] }
 ];
 
 const capabilities = [
   ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation."],
   ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits."],
   ["03", "VFX & Compositing", "Rotoscope, clean-up, keying, glow passes, atmosphere."],
-  ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems."],
+  ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems."]
 ];
 
 const tools = [
   { name: "After Effects", icon: "Ae", color: "#9999FF", level: 97 },
   { name: "Premiere Pro", icon: "Pr", color: "#9999FF", level: 94 },
   { name: "Photoshop", icon: "Ps", color: "#31A8FF", level: 91 },
-  { name: "Illustrator", icon: "Ai", color: "#FF9A00", level: 85 },
+  { name: "Illustrator", icon: "Ai", color: "#FF9A00", level: 85 }
 ];
 
 const expertiseCards = [
   { num: "01", title: "Storytelling Through Motion", body: "Every edit has a heartbeat — a rhythm that decides how the viewer feels.", accent: "#00dcff", tag: "Pacing & Feel" },
   { num: "02", title: "VFX That Blend, Not Break", body: "Rotoscope, colour grade, glow passes, clean-up, compositing that looks native.", accent: "#ff2f8e", tag: "Visual Effects" },
   { num: "03", title: "Brand-First Motion Graphics", body: "Titles, lower thirds, kinetic type, HUDs — all built on-brand while premium.", accent: "#ff7a1a", tag: "Motion Design" },
-  { num: "04", title: "Social-Ready Delivery", body: "Every format at 4K with proper captions and platform-optimised cuts.", accent: "#f7d39c", tag: "Multi-Format" },
+  { num: "04", title: "Social-Ready Delivery", body: "Every format at 4K with proper captions and platform-optimised cuts.", accent: "#f7d39c", tag: "Multi-Format" }
 ];
 
 const processSteps = [
   { num: "01", title: "Brief", body: "Share your idea, references, deadline, and vibe.", color: "#00dcff", emoji: "📋" },
   { num: "02", title: "Concept", body: "Meet maps out structure, style frames, and timeline.", color: "#ff2f8e", emoji: "🎨" },
   { num: "03", title: "Build", body: "Animation, editing, VFX, sound sync — built in stages.", color: "#ff7a1a", emoji: "⚙️" },
-  { num: "04", title: "Deliver", body: "Final export in your format + project files if requested.", color: "#f7d39c", emoji: "🚀" },
+  { num: "04", title: "Deliver", body: "Final export + project files if requested.", color: "#f7d39c", emoji: "🚀" }
 ];
 
 const faqs = [
@@ -91,23 +89,23 @@ const faqs = [
   ["How many revisions?", "Standard: 2 rounds. Premium: 4+ rounds."],
   ["What format?", "MP4 (H.264) by default. Also ProRes, MOV available."],
   ["Project files?", "Included in premium packages."],
-  ["How to share footage?", "Client Portal, WeTransfer, Google Drive, or Frame.io/JumpShare."],
+  ["How to share footage?", "Client Portal, WeTransfer, Google Drive, Frame.io/JumpShare."],
   ["Not happy?", "Revision rounds exist for this purpose."],
-  ["International?", "Yes! PayPal, Wise, Razorpay accepted."],
+  ["International?", "Yes! PayPal, Wise, Razorpay accepted."]
 ];
 
 const testimonials = [
   { name: "Aarav Shah", role: "Music Label — Aarav Studios", quote: "Delivered 7 projects, every single one better than briefed.", color: "#00dcff", initials: "AS", rating: 5 },
   { name: "Priya Mathur", role: "Founder — Nova Skin", quote: "2M views in 48 hours. Made brand look premium.", color: "#ff2f8e", initials: "PM", rating: 5 },
   { name: "Kunal Desai", role: "Tech Creator — Flux Motion", quote: "Best performing video after 18 months.", color: "#ff7a1a", initials: "KD", rating: 5 },
-  { name: "Sneha Pillai", role: "Brand Manager — Vibe Co.", quote: "Turnaround in 4 days, zero revisions needed.", color: "#f7d39c", initials: SP", rating: 5 },
+  { name: "Sneha Pillai", role: "Brand Manager — Vibe Co.", quote: "Turnaround in 4 days, zero revisions needed.", color: "#f7d39c", initials: "SP", rating: 5 }
 ];
 
 const stats = [
   { value: 48, suffix: "+", label: "Projects Delivered", color: "#fff0cf" },
   { value: 12, suffix: "", label: "Brand Clients", color: "#ff2f8e" },
   { value: 5, suffix: "+", label: "Years Experience", color: "#00dcff" },
-  { value: 100, suffix: "%", label: "Delivery Rate", color: "#ff7a1a" },
+  { value: 100, suffix: "%", label: "Delivery Rate", color: "#ff7a1a" }
 ];
 
 const funnyTaglines = [
@@ -118,7 +116,7 @@ const funnyTaglines = [
   "VFX artist by day, render slave by night 😭",
   "I speak fluent timeline 🎞️",
   "Motion graphics and mild panic 🔥",
-  "Ctrl+Z is my love language",
+  "Ctrl+Z is my love language"
 ];
 
 const heroStickers = [
@@ -126,10 +124,8 @@ const heroStickers = [
   { emoji: "🎞️", cx: "88%", cy: "18%", delay: 0.3, rot: 12 },
   { emoji: "✨", cx: "7%", cy: "74%", delay: 0.6, rot: 8 },
   { emoji: "🎨", cx: "92%", cy: "68%", delay: 0.9, rot: -22 },
-  { emoji: "🔥", cx: "50%", cy: "8%", delay: 1.1, rot: 5 },
+  { emoji: "🔥", cx: "50%", cy: "8%", delay: 1.1, rot: 5 }
 ];
-
-// ─── COMPONENTS ───
 
 function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -144,8 +140,7 @@ function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: strin
     const increment = value / steps;
     const timer = setInterval(() => {
       start += increment;
-      if (start >= value) { setCount(value); clearInterval(timer); }
-      else setCount(Math.floor(start));
+      if (start >= value) { setCount(value); clearInterval(timer); } else setCount(Math.floor(start));
     }, 1000 / fps);
     return () => clearInterval(timer);
   }, [inView, value]);
@@ -233,14 +228,14 @@ function HiredStamp({ show }: { show: boolean }) {
   return (<AnimatePresence>{show && (<motion.div className="hired-stamp" initial={{ scale: 3.5, rotate: -24, opacity: 0 }} animate={{ scale: 1, rotate: -18, opacity: 1 }} exit={{ scale: 0.6, opacity: 0, y: 40 }} transition={{ type: "spring", stiffness: 500 }}>HIRED!</motion.div>)}</AnimatePresence>);
 }
 
-// ✅✅✅ WORK CARD - PROPER IFRAME EMBED WITH ASPECT RATIO! ✅✅✅
+// ✅ WORK CARD - IFRAME VERSION
 function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.article
       className="project-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
-      initial={{ opacity: 0, y: 55 }} 
+      initial={{ opacity: 0, y: 55 }}
       whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -14, rotate: index % 2 === 0 ? -1.2 : 1.2, scale: 1.015 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -248,18 +243,18 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* ✅ VIDEO CONTAINER WITH PROPER ASPECT RATIO */}
-      <div className={`relative overflow-hidden bg-gradient-to-br ${work.gradient}`} style={{ paddingBottom: '56.25%' /* 16:9 ratio */}}>
+      {/* Video Container with 16:9 aspect ratio */}
+      <div className="relative overflow-hidden bg-gradient-to-br {work.gradient}" style={{ paddingBottom: "56.25%" }}>
         
-        {/* ✅ BACKGROUND (Always visible) */}
+        {/* Background Layer */}
         <div className="absolute inset-0 z-[1]">
           <div className="absolute inset-0 opacity-30 mix-blend-overlay pattern" />
-          <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45% bg-[#111]/80 blur-[1px]" />
+          <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45%] bg-[#111]/80 blur-[1px]" />
           
-          {/* Play Button (shown when not hovering) */}
+          {/* Play Button (visible when not hovering) */}
           {!isHovered && (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10">
-              <motion.div 
+              <motion.div
                 className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 cursor-pointer"
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
@@ -269,59 +264,51 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
               <p className="font-mono text-xs text-white/60 mt-2">Hover to preview</p>
             </div>
           )}
+
+          {/* Iframe (visible on hover) */}
+          {isHovered && (
+            <iframe
+              src={work.embedUrl}
+              className="absolute top-0 left-0 w-full h-full border-0"
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%" }}
+              frameBorder="0"
+              allow="autoplay; encrypted-media; fullscreen"
+              allowFullScreen
+              title={work.title}
+              loading="lazy"
+            />
+          )}
+
+          {/* Dark overlay on hover */}
+          {isHovered && <div className="absolute inset-0 bg-black/30 pointer-events-none z-[5]" />}
+
+          {/* Number Badge */}
+          <div className="absolute right-4 top-4 font-hand text-4xl md:text-5xl text-white/90 z-20">
+            {String(index + 1).padStart(2, "0")}
+          </div>
+
+          {/* Info Card */}
+          <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-black/40 p-4 backdrop-blur-md z-20">
+            <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#fff0cf]">{work.type} / {work.year}</p>
+            <h3 className="mt-1 font-display text-lg md:text-2xl font-black uppercase leading-none tracking-[-0.04em] text-white">{work.title}</h3>
+          </div>
         </div>
 
-        {/* ✅ IFRAME (Shown on hover) - PROPER 16:9 ASPECT RATIO! */}
-        {isHovered && (
-          <iframe
-            src={work.embedUrl}
-            className="absolute top-0 left-0 w-full h-full border-0"
-            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-            frameBorder="0"
-            allow="autoplay; encrypted-media; fullscreen"
-            allowFullScreen
-            title={work.title}
-            loading="lazy"
-          />
-        )}
-
-        {/* Overlay on hover for text readability */}
-        {isHovered && <div className="absolute inset-0 bg-black/30 pointer-events-none z-[5]" />}
-
-        {/* Number Badge */}
-        <div className="absolute right-4 top-4 font-hand text-4xl md:text-5xl text-white/90 z-20">
-          {String(index + 1).padStart(2, "0")}
+        {/* Card Footer */}
+        <div className="flex items-start justify-between gap-4 p-4 md:p-6">
+          <p className="text-xs md:text-sm text-white/65">{work.tone}</p>
+          <ArrowUpRight className="h-5 w-5 md:h-6 shrink-0 text-[#00dcff]" />
         </div>
-        
-        {/* Info Card (Always visible) */}
-        <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-black/40 p-4 backdrop-blur-md z-20">
-          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#fff0cf]">
-            {work.type} / {work.year}
-          </p>
-          <h3 className="mt-1 font-display text-lg md:text-2xl font-black uppercase leading-none tracking-[-0.04em] text-white">
-            {work.title}
-          </h3>
-        </div>
-      </div>
-      
-      {/* Card Footer */}
-      <div className="flex items-start justify-between gap-4 p-4 md:p-6">
-        <p className="text-xs md:text-sm text-white/65">{work.tone}</p>
-        <ArrowUpRight className="h-5 w-5 md:h-6 shrink-0 text-[#00dcff]" />
-      </div>
-    </motion.article>
+      </motion.article>
   );
 }
 
-// ─── MAIN COMPONENT ───
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
   const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
   const scrollBarScale = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
-  const reelY = useTransform(scrollYProgress, [0.08, 0.45], [90, -70]);
-  const reelRotate = useTransform(scrollYProgress, [0.08, 0.45], [-1.6, 1.4]);
 
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [mouseNorm, setMouseNorm] = useState({ x: 0, y: 0 });
@@ -346,19 +333,17 @@ export default function Home() {
       <ConfettiBurst x={confetti.x} y={confetti.y} active={confetti.active} />
       <HiredStamp show={stampVisible} />
 
-      {/* Progress Bar */}
       <motion.div className="fixed left-0 top-0 z-[70] h-1 origin-left bg-gradient-to-r from-[#ff2f8e] via-[#fff0cf] to-[#00dcff]" style={{ scaleX: scrollBarScale }} />
 
-      {/* NAVIGATION */}
       <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-4 backdrop-blur-md bg-black/40 border-b border-white/5 md:px-10">
         <a href="#top" className="font-display text-lg font-black uppercase tracking-tight text-[#fff7e8]">Motion<span className="text-[#00dcff]">.VFX</span></a>
         <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white/70 md:flex">
-          <a href="#expertise" className="transition hover:text-[#00dcff]">Skills</a><a href="#tools" className="transition hover:text-[#00dcff]">Tools</a><a href="#clients" className="transition hover:text-[#00dcff]">Clients</a><a href="#work" className="transition hover:text-[##00dcff]">Work</a><a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
+          <a href="#expertise" className="transition hover:text-[#00dcff]">Skills</a><a href="#tools" className="transition hover:text-[#00dcff]">Tools</a><a href="#clients" className="transition hover:text-[#00dcff]">Clients</a><a href="#work" className="transition hover:text-[#00dcff]">Work</a><a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
         </div>
         <a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#00dcff] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf] hover:scale-105"><FolderOpen className="h-3.5 w-3.5" /> Client Portal</a>
       </nav>
 
-      {/* HERO SECTION */}
+      {/* HERO */}
       <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 md:py-28">
         <div className="grain" />
         {heroStickers.map((s) => (
@@ -375,15 +360,18 @@ export default function Home() {
             <span className="font-hand text-xl text-[#fff7e8]/80 md:text-3xl">of</span>
             <span className="hero-name font-hand text-3xl text-[#fff7e8] md:text-5xl">Meet</span>
             <AnimatedHand /><Doodle className="h-10 w-32 text-[#f7d39c]" />
-            <div className="tagline-box"><AnimatePresence mode="wait"><motion.p key={taglineIndex} className="font-mono text-xs uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-sm" initial={{ opacity: 0, y: 14, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -14, filter: "blur(4px)" }} transition={{ duration: 0.42 }}>{funnyTaglines[taglineIndex]}</motion.p></AnimatePresence></div>
+            <div className="tagline-box">
+              <AnimatePresence mode="wait">
+                <motion.p key={taglineIndex} className="font-mono text-xs uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-sm" initial={{ opacity: 0, y: 14, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -14, filter: "blur(4px)" }} transition={{ duration: 0.42 }}>{funnyTaglines[taglineIndex]}</motion.p>
+              </AnimatePresence>
+            </div>
             <p className="max-w-3xl text-balance text-base font-semibold leading-relaxed text-white md:text-lg">An <span className="text-[#f7d39c]">Animation Designer & VFX Editor</span> who builds cinematic films, motion graphics, and scroll-stopping brand visuals.</p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-6 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]" onClick={handleConfetti}>View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" /></a>
               <button onClick={handleStamp} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95"><Stamp className="h-4 w-4" /> Hire me!</button>
             </div>
           </motion.div>
-        </motion.div>
-      </section>
+        </section>
 
       {/* EXPERTISE */}
       <section id="expertise" className="relative px-5 py-24 md:px-10">
@@ -396,12 +384,15 @@ export default function Home() {
             {expertiseCards.map((card, i) => (
               <motion.div key={card.num} className="expertise-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -10, scale: 1.015 }} viewport={{ once: true, margin: "-60px" }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}>
                 <div className="expertise-card-bg" style={{ background: `radial-gradient(circle at 80% 20%, ${card.accent}22, transparent 55%)` }} />
-                <div className="relative z-10"><div className="mb-5 flex items-start justify-between"><span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span><span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55`, color: card.accent }}>{card.tag}</span></div><h3 className="mb-4 font-display text-2xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-3xl">{card.title}</h3><p className="text-sm leading-relaxed text-white/60">{card.body}</p></div>
+                <div className="relative z-10">
+                  <div className="mb-5 flex items-start justify-between"><span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span><span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55}`, color: card.accent }}>{card.tag}</span></div>
+                  <h3 className="mb-4 font-display text-2xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-3xl">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-white/60">{card.body}</p>
+                </div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* TOOLS */}
       <section id="tools" className="relative overflow-hidden px-5 py-24 md:px-10">
@@ -413,14 +404,13 @@ export default function Home() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {tools.map((tool, i) => (
               <motion.div key={tool.name} className="tool-bar-card group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#171717] p-6" initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ y: -8, scale: 1.03 }} viewport={{ once: true, margin: "-40px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.05 }}>
-                <div className="mb-5 flex items-center justify-between"><div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44`, color: tool.color }}>{tool.icon}</div><span className="font-mono text-xs font-bold" style={{ color: tool.color }}>{tool.level}%</span></div>
+                <div className="mb-5 flex items-center justify-between"><div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44}`, color: tool.color }}>{tool.icon}</div><span className="font-mono text-xs font-bold" style={{ color: tool.color }}>{tool.level}%</span></div>
                 <p className="mb-4 font-display text-base font-black uppercase tracking-[-0.03em] text-white">{tool.name}</p>
                 <div className="tool-bar-track"><motion.div className="tool-bar-fill" style={{ background: `linear-gradient(90deg, ${tool.color}99, ${tool.color})` }} initial={{ width: 0 }} whileInView={{ width: `${tool.level}%` }} viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.3 + i * 0.06 }} /></div>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* CLIENT PORTAL */}
       <section id="portal" className="px-5 py-10 md:px-10">
@@ -430,7 +420,7 @@ export default function Home() {
             <div>
               <div className="mb-3 flex items-center gap-3"><span className="portal-live-dot" /><span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00dcff]">Client Panel — Open for projects</span></div>
               <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-[-0.05em] text-white md:text-5xl lg:text-6xl">Got a project?<br /><span className="text-[#00dcff]">Let's build it.</span></h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60">Submit brief through client portal. Response within 24 hours.</p>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60">Submit your brief through client portal. Response within 24 hours.</p>
               <ul className="mt-6 flex flex-wrap gap-3">{["Brief Submission", "File Handoff", "Revision Tracking", "Final Delivery"].map((item) => (<li key={item} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-white/70">{item}</li>))}</ul>
             </div>
             <div className="flex flex-col items-start gap-4 md:items-end">
@@ -440,7 +430,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ✅ CLIENTS - PROFILES & REELS */}
+      {/* CLIENTS */}
       <section id="clients" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-end">
@@ -453,9 +443,9 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-3">
             {clients.map((client, index) => (
               <motion.article key={client.name} className="client-card group relative min-h-[520px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }} viewport={{ once: true, margin: "-80px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}>
-                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} /><div className="client-card-glow" />
+                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45}`} /><div className="client-card-glow" />
                 <div className="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7">
-                  <div><div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div><div className="mt-7"><p className="font-mono text-xs uppercase tracking-[{0.28em}] text-[#00dcff]">{client.role}</p><h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3><p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p></div></div>
+                  <div><div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div><div className="mt-7"><p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p><h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3><p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p></div></div>
                   <div className="client-project-panel"><div className="mb-4 flex items-center justify-between"><span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Project reels</span><Film className="h-5 w-5 text-[#00dcff]" /></div><div className="grid gap-3">{client.projects.map((project, projectIndex) => (<div key={project} className="client-video-row"><div className="client-video-thumb"><span className={`client-video-orb orb-${projectIndex + 1}`} /><span className="client-video-scan" /><Play className="relative z-10 h-4 w-4 fill-current text-white" /></div><div><p className="font-display text-base font-black uppercase leading-none text-white">{project}</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Looping preview</p></div></div>))}</div></div>
                   <div className="flex items-end justify-between border-t border-white/10 pt-5"><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Hover to reveal</span><ArrowUpRight className="h-6 w-6 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
                 </div>
@@ -469,14 +459,18 @@ export default function Home() {
       <section className="relative overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
         <div className="motion-marquee font-display text-3xl font-black uppercase tracking-[-0.05em] md:text-5xl">
           <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fun">5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
-          <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fen>5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
+          <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fun">5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
+          <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fun">5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
         </div>
       </section>
 
-      {/* SHOWREEL - FIRST FRAME SHOULD FEEL HIRED */}
+      {/* SHOWREEL */}
       <section id="showreel" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-          <div><p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p><h2 className="font-display text-4xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-6xl lg:text-7xl">First frame should feel hired.</h2></div>
+          <div>
+            <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
+            <h2 className="font-display text-4xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-6xl lg:text-7xl">First frame should feel hired.</h2>
+          </div>
           <p className="max-w-2xl text-lg leading-relaxed text-white/70">Use this section for YouTube/Vimeo showreel embed.</p>
         </div>
         <motion.div className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black" style={{ y: reelY, rotate: reelRotate }} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}>
@@ -486,22 +480,19 @@ export default function Home() {
             <div className="absolute inset-6 rounded-[1.5rem] border border-white/15" />
             <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
             <div className="absolute bottom-8 left-8 right-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <div><h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl">Showreel</h3><p className="mt-4 max-w-xl text-base text-white/70">Editing, animation, compositing, transitions.</p></div>
+              <div><h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl">Showreel</h3><p className="mt-4 max-w-xl text-base text-white/70">Editing, animation, compositing, transitions, and color finishing.</p></div>
               <motion.button className="group flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black" aria-label="Play showreel" whileHover={{ scale: 1.18, rotate: [0, -8, 8, -4, 0] }} whileTap={{ scale: 0.88 }} transition={{ type: "spring", stiffness: 400, damping: 14 }}><Play className="ml-1 h-7 w-7 fill-current" /></motion.button>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* ✅ WORK SECTION - JUMPSHARE/FRAME.IO IFRAME VERSION! */}
+      {/* WORK SECTION */}
       <section id="work" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-center">
             <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Selected<br />Frames</h2>
-            <p className="max-w-md text-base leading-relaxed text-white/65">
-              💡 <strong style={{color: '#00dcff'}}>Hover any card below to preview video!</strong><br/>
-              <span className="text-sm text-white/40">(Video loads from Frame.io/JumpShare)</span>
-            </p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">💡 Hover any card below to preview video!</p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">{works.map((work, index) => (<WorkCard key={work.title} work={work} index={index} />))}</div>
         </div>
@@ -512,8 +503,10 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-white/10 bg-[#fff0cf] p-7 text-black md:p-12 lg:grid-cols-[0.95fr_1.05fr]">
           <div><p className="font-hand text-4xl text-[#ff2f8e] md:text-6xl">About the artist</p><h2 className="mt-6 font-display text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-6xl lg:text-7xl">Creative cuts with animated soul.</h2></div>
           <div className="space-y-7 text-base font-semibold leading-relaxed text-black/75">
-            <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals.</p>
-            <div className="grid gap-4 sm:grid-cols-2">{stats.map((stat, i) => (<motion.div key={stat.label} whileHover={{ scale: 1.06, rotate: i % 2 === 0 ? -2 : 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5" style={{ color: stat.color }}><strong className="block font-display text-3xl"><AnimatedCounter value={stat.value} suffix={stat.suffix} /></strong><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/60">{stat.label}</span></motion.div>))}</div>
+            <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
+            <div className="grid gap-4 sm:grid-cols-2">{stats.map((stat, i) => (
+              <motion.div key={stat.label} whileHover={{ scale: 1.06, rotate: i % 2 === 0 ? -2 : 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5" style={{ color: stat.color }}><strong className="block font-display text-3xl"><AnimatedCounter value={stat.value} suffix={stat.suffix} /></strong><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/60">{stat.label}</span></motion.div>
+            ))}</div>
           </div>
         </div>
       </section>
@@ -525,7 +518,9 @@ export default function Home() {
             <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Process<br />& Services</h2>
             <motion.div animate={{ rotate: [0, 15, -15, 10, 0] }} transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 2 }}><Wand2 className="hidden h-14 w-14 text-[#ff2f8e] md:block" /></motion.div>
           </div>
-          <div className="divide-y divide-white/10 border-y border-white/10">{capabilities.map(([num, title, body], i) => (<motion.div key={title} className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ x: 18, scale: 1.012 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}><span className="font-hand text-4xl text-[#f7d39c]">{num}</span><h3 className="font-display text-2xl font-black uppercase tracking-[-0.04em] md:text-4xl">{title}</h3><p className="text-base leading-relaxed text-white/65">{body}</p></motion.div>))}</div>
+          <div className="divide-y divide-white/10 border-y border-white/10">{capabilities.map(([num, title, body], i) => (
+            <motion.div key={title} className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ x: 18, scale: 1.012 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}><span className="font-hand text-4xl text-[#f7d39c]">{num}</span><h3 className="font-display text-2xl font-black uppercase tracking-[-0.04em] md:text-4xl">{title}</h3><p className="text-base leading-relaxed text-white/65">{body}</p></motion.div>
+))}</div>
         </div>
       </section>
 
@@ -567,7 +562,7 @@ export default function Home() {
                 <div className="relative z-10">
                   <div className="mb-5 flex items-start justify-between"><Quote className="h-7 w-7" style={{ color: `${t.color}80` }} /><div className="flex gap-0.5">{Array.from({ length: t.rating }).map((_, s) => (<span key={s} className="text-sm text-[#f7d39c]">★</span>))}</div></div>
                   <p className="mb-8 text-lg font-semibold leading-relaxed text-white/85">"{t.quote}"</p>
-                  <div className="flex items-center gap-4 border-t border-white/10 pt-6"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25`, color: t.color }}>{t.initials}</div><div><p className="font-display text-base font-black uppercase tracking-[-0.03em] text-white">{t.name}</p><p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{t.role}</p></div></div>
+                  <div className="flex items-center gap-4 border-t border-white/10 pt-6"><div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25}`, color: t.color }}>{t.initials}}</div><div><p className="font-display text-base font-black uppercase tracking-[-0.03em] text-white">{t.name}</p><p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{t.role}</p></div></div>
                 </div>
               </motion.div>
             ))}
@@ -579,7 +574,7 @@ export default function Home() {
       <section id="faq" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
-            <div><p className="mb-3 font-mo no text-xs uppercase tracking-[0.35em] text-[#00dcff]">Before you ask</p><h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">FAQs</h2></div>
+            <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Before you ask</p><h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">FAQs</h2></div>
             <p className="max-w-md text-base leading-relaxed text-white/60">Common questions answered.</p>
           </div>
           <FaqList />
@@ -595,7 +590,7 @@ export default function Home() {
       <section id="connect" className="px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border white/10 bg-[#171717] px-8 py-14 text-center">
-            <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p><h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] md:text-6xl">Follow the<br />Work</h2><p className="mx-auto mt-5 max-w-lg text-sm text-white/55">Behind-the-scenes, reels, experiments across platforms.</p></div>
+            <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p><h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] md:text-6xl">Follow the<br />Work</h2><p className="mx-auto mt-5 max-w-lg text-sm text-white/55">Behind-the-scenes, reels, experiments across every platform.</p></div>
             <div className="flex flex-wrap justify-center gap-3">
               <motion.a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}><Instagram className="h-4 w-4" /> Instagram</motion.a>
               <motion.a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}><Youtube className="h-4 w-4" /> YouTube</motion.a>
@@ -617,7 +612,7 @@ export default function Home() {
             <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/70">Replace with real contact links when ready.</p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <motion.a href="mailto:hello@motionvfx.com" className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black" whileHover={{ scale: 1.08, rotate: -2 }} whileTap={{ scale: 0.93 }} onClick={handleConfetti}><Mail className="h-4 w-4" /> hello@motionvfx.com</motion.a>
-              <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#00dcff]/40 bg-[#00dcff]/10 px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-[#00dcff]" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }}><FolderOpen className="h-4 w-4" /> Client Portal</motion.a>
+              <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#00dcff]/40 bg-[#00dcff]/10 px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-[#00dcff]" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }}><FolderOpen className="h-5 w-5" /> Client Portal</motion.a>
               <motion.a href="#showreel" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-white" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }}><Clapperboard className="h-4 w-4" /> Watch reel</motion.a>
             </div>
             <motion.div className="mt-12 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 font-mono text-xs uppercase tracking-[0.22em] text-white/40" animate={{ opacity: [0.4, 1, 0.4] }} transition={{ duration: 2.4, repeat: Infinity }}><Zap className="h-3 w-3 text-[#00dcff]" /> Available for freelance projects</motion.div>
