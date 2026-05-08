@@ -5,12 +5,11 @@ import { useEffect, useRef, useState } from "react";
 const CLIENT_PORTAL_URL = "https://xyric27.github.io/cutstudio-pro";
 const WHATSAPP_URL = "https://wa.me/919034879858";
 
-// ✅ FIXED: Added missing YouTube & Vimeo links
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/meeeet_27/",
   behance: "https://www.behance.net/meetsharma14",
-  youtube: "https://youtube.com/@meeeet_27",      // ✅ ADDED
-  vimeo: "https://vimeo.com/meeeet27",            // ✅ ADDED
+  youtube: "https://youtube.com/@meeeet_27",
+  vimeo: "https://vimeo.com/meeeet27",
 };
 
 const statsTicker = [
@@ -20,7 +19,11 @@ const statsTicker = [
   "100% Delivery Rate",
 ];
 
-const BASE_VIDEO_URL = "https://drive.google.com/file/d/1ur5LLW-3e1U5b8pIiRjFUr6G4sZgfqNa/view?usp=sharing";
+// ⚠️ VIDEO URL ISSUE: Google Drive links don't work directly in <video> tags!
+// You need to use DIRECT video URLs (.mp4 files hosted on:
+// - Your public folder (/public/videos/project1.mp4)
+// - Or a CDN like Cloudinary, Vimeo, etc.
+// Or embed YouTube/Vimeo iframes instead
 
 const works = [
   {
@@ -29,7 +32,9 @@ const works = [
     year: "2024",
     tone: "Launch visuals with playful transitions, punchy timing, and kinetic typography.",
     gradient: "from-[#ff2f8e] via-[#ff6b2b] to-[#ffd38a]",
-    videoUrl: "/videos/project1.mp4",
+    // ✅ FIX: Use local video files in /public/videos/ folder
+    // Example: videoUrl: "/videos/project1.mp4"
+    videoUrl: "/videos/project1.mp4", 
   },
   {
     title: "Music Video VFX",
@@ -63,7 +68,7 @@ const clients = [
     role: "Content Creater",
     stats: "38 projects",
     avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]",
-    initials: "DA",  // ✅ FIXED: Added missing 'initials' field
+    initials: "DA",
     projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"],
   },
 ];
@@ -121,12 +126,12 @@ const processSteps = [
 ];
 
 const faqs = [
-  ["How long does a project take?", "Quick Cut edits are done in 3–5 days. Full Production projects take 7–10 days. Cinematic / VFX projects are scoped individually. Rush delivery is available for an additional fee."],
-  ["How many revisions do I get?", "It depends on the package — Quick Cut gets 2 rounds, Full Production gets 4, and Cinematic gets unlimited. Each revision round covers one consolidated set of changes."],
+  ["How long does a project take?", "Quick edits are done in 3–5 days. Full production projects take 7–10 days. Cinematic / VFX projects are scoped individually. Rush delivery is available for an additional fee."],
+  ["How many revisions do I get?", "Standard projects get 2 revision rounds. Premium packages get 4+ rounds. Each round covers one consolidated set of changes."],
   ["What format will I receive the final file in?", "By default: MP4 (H.264, 4K or 1080p). Can also deliver ProRes, MOV, vertical (9:16), square (1:1), or any specific platform format you need."],
-  ["Do you provide the project files (AE, Premiere)?", "Project files are included in the Cinematic VFX package. For other packages, they can be added for a small extra fee."],
+  ["Do you provide the project files (AE, Premiere)?", "Project files are included in premium packages. For other packages, they can be added for a small extra fee."],
   ["How do I share my footage and references?", "Through the Client Portal — you'll get a shared folder link after booking. WeTransfer and Google Drive also work fine."],
-  ["What if I don't like the final output?", "That almost never happens because we align on style before production starts. But if it does — your revision rounds exist exactly for this. If the brief changed mid-project, we'll discuss scope adjustment."],
+  ["What if I don't like the final output?", "That almost never happens because we align on style before production starts. But if it does — your revision rounds exist exactly for this."],
   ["Do you work with international clients?", "Absolutely. Payments accepted via PayPal, Wise, and Razorpay. Time zone overlap is handled via async updates in the Client Portal."],
 ];
 
@@ -183,62 +188,7 @@ const funnyTaglines = [
   "Ctrl+Z is my love language",
 ];
 
-// ✅✅✅ MAJOR FIX: Missing packages array that was causing the error! ✅✅✅
-const packages = [
-  {
-    name: "Quick Cut",
-    tag: "Basic",
-    price: "₹5,000",
-    color: "#00dcff",
-    highlight: false,
-    cta: "Get Started",
-    features: [
-      "Basic video editing (up to 3 min)",
-      "Color correction & grading",
-      "Background music sync",
-      "2 revision rounds",
-      "MP4 delivery (1080p)",
-      "3-day turnaround"
-    ]
-  },
-  {
-    name: "Full Production",
-    tag: "Popular",
-    price: "₹15,000",
-    color: "#ff2f8e",
-    highlight: true,
-    cta: "Most Popular",
-    features: [
-      "Advanced editing (up to 10 min)",
-      "Motion graphics & titles",
-      "VFX & compositing",
-      "Sound design & mixing",
-      "4 revision rounds",
-      "4K delivery + source files",
-      "7-day turnaround",
-      "Priority support"
-    ]
-  },
-  {
-    name: "Cinematic VFX",
-    tag: "Premium",
-    price: "₹35,000",
-    color: "#f7d39c",
-    highlight: false,
-    cta: "Go Premium",
-    features: [
-      "Cinematic editing (unlimited length)",
-      "Custom animation & VFX",
-      "Rotoscoping & keying",
-      "Full color grading suite",
-      "Unlimited revisions",
-      "All formats & resolutions",
-      "Project files included",
-      "14-day turnaround",
-      "Dedicated project manager"
-    ]
-  }
-];
+// ❌ REMOVED: Packages array completely deleted as requested
 
 const heroStickers = [
   { emoji: "⚡", cx: "12%", cy: "22%", delay: 0, rot: -18 },
@@ -284,12 +234,7 @@ function LoadingScreen({ onDone }: { onDone: () => void }) {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4, ease: "easeIn" }}
     >
-      <img
-        src="/intro.gif"
-        alt="intro"
-        className="gif-intro"
-        draggable={false}
-      />
+      <img src="/intro.gif" alt="intro" className="gif-intro" draggable={false} />
     </motion.div>
   );
 }
@@ -304,26 +249,15 @@ function FaqList() {
             className="flex w-full items-center justify-between gap-6 py-7 text-left"
             onClick={() => setOpen(open === i ? null : i)}
           >
-            <span className="font-display text-xl font-black uppercase tracking-[-0.03em] text-white md:text-2xl">{q}</span>
-            <motion.div
-              animate={{ rotate: open === i ? 180 : 0 }}
-              transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="shrink-0"
-            >
+            <span className="font-display text-lg font-black uppercase tracking-[-0.03em] text-white md:text-xl">{q}</span>
+            <motion.div animate={{ rotate: open === i ? 180 : 0 }} transition={{ duration: 0.25, ease: "easeInOut" }} className="shrink-0">
               <ChevronDown className="h-6 w-6 text-[#00dcff]" />
             </motion.div>
           </button>
           <AnimatePresence initial={false}>
             {open === i && (
-              <motion.div
-                key="answer"
-                initial={{ height: 0, opacity: 0 }}
-                animate={{ height: "auto", opacity: 1 }}
-                exit={{ height: 0, opacity: 0 }}
-                transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                className="overflow-hidden"
-              >
-                <p className="pb-7 text-lg leading-relaxed text-white/60">{a}</p>
+              <motion.div key="answer" initial={{ height: 0, opacity: 0 }} animate={{ height: "auto", opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }} className="overflow-hidden">
+                <p className="pb-7 text-base leading-relaxed text-white/60">{a}</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -338,11 +272,7 @@ function Wing({ side, mouseX, mouseY }: { side: "left" | "right"; mouseX: number
   const dx = side === "left" ? -mouseX * 18 : mouseX * 18;
   const dy = -mouseY * 12;
   return (
-    <motion.div
-      className={`wing wing-${side} ${flip}`}
-      animate={{ x: dx, y: dy }}
-      transition={{ type: "spring", stiffness: 60, damping: 18 }}
-    >
+    <motion.div className={`wing wing-${side} ${flip}`} animate={{ x: dx, y: dy }} transition={{ type: "spring", stiffness: 60, damping: 18 }}>
       <span className="wing-panel panel-one" />
       <span className="wing-panel panel-two" />
       <span className="wing-panel panel-three" />
@@ -357,16 +287,7 @@ function Wing({ side, mouseX, mouseY }: { side: "left" | "right"; mouseX: number
 function Doodle({ className = "" }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 220 82" fill="none" aria-hidden="true">
-      <motion.path
-        d="M7 51C30 30 42 74 67 47C81 31 89 9 103 29C117 49 121 76 143 55C159 40 166 8 181 27C194 44 191 69 213 47"
-        stroke="currentColor"
-        strokeWidth="6"
-        strokeLinecap="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        whileInView={{ pathLength: 1, opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, ease: "easeInOut" }}
-      />
+      <motion.path d="M7 51C30 30 42 74 67 47C81 31 89 9 103 29C117 49 121 76 143 55C159 40 166 8 181 27C194 44 191 69 213 47" stroke="currentColor" strokeWidth="6" strokeLinecap="round" initial={{ pathLength: 0, opacity: 0 }} whileInView={{ pathLength: 1, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: "easeInOut" }} />
       <circle cx="83" cy="13" r="5" fill="currentColor" />
       <circle cx="171" cy="15" r="5" fill="currentColor" />
     </svg>
@@ -385,7 +306,6 @@ function AnimatedHand() {
   );
 }
 
-
 function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean }) {
   const colors = ["#ff2f8e", "#00dcff", "#fff0cf", "#ff7a1a", "#7a4cff", "#fff"];
   const pieces = Array.from({ length: 20 });
@@ -399,22 +319,7 @@ function ConfettiBurst({ x, y, active }: { x: number; y: number; active: boolean
             const tx = Math.cos((angle * Math.PI) / 180) * dist;
             const ty = Math.sin((angle * Math.PI) / 180) * dist - 60;
             return (
-              <motion.span
-                key={i}
-                className="confetti-piece"
-                style={{
-                  left: x, top: y,
-                  background: colors[i % colors.length],
-                  rotate: angle,
-                  width: 8 + (i % 4) * 3,
-                  height: 8 + (i % 3) * 2,
-                  borderRadius: i % 2 === 0 ? "50%" : "2px",
-                }}
-                initial={{ x: 0, y: 0, opacity: 1, scale: 1 }}
-                animate={{ x: tx, y: ty, opacity: 0, scale: 0.4, rotate: angle + 360 }}
-                exit={{}}
-                transition={{ duration: 0.7 + Math.random() * 0.3, ease: "easeOut" }}
-              />
+              <motion.span key={i} className="confetti-piece" style={{ left: x, top: y, background: colors[i % colors.length], rotate: angle, width: 8 + (i % 4) * 3, height: 8 + (i % 3) * 2, borderRadius: i % 2 === 0 ? "50%" : "2px" }} initial={{ x: 0, y: 0, opacity: 1, scale: 1 }} animate={{ x: tx, y: ty, opacity: 0, scale: 0.4, rotate: angle + 360 }} exit={{}} transition={{ duration: 0.7 + Math.random() * 0.3, ease: "easeOut" }} />
             );
           })}
         </div>
@@ -427,20 +332,13 @@ function HiredStamp({ show }: { show: boolean }) {
   return (
     <AnimatePresence>
       {show && (
-        <motion.div
-          className="hired-stamp"
-          initial={{ scale: 3.5, rotate: -24, opacity: 0 }}
-          animate={{ scale: 1, rotate: -18, opacity: 1 }}
-          exit={{ scale: 0.6, opacity: 0, y: 40 }}
-          transition={{ type: "spring", stiffness: 500, damping: 22 }}
-        >
+        <motion.div className="hired-stamp" initial={{ scale: 3.5, rotate: -24, opacity: 0 }} animate={{ scale: 1, rotate: -18, opacity: 1 }} exit={{ scale: 0.6, opacity: 0, y: 40 }} transition={{ type: "spring", stiffness: 500, damping: 22 }}>
           HIRED!
         </motion.div>
       )}
     </AnimatePresence>
   );
 }
-
 
 /* ─── WORK CARD WITH HOVER VIDEO ─── */
 function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
@@ -472,32 +370,28 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`relative min-h-[360px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
+      <div className={`relative min-h-[320px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
         {/* Hover Video */}
         <video
           ref={videoRef}
           src={work.videoUrl}
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`}
-          muted
-          loop
-          playsInline
-          preload="none"
+          muted loop playsInline preload="none"
         />
-        {/* Gradient overlay — fades when video plays */}
+        {/* Gradient overlay */}
         <div className={`absolute inset-0 transition-opacity duration-500 ${isHovered ? "opacity-0" : "opacity-100"}`}>
           <div className="absolute inset-0 opacity-40 mix-blend-overlay pattern" />
           <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45%] bg-[#111]/80 blur-[1px] transition duration-700 group-hover:rotate-[-8deg]" />
         </div>
-        {/* Dark overlay on video for text readability */}
         {isHovered && <div className="absolute inset-0 bg-black/30" />}
-        <div className="absolute right-8 top-8 font-hand text-6xl text-white/90">{String(index + 1).padStart(2, "0")}</div>
+        <div className="absolute right-8 top-8 font-hand text-5xl text-white/90">{String(index + 1).padStart(2, "0")}</div>
         <div className="absolute bottom-6 left-6 right-6 rounded-[1.4rem] border border-white/20 bg-black/35 p-5 backdrop-blur-md">
           <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#fff0cf]">{work.type} / {work.year}</p>
-          <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.04em] text-white">{work.title}</h3>
+          <h3 className="mt-3 font-display text-2xl font-black uppercase leading-none tracking-[-0.04em] text-white md:text-3xl">{work.title}</h3>
         </div>
       </div>
       <div className="flex items-start justify-between gap-4 p-6">
-        <p className="text-white/65">{work.tone}</p>
+        <p className="text-sm text-white/65">{work.tone}</p>
         <ArrowUpRight className="h-6 w-6 shrink-0 text-[#00dcff] transition group-hover:translate-x-1 group-hover:-translate-y-1" />
       </div>
     </motion.article>
@@ -562,7 +456,7 @@ export default function Home() {
       <motion.div className="pointer-events-none fixed right-[7vw] top-[58vh] z-0 hidden h-44 w-44 rounded-full bg-[#00dcff]/20 blur-xl lg:block" style={{ y: floatReverseY }} />
 
       <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-4 backdrop-blur-md bg-black/40 border-b border-white/5 md:px-10">
-        <a href="#top" className="font-display text-xl font-black uppercase tracking-tight text-[#fff7e8]">
+        <a href="#top" className="font-display text-lg font-black uppercase tracking-tight text-[#fff7e8]">
           Motion<span className="text-[#00dcff]">.VFX</span>
         </a>
         <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white/70 md:flex">
@@ -572,87 +466,58 @@ export default function Home() {
           <a href="#work" className="transition hover:text-[#00dcff]">Work</a>
           <a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
         </div>
-        <a
-          href={CLIENT_PORTAL_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full bg-[#00dcff] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf] hover:scale-105"
-        >
+        <a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#00dcff] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf] hover:scale-105">
           <FolderOpen className="h-3.5 w-3.5" /> Client Portal
         </a>
       </nav>
 
-      {/* HERO */}
+      {/* HERO - Reduced font sizes */}
       <section id="top" className="relative flex min-h-screen items-center justify-center overflow-hidden px-5 py-24 md:py-28">
         <div className="grain" />
         {heroStickers.map((s) => (
-          <motion.span
-            key={s.emoji}
-            className="hero-sticker"
-            style={{ left: s.cx, top: s.cy, rotate: s.rot }}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1 + s.delay, type: "spring", stiffness: 280, damping: 16 }}
-            whileHover={{ scale: 1.5 }}
-          >
+          <motion.span key={s.emoji} className="hero-sticker" style={{ left: s.cx, top: s.cy, rotate: s.rot }} initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1 + s.delay, type: "spring", stiffness: 280, damping: 16 }} whileHover={{ scale: 1.5 }}>
             {s.emoji}
           </motion.span>
         ))}
 
         <motion.div style={{ y: coverY, scale: coverScale }} className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
-          <motion.div className="hero-script mb-4 font-hand text-4xl text-[#fff7e8] md:text-6xl" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+          <motion.div className="hero-script mb-4 font-hand text-3xl text-[#fff7e8] md:text-5xl" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             An Animation
           </motion.div>
 
           <div className="portfolio-lockup relative w-full">
             <Wing side="left" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
             <Wing side="right" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
-            <motion.h1
-              className="relative z-20 font-display text-[19vw] font-black leading-[0.73] tracking-[-0.08em] text-[#fff0cf] md:text-[10.7rem] lg:text-[13.5rem]"
-              initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1 }}
-              whileHover={{ scale: 1.03 }}
-            >
+            <motion.h1 className="relative z-20 font-display text-[16vw] font-black leading-[0.73] tracking-[-0.08em] text-[#fff0cf] md:text-[9rem] lg:text-[11rem]" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} whileHover={{ scale: 1.03 }}>
               Portfolio
             </motion.h1>
-            <motion.div
-              className="absolute left-1/2 top-[18%] z-30 -translate-x-1/2 font-display text-[15vw] font-black leading-none tracking-[-0.08em] text-[#00dcff] mix-blend-screen md:text-[8.8rem] lg:text-[11rem]"
-              initial={{ opacity: 0, x: -80 }} animate={{ opacity: 0.9, x: 0 }}
-              transition={{ duration: 1, delay: 0.25 }}
-            >
+            <motion.div className="absolute left-1/2 top-[18%] z-30 -translate-x-1/2 font-display text-[13vw] font-black leading-none tracking-[-0.08em] text-[#00dcff] mix-blend-screen md:text-[7.5rem] lg:text-[9.5rem]" initial={{ opacity: 0, x: -80 }} animate={{ opacity: 0.9, x: 0 }} transition={{ duration: 1, delay: 0.25 }}>
               Portfo
             </motion.div>
           </div>
 
           <motion.div className="mt-2 flex flex-col items-center gap-4" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}>
-            <span className="font-hand text-2xl text-[#fff7e8]/80 md:text-4xl">of</span>
-            <span className="hero-name font-hand text-4xl text-[#fff7e8] md:text-6xl">Meet</span>
+            <span className="font-hand text-xl text-[#fff7e8]/80 md:text-3xl">of</span>
+            <span className="hero-name font-hand text-3xl text-[#fff7e8] md:text-5xl">Meet</span>
             <AnimatedHand />
-            <Doodle className="h-12 w-36 text-[#f7d39c]" />
+            <Doodle className="h-10 w-32 text-[#f7d39c]" />
 
             <div className="tagline-box">
               <AnimatePresence mode="wait">
-                <motion.p
-                  key={taglineIndex}
-                  className="font-mono text-sm uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-base"
-                  initial={{ opacity: 0, y: 14, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -14, filter: "blur(4px)" }}
-                  transition={{ duration: 0.42 }}
-                >
+                <motion.p key={taglineIndex} className="font-mono text-xs uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-sm" initial={{ opacity: 0, y: 14, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -14, filter: "blur(4px)" }} transition={{ duration: 0.42 }}>
                   {funnyTaglines[taglineIndex]}
                 </motion.p>
               </AnimatePresence>
             </div>
 
-            <p className="max-w-3xl text-balance text-lg font-semibold leading-relaxed text-white md:text-xl">
+            <p className="max-w-3xl text-balance text-base font-semibold leading-relaxed text-white md:text-lg">
               An <span className="text-[#f7d39c]">Animation Designer & VFX Editor</span> who builds cinematic films, motion graphics, and scroll-stopping brand visuals for artists, labels, and brands.
             </p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]" onClick={handleConfetti}>
+              <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-6 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]" onClick={handleConfetti}>
                 View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" />
               </a>
-              <button onClick={handleStamp} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95">
+              <button onClick={handleStamp} className="inline-flex items-center gap-3 rounded-full border border-white/20 px-6 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-white transition hover:border-[#ff2f8e] hover:text-[#ff87be] active:scale-95">
                 <Stamp className="h-4 w-4" /> Hire me!
               </button>
             </div>
@@ -660,38 +525,30 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* EXPERTISE DEEP-DIVE */}
-      <section id="expertise" className="relative px-5 py-28 md:px-10">
+      {/* EXPERTISE - Reduced fonts */}
+      <section id="expertise" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+          <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">What makes the difference</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">What I<br />Do Best</h2>
+              <h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">What I<br />Do Best</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">
+            <p className="max-w-md text-base leading-relaxed text-white/60">
               Four things that separate a good editor from one that makes clients come back every time.
             </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2">
             {expertiseCards.map((card, i) => (
-              <motion.div
-                key={card.num}
-                className="expertise-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10, scale: 1.015 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}
-              >
+              <motion.div key={card.num} className="expertise-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -10, scale: 1.015 }} viewport={{ once: true, margin: "-60px" }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}>
                 <div className="expertise-card-bg" style={{ background: `radial-gradient(circle at 80% 20%, ${card.accent}22, transparent 55%)` }} />
                 <div className="relative z-10">
                   <div className="mb-5 flex items-start justify-between">
-                    <span className="font-hand text-5xl" style={{ color: card.accent }}>{card.num}</span>
+                    <span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span>
                     <span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55`, color: card.accent }}>{card.tag}</span>
                   </div>
-                  <h3 className="mb-4 font-display text-3xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-4xl">{card.title}</h3>
-                  <p className="text-base leading-relaxed text-white/60">{card.body}</p>
+                  <h3 className="mb-4 font-display text-2xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-3xl">{card.title}</h3>
+                  <p className="text-sm leading-relaxed text-white/60">{card.body}</p>
                 </div>
                 <div className="expertise-corner-line" style={{ borderColor: `${card.accent}40` }} />
               </motion.div>
@@ -700,46 +557,29 @@ export default function Home() {
         </div>
       </section>
 
-      {/* TOOLS ARSENAL */}
-      <section id="tools" className="relative overflow-hidden px-5 py-28 md:px-10">
+      {/* TOOLS - Reduced fonts */}
+      <section id="tools" className="relative overflow-hidden px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+          <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">The arsenal</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">Tools &<br />Software</h2>
+              <h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">Tools &<br />Software</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">
-              8 industry-standard tools, used daily. No learning curves, just output.
+            <p className="max-w-md text-base leading-relaxed text-white/60">
+              Industry-standard tools, used daily. No learning curves, just output.
             </p>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {tools.map((tool, i) => (
-              <motion.div
-                key={tool.name}
-                className="tool-bar-card group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#171717] p-6"
-                initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ y: -8, scale: 1.03 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.05 }}
-              >
+              <motion.div key={tool.name} className="tool-bar-card group relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#171717] p-6" initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ y: -8, scale: 1.03 }} viewport={{ once: true, margin: "-40px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.05 }}>
                 <div className="mb-5 flex items-center justify-between">
-                  <div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44`, color: tool.color }}>
-                    {tool.icon}
-                  </div>
+                  <div className="tool-icon" style={{ background: `${tool.color}22`, borderColor: `${tool.color}44`, color: tool.color }}>{tool.icon}</div>
                   <span className="font-mono text-xs font-bold" style={{ color: tool.color }}>{tool.level}%</span>
                 </div>
-                <p className="mb-4 font-display text-lg font-black uppercase tracking-[-0.03em] text-white">{tool.name}</p>
+                <p className="mb-4 font-display text-base font-black uppercase tracking-[-0.03em] text-white">{tool.name}</p>
                 <div className="tool-bar-track">
-                  <motion.div
-                    className="tool-bar-fill"
-                    style={{ background: `linear-gradient(90deg, ${tool.color}99, ${tool.color})` }}
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${tool.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, delay: 0.3 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  />
+                  <motion.div className="tool-bar-fill" style={{ background: `linear-gradient(90deg, ${tool.color}99, ${tool.color})` }} initial={{ width: 0 }} whileInView={{ width: `${tool.level}%` }} viewport={{ once: true }} transition={{ duration: 1.2, delay: 0.3 + i * 0.06, ease: [0.22, 1, 0.36, 1] }} />
                 </div>
               </motion.div>
             ))}
@@ -749,13 +589,7 @@ export default function Home() {
 
       {/* CLIENT PORTAL CTA */}
       <section id="portal" className="px-5 py-10 md:px-10">
-        <motion.div
-          className="client-portal-banner mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#00dcff]/30 bg-[#0a0f14]"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.7 }}
-        >
+        <motion.div className="client-portal-banner mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#00dcff]/30 bg-[#0a0f14]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.7 }}>
           <div className="absolute inset-0 pointer-events-none">
             <div className="absolute left-[-5%] top-[-10%] h-72 w-72 rounded-full bg-[#00dcff]/15 blur-[80px]" />
             <div className="absolute right-[-5%] bottom-[-10%] h-72 w-72 rounded-full bg-[#ff2f8e]/12 blur-[80px]" />
@@ -767,10 +601,10 @@ export default function Home() {
                 <span className="portal-live-dot" />
                 <span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00dcff]">Client Panel — Open for projects</span>
               </div>
-              <h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] text-white md:text-6xl lg:text-7xl">
+              <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-[-0.05em] text-white md:text-5xl lg:text-6xl">
                 Got a project?<br /><span className="text-[#00dcff]">Let's build it.</span>
               </h2>
-              <p className="mt-5 max-w-xl text-lg leading-relaxed text-white/60">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60">
                 Submit your project brief — reference links, timeline, deliverables, and budget — through the client portal. Meet reviews every submission personally and responds within 24 hours.
               </p>
               <ul className="mt-6 flex flex-wrap gap-3">
@@ -780,16 +614,7 @@ export default function Home() {
               </ul>
             </div>
             <div className="flex flex-col items-start gap-4 md:items-end">
-              <motion.a
-                href={CLIENT_PORTAL_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="portal-btn"
-                whileHover={{ scale: 1.06, rotate: -1 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 360, damping: 16 }}
-                onClick={handleConfetti}
-              >
+              <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="portal-btn" whileHover={{ scale: 1.06, rotate: -1 }} whileTap={{ scale: 0.95 }} transition={{ type: "spring", stiffness: 360, damping: 16 }} onClick={handleConfetti}>
                 <FolderOpen className="h-5 w-5" />
                 Open Client Portal
                 <ExternalLink className="h-4 w-4 opacity-70" />
@@ -806,30 +631,22 @@ export default function Home() {
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-end">
             <div>
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client rooms</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Profiles<br />& Reels</h2>
+              <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Profiles<br />& Reels</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/65">Hover each card to reveal that client's project reel list. Go on, try it. 👀</p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">Hover each card to reveal that client's project reel list. Go on, try it. 👀</p>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
             {clients.map((client, index) => (
-              <motion.article
-                key={client.name}
-                className="client-card group relative min-h-[560px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]"
-                initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}
-              >
+              <motion.article key={client.name} className="client-card group relative min-h-[520px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }} viewport={{ once: true, margin: "-80px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} />
                 <div className="client-card-glow" />
-                <div className="relative z-10 flex h-full min-h-[560px] flex-col justify-between p-7">
+                <div className="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7">
                   <div>
                     <div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div>
                     <div className="mt-7">
                       <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p>
-                      <h3 className="mt-3 font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
+                      <h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
                       <p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p>
                     </div>
                   </div>
@@ -847,7 +664,7 @@ export default function Home() {
                             <Play className="relative z-10 h-4 w-4 fill-current text-white" />
                           </div>
                           <div>
-                            <p className="font-display text-lg font-black uppercase leading-none text-white">{project}</p>
+                            <p className="font-display text-base font-black uppercase leading-none text-white">{project}</p>
                             <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Looping preview</p>
                           </div>
                         </div>
@@ -867,7 +684,7 @@ export default function Home() {
 
       {/* MARQUEE */}
       <section className="relative overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
-        <div className="motion-marquee font-display text-4xl font-black uppercase tracking-[-0.05em] md:text-6xl">
+        <div className="motion-marquee font-display text-3xl font-black uppercase tracking-[-0.05em] md:text-5xl">
           <span>Animation</span><span className="marquee-fun">Send Help 💀</span>
           <span>VFX</span><span>Editing</span>
           <span className="marquee-fun">5AM Renders 😵</span>
@@ -883,22 +700,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHOWREEL */}
+      {/* SHOWREEL - Reduced fonts */}
       <section id="showreel" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
           <div>
             <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
-            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-8xl">First frame should feel hired.</h2>
+            <h2 className="font-display text-4xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-6xl lg:text-7xl">First frame should feel hired.</h2>
           </div>
-          <p className="max-w-2xl text-xl leading-relaxed text-white/70">Use this section for the client's YouTube/Vimeo showreel embed.</p>
+          <p className="max-w-2xl text-lg leading-relaxed text-white/70">Use this section for the client's YouTube/Vimeo showreel embed.</p>
         </div>
-        <motion.div
-          className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black"
-          style={{ y: reelY, rotate: reelRotate }}
-          initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}
-        >
-          <div className="relative aspect-video min-h-[360px]">
+        <motion.div className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black" style={{ y: reelY, rotate: reelRotate }} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}>
+          <div className="relative aspect-video min-h-[320px]">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,#ff2f8e_0,transparent_26%),radial-gradient(circle_at_82%_70%,#00dcff_0,transparent_28%),linear-gradient(135deg,#160b0d,#111_48%,#2a081b)]" />
             <div className="motion-video-loop absolute inset-0">
               <span className="loop-shape loop-a" /><span className="loop-shape loop-b" /><span className="loop-shape loop-c" /><span className="loop-shape loop-d" />
@@ -908,29 +720,23 @@ export default function Home() {
             <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
             <div className="absolute bottom-8 left-8 right-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <div>
-                <h3 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.05em] md:text-8xl">Showreel</h3>
-                <p className="mt-4 max-w-xl text-white/70">Editing, animation, compositing, title design, transitions, and color finishing.</p>
+                <h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl">Showreel</h3>
+                <p className="mt-4 max-w-xl text-base text-white/70">Editing, animation, compositing, title design, transitions, and color finishing.</p>
               </div>
-              <motion.button
-                className="group flex h-24 w-24 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black"
-                aria-label="Play showreel"
-                whileHover={{ scale: 1.18, rotate: [0, -8, 8, -4, 0] }}
-                whileTap={{ scale: 0.88 }}
-                transition={{ type: "spring", stiffness: 400, damping: 14 }}
-              >
-                <Play className="ml-1 h-8 w-8 fill-current" />
+              <motion.button className="group flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black" aria-label="Play showreel" whileHover={{ scale: 1.18, rotate: [0, -8, 8, -4, 0] }} whileTap={{ scale: 0.88 }} transition={{ type: "spring", stiffness: 400, damping: 14 }}>
+                <Play className="ml-1 h-7 w-7 fill-current" />
               </motion.button>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* SELECTED FRAMES */}
+      {/* SELECTED FRAMES - Reduced fonts */}
       <section id="work" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-center">
-            <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Selected<br />Frames</h2>
-            <p className="max-w-md text-lg leading-relaxed text-white/65">Portfolio pieces — visual first, service tags last.</p>
+            <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Selected<br />Frames</h2>
+            <p className="max-w-md text-base leading-relaxed text-white/65">Portfolio pieces — visual first, service tags last.</p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
             {works.map((work, index) => (
@@ -940,25 +746,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ABOUT */}
+      {/* ABOUT - Reduced fonts */}
       <section id="about" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-white/10 bg-[#fff0cf] p-7 text-black md:p-12 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
-            <p className="font-hand text-5xl text-[#ff2f8e] md:text-7xl">About the artist</p>
-            <h2 className="mt-6 font-display text-6xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-8xl">Creative cuts with animated soul.</h2>
+            <p className="font-hand text-4xl text-[#ff2f8e] md:text-6xl">About the artist</p>
+            <h2 className="mt-6 font-display text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-6xl lg:text-7xl">Creative cuts with animated soul.</h2>
           </div>
-          <div className="space-y-7 text-lg font-semibold leading-relaxed text-black/75">
+          <div className="space-y-7 text-base font-semibold leading-relaxed text-black/75">
             <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
             <div className="grid gap-4 sm:grid-cols-2">
               {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  whileHover={{ scale: 1.06, rotate: i % 2 === 0 ? -2 : 2 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 14 }}
-                  className="rounded-3xl bg-black p-5"
-                  style={{ color: stat.color }}
-                >
-                  <strong className="block font-display text-4xl">
+                <motion.div key={stat.label} whileHover={{ scale: 1.06, rotate: i % 2 === 0 ? -2 : 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5" style={{ color: stat.color }}>
+                  <strong className="block font-display text-3xl">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </strong>
                   <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/60">{stat.label}</span>
@@ -969,63 +769,48 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES */}
+      {/* SERVICES - Reduced fonts */}
       <section id="services" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex items-end justify-between gap-8">
-            <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-9xl">Process<br />& Services</h2>
+            <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Process<br />& Services</h2>
             <motion.div animate={{ rotate: [0, 15, -15, 10, 0] }} transition={{ duration: 1.8, repeat: Infinity, repeatDelay: 2 }}>
-              <Wand2 className="hidden h-16 w-16 text-[#ff2f8e] md:block" />
+              <Wand2 className="hidden h-14 w-14 text-[#ff2f8e] md:block" />
             </motion.div>
           </div>
           <div className="divide-y divide-white/10 border-y border-white/10">
             {capabilities.map(([num, title, body], i) => (
-              <motion.div
-                key={title}
-                className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center"
-                initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }}
-                whileHover={{ x: 18, scale: 1.012 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}
-              >
-                <span className="font-hand text-5xl text-[#f7d39c]">{num}</span>
-                <h3 className="font-display text-3xl font-black uppercase tracking-[-0.04em] md:text-5xl">{title}</h3>
-                <p className="text-lg leading-relaxed text-white/65">{body}</p>
+              <motion.div key={title} className="grid gap-5 py-8 md:grid-cols-[120px_0.8fr_1.2fr] md:items-center" initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} whileHover={{ x: 18, scale: 1.012 }} viewport={{ once: true }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.05 }}>
+                <span className="font-hand text-4xl text-[#f7d39c]">{num}</span>
+                <h3 className="font-display text-2xl font-black uppercase tracking-[-0.04em] md:text-4xl">{title}</h3>
+                <p className="text-base leading-relaxed text-white/65">{body}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* HOW IT WORKS */}
-      <section id="process" className="px-5 py-28 md:px-10">
+      {/* HOW IT WORKS - Reduced fonts */}
+      <section id="process" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+          <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff7a1a]">Zero confusion</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">How It<br />Works</h2>
+              <h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">How It<br />Works</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">Four steps from "I have an idea" to "this is exactly what I wanted."</p>
+            <p className="max-w-md text-base leading-relaxed text-white/60">Four steps from "I have an idea" to "this is exactly what I wanted."</p>
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, i) => (
-              <motion.div
-                key={step.num}
-                className="process-step-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-7"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10, scale: 1.03 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.08 }}
-              >
+              <motion.div key={step.num} className="process-step-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-7" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -10, scale: 1.03 }} viewport={{ once: true, margin: "-60px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.08 }}>
                 <div className="process-step-glow" style={{ background: `radial-gradient(circle at 30% 30%, ${step.color}22, transparent 60%)` }} />
                 <div className="relative z-10">
                   <div className="mb-5 flex items-start justify-between">
-                    <span className="process-step-num font-display text-6xl font-black leading-none tracking-[-0.05em]" style={{ color: `${step.color}40` }}>{step.num}</span>
-                    <span className="text-3xl">{step.emoji}</span>
+                    <span className="process-step-num font-display text-5xl font-black leading-none tracking-[-0.05em]" style={{ color: `${step.color}40` }}>{step.num}</span>
+                    <span className="text-2xl">{step.emoji}</span>
                   </div>
                   <div className="mb-3 h-0.5 w-10 rounded-full" style={{ background: step.color }} />
-                  <h3 className="mb-3 font-display text-3xl font-black uppercase tracking-[-0.04em] text-white">{step.title}</h3>
+                  <h3 className="mb-3 font-display text-2xl font-black uppercase tracking-[-0.04em] text-white">{step.title}</h3>
                   <p className="text-sm leading-relaxed text-white/55">{step.body}</p>
                 </div>
                 {i < processSteps.length - 1 && (
@@ -1039,107 +824,36 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ✅✅✅ PACKAGES SECTION - Now works because packages array is defined above! ✅✅✅ */}
-      <section id="packages" className="px-5 py-28 md:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">No hidden costs</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">Packages<br />& Pricing</h2>
-            </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">Pick a tier, or drop a message for something custom. Everything is negotiable except quality.</p>
-          </div>
-          <div className="grid gap-6 lg:grid-cols-3">
-            {packages.map((pkg, i) => (
-              <motion.div
-                key={pkg.name}
-                className={`package-card relative overflow-hidden rounded-[2rem] border p-8 ${pkg.highlight ? "border-[#ff2f8e]/50 bg-[#1a0910]" : "border-white/10 bg-[#171717]"}`}
-                initial={{ opacity: 0, y: 55 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -12, scale: 1.02 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ type: "spring", stiffness: 220, damping: 20, delay: i * 0.08 }}
-              >
-                {pkg.highlight && (
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#ff2f8e]/10 via-transparent to-transparent" />
-                  </div>
-                )}
-                <div className="relative z-10">
-                  <div className="mb-6 flex items-start justify-between">
-                    <div>
-                      <span className="mb-2 block rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ background: `${pkg.color}22`, color: pkg.color }}>{pkg.tag}</span>
-                      <h3 className="font-display text-3xl font-black uppercase tracking-[-0.04em] text-white">{pkg.name}</h3>
-                    </div>
-                    {pkg.highlight && <span className="rounded-full bg-[#ff2f8e] px-3 py-1 font-mono text-[10px] font-black uppercase tracking-[0.18em] text-white">Popular</span>}
-                  </div>
-                  <div className="mb-8 border-b border-white/10 pb-8">
-                    <span className="font-display text-5xl font-black tracking-[-0.05em] text-white">{pkg.price}</span>
-                    <span className="ml-2 font-mono text-xs uppercase tracking-[0.2em] text-white/40">per project</span>
-                  </div>
-                  <ul className="mb-8 space-y-3">
-                    {pkg.features.map((feat) => (
-                      <li key={feat} className="flex items-center gap-3 text-sm text-white/70">
-                        <CheckCircle2 className="h-4 w-4 shrink-0" style={{ color: pkg.color }} />
-                        {feat}
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.a
-                    href={CLIENT_PORTAL_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full rounded-full py-4 text-center font-mono text-sm font-black uppercase tracking-[0.18em] transition"
-                    style={pkg.highlight ? { background: pkg.color, color: "#000" } : { border: `1px solid ${pkg.color}55`, color: pkg.color }}
-                    whileHover={{ scale: 1.04 }}
-                    whileTap={{ scale: 0.96 }}
-                  >
-                    {pkg.cta}
-                  </motion.a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-          <p className="mt-8 text-center font-mono text-xs uppercase tracking-[0.25em] text-white/35">All prices are starting rates · Custom scopes always welcome · GST extra if applicable</p>
-        </div>
-      </section>
+      {/* ❌❌❌ PACKAGES SECTION COMPLETELY REMOVED AS REQUESTED ❌❌❌ */}
 
-      {/* TESTIMONIALS */}
-      <section id="testimonials" className="px-5 py-28 md:px-10">
+      {/* TESTIMONIALS - Reduced fonts */}
+      <section id="testimonials" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+          <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Don't take our word for it</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">What<br />Clients Say</h2>
+              <h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">What<br />Clients Say</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">Real words from real clients. No fluff, no marketing speak.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/60">Real words from real clients. No fluff, no marketing speak.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
             {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                className="testimonial-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8"
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                whileHover={{ y: -10, scale: 1.015 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}
-              >
+              <motion.div key={t.name} className="testimonial-card relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -10, scale: 1.015 }} viewport={{ once: true, margin: "-60px" }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}>
                 <div className="absolute right-0 top-0 h-40 w-40 rounded-full blur-[60px]" style={{ background: `${t.color}18` }} />
                 <div className="relative z-10">
                   <div className="mb-5 flex items-start justify-between">
-                    <Quote className="h-8 w-8" style={{ color: `${t.color}80` }} />
+                    <Quote className="h-7 w-7" style={{ color: `${t.color}80` }} />
                     <div className="flex gap-0.5">
                       {Array.from({ length: t.rating }).map((_, s) => (
                         <span key={s} className="text-sm text-[#f7d39c]">★</span>
                       ))}
                     </div>
                   </div>
-                  <p className="mb-8 text-xl font-semibold leading-relaxed text-white/85">"{t.quote}"</p>
+                  <p className="mb-8 text-lg font-semibold leading-relaxed text-white/85">"{t.quote}"</p>
                   <div className="flex items-center gap-4 border-t border-white/10 pt-6">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25`, color: t.color }}>{t.initials}</div>
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-display text-sm font-black" style={{ background: `${t.color}25`, color: t.color }}>{t.initials}</div>
                     <div>
-                      <p className="font-display text-lg font-black uppercase tracking-[-0.03em] text-white">{t.name}</p>
+                      <p className="font-display text-base font-black uppercase tracking-[-0.03em] text-white">{t.name}</p>
                       <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/45">{t.role}</p>
                     </div>
                   </div>
@@ -1150,15 +864,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ */}
-      <section id="faq" className="px-5 py-28 md:px-10">
+      {/* FAQ - Reduced fonts */}
+      <section id="faq" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-5xl">
-          <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
+          <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Before you ask</p>
-              <h2 className="font-display text-6xl font-black uppercase leading-none tracking-[-0.06em] md:text-8xl lg:text-9xl">FAQs</h2>
+              <h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">FAQs</h2>
             </div>
-            <p className="max-w-md text-lg leading-relaxed text-white/60">The 7 questions every client asks. Answered once, right here.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/60">The 7 questions every client asks. Answered once, right here.</p>
           </div>
           <FaqList />
         </div>
@@ -1168,7 +882,7 @@ export default function Home() {
       <div className="relative overflow-hidden border-y border-white/8 bg-[#0e0e0e] py-5">
         <div className="stats-ticker-track">
           {[...statsTicker, ...statsTicker].map((item, i) => (
-            <span key={i} className="inline-flex items-center gap-4 px-8 font-display text-2xl font-black uppercase tracking-[-0.03em] text-white/25 md:text-3xl">
+            <span key={i} className="inline-flex items-center gap-4 px-8 font-display text-xl font-black uppercase tracking-[-0.03em] text-white/25 md:text-2xl">
               {item}
               <span className="h-1.5 w-1.5 rounded-full bg-[#00dcff]/60 shrink-0" />
             </span>
@@ -1176,14 +890,14 @@ export default function Home() {
         </div>
       </div>
 
-      {/* CONNECT / SOCIAL */}
+      {/* CONNECT / SOCIAL - Reduced fonts */}
       <section id="connect" className="px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border-white/10 bg-[#171717] px-8 py-14 text-center">
             <div>
               <p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p>
-              <h2 className="font-display text-5xl font-black uppercase leading-tight tracking-[-0.05em] md:text-7xl">Follow the<br />Work</h2>
-              <p className="mx-auto mt-5 max-w-lg text-white/55">Behind-the-scenes, reels, project drops, and motion experiments — across every platform.</p>
+              <h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] md:text-6xl">Follow the<br />Work</h2>
+              <p className="mx-auto mt-5 max-w-lg text-sm text-white/55">Behind-the-scenes, reels, project drops, and motion experiments — across every platform.</p>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
               <motion.a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}>
@@ -1206,25 +920,25 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT */}
+      {/* CONTACT - Reduced fonts */}
       <section id="contact" className="px-5 pb-10 pt-24 md:px-10">
         <div className="relative mx-auto overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] p-8 text-center md:p-16">
           <div className="absolute left-[-8%] top-[10%] h-64 w-64 rounded-full bg-[#ff2f8e] blur-[90px]" />
           <div className="absolute bottom-[-8%] right-[-8%] h-72 w-72 rounded-full bg-[#00dcff] blur-[95px]" />
           <div className="relative z-10 mx-auto max-w-4xl">
             <motion.div animate={{ rotate: [0, 20, -20, 10, 0], scale: [1, 1.2, 1] }} transition={{ duration: 2.2, repeat: Infinity, repeatDelay: 3 }}>
-              <Sparkles className="mx-auto mb-7 h-10 w-10 text-[#fff0cf]" />
+              <Sparkles className="mx-auto mb-7 h-9 w-9 text-[#fff0cf]" />
             </motion.div>
-            <h2 className="font-display text-6xl font-black uppercase leading-[0.85] tracking-[-0.07em] md:text-9xl">Let's animate your next idea.</h2>
-            <p className="mx-auto mt-8 max-w-2xl text-xl leading-relaxed text-white/70">Replace with real WhatsApp, email, Instagram, Vimeo, and Behance links when ready.</p>
+            <h2 className="font-display text-5xl font-black uppercase leading-[0.85] tracking-[-0.07em] md:text-7xl lg:text-8xl">Let's animate your next idea.</h2>
+            <p className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-white/70">Replace with real WhatsApp, email, Instagram, Vimeo, and Behance links when ready.</p>
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <motion.a href="mailto:hello@motionvfx.com" className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-black" whileHover={{ scale: 1.08, rotate: -2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }} onClick={handleConfetti}>
+              <motion.a href="mailto:hello@motionvfx.com" className="inline-flex items-center gap-3 rounded-full bg-[#fff0cf] px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black" whileHover={{ scale: 1.08, rotate: -2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }} onClick={handleConfetti}>
                 <Mail className="h-4 w-4" /> hello@motionvfx.com
               </motion.a>
-              <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#00dcff]/40 bg-[#00dcff]/10 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-[#00dcff]" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }}>
+              <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 rounded-full border border-[#00dcff]/40 bg-[#00dcff]/10 px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-[#00dcff]" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }}>
                 <FolderOpen className="h-4 w-4" /> Client Portal
               </motion.a>
-              <motion.a href="#showreel" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-8 py-4 font-mono text-sm font-black uppercase tracking-[0.18em] text-white" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }}>
+              <motion.a href="#showreel" className="inline-flex items-center gap-3 rounded-full border border-white/20 px-7 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-white" whileHover={{ scale: 1.08, rotate: 2 }} whileTap={{ scale: 0.93 }} transition={{ type: "spring", stiffness: 340, damping: 14 }}>
                 <Clapperboard className="h-4 w-4" /> Watch reel
               </motion.a>
             </div>
@@ -1238,19 +952,9 @@ export default function Home() {
           <span>Behance / Vimeo / Instagram / WhatsApp</span>
         </footer>
       </section>
-      
+
       {/* WHATSAPP FLOAT */}
-      <motion.a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="whatsapp-float"
-        initial={{ opacity: 0, scale: 0.6, y: 30 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        transition={{ delay: 3, type: "spring", stiffness: 280, damping: 18 }}
-        whileHover={{ scale: 1.08, y: -3 }}
-        whileTap={{ scale: 0.94 }}
-      >
+      <motion.a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="whatsapp-float" initial={{ opacity: 0, scale: 0.6, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: 3, type: "spring", stiffness: 280, damping: 18 }} whileHover={{ scale: 1.08, y: -3 }} whileTap={{ scale: 0.94 }}>
         <MessageCircle className="h-4 w-4 fill-current" />
         Chat on WhatsApp
       </motion.a>
