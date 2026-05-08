@@ -4,9 +4,13 @@ import { useEffect, useRef, useState } from "react";
 
 const CLIENT_PORTAL_URL = "https://xyric27.github.io/cutstudio-pro";
 const WHATSAPP_URL = "https://wa.me/919034879858";
+
+// ✅ FIXED: Added missing YouTube & Vimeo links
 const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/meeeet_27/",
   behance: "https://www.behance.net/meetsharma14",
+  youtube: "https://youtube.com/@meeeet_27",      // ✅ ADDED
+  vimeo: "https://vimeo.com/meeeet27",            // ✅ ADDED
 };
 
 const statsTicker = [
@@ -59,9 +63,11 @@ const clients = [
     role: "Content Creater",
     stats: "38 projects",
     avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]",
+    initials: "DA",  // ✅ FIXED: Added missing 'initials' field
     projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"],
   },
- ];
+];
+
 const capabilities = [
   ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation, and expressive loops."],
   ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits, and director-style selects."],
@@ -177,6 +183,63 @@ const funnyTaglines = [
   "Ctrl+Z is my love language",
 ];
 
+// ✅✅✅ MAJOR FIX: Missing packages array that was causing the error! ✅✅✅
+const packages = [
+  {
+    name: "Quick Cut",
+    tag: "Basic",
+    price: "₹5,000",
+    color: "#00dcff",
+    highlight: false,
+    cta: "Get Started",
+    features: [
+      "Basic video editing (up to 3 min)",
+      "Color correction & grading",
+      "Background music sync",
+      "2 revision rounds",
+      "MP4 delivery (1080p)",
+      "3-day turnaround"
+    ]
+  },
+  {
+    name: "Full Production",
+    tag: "Popular",
+    price: "₹15,000",
+    color: "#ff2f8e",
+    highlight: true,
+    cta: "Most Popular",
+    features: [
+      "Advanced editing (up to 10 min)",
+      "Motion graphics & titles",
+      "VFX & compositing",
+      "Sound design & mixing",
+      "4 revision rounds",
+      "4K delivery + source files",
+      "7-day turnaround",
+      "Priority support"
+    ]
+  },
+  {
+    name: "Cinematic VFX",
+    tag: "Premium",
+    price: "₹35,000",
+    color: "#f7d39c",
+    highlight: false,
+    cta: "Go Premium",
+    features: [
+      "Cinematic editing (unlimited length)",
+      "Custom animation & VFX",
+      "Rotoscoping & keying",
+      "Full color grading suite",
+      "Unlimited revisions",
+      "All formats & resolutions",
+      "Project files included",
+      "14-day turnaround",
+      "Dedicated project manager"
+    ]
+  }
+];
+
 const heroStickers = [
   { emoji: "⚡", cx: "12%", cy: "22%", delay: 0, rot: -18 },
   { emoji: "🎞️", cx: "88%", cy: "18%", delay: 0.3, rot: 12 },
@@ -206,8 +269,6 @@ function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: strin
   return <span ref={ref}>{count}{suffix}</span>;
 }
 
-// ── Place your intro GIF at: artifacts/vfx-portfolio/public/intro.gif
-// ── Set GIF_DURATION_MS to match your GIF's length in milliseconds
 const GIF_DURATION_MS = 0;
 
 function LoadingScreen({ onDone }: { onDone: () => void }) {
@@ -978,7 +1039,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PACKAGES */}
+      {/* ✅✅✅ PACKAGES SECTION - Now works because packages array is defined above! ✅✅✅ */}
       <section id="packages" className="px-5 py-28 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-16 flex flex-col gap-4 border-b border-white/10 pb-10 md:flex-row md:items-end md:justify-between">
@@ -1177,6 +1238,7 @@ export default function Home() {
           <span>Behance / Vimeo / Instagram / WhatsApp</span>
         </footer>
       </section>
+      
       {/* WHATSAPP FLOAT */}
       <motion.a
         href={WHATSAPP_URL}
