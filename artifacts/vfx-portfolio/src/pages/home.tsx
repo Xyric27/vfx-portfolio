@@ -618,16 +618,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SHOWREEL */}
-      <section id="showreel" className="relative px-5 py-50 md:px-10">
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-          <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
-            <h2 className="font-display text-4xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-6xl lg:text-7xl">First frame should feel hired.</h2>
-          </div>
-          <p className="max-w-2xl text-lg leading-relaxed text-white/70">Use this section for YouTube/Vimeo showreel embed.</p>
-        </div>
-        <motion.div className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black" style={{ y: reelY, rotate: reelRotate }} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}>
+      {/* SHOWREEL - LANDSCAPE ONLY, NO TITLE */}
+      <section id="showreel" className="relative px-5 py-24 md:px-10">
+        <motion.div className="reel-card mx-auto max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black" style={{ y: reelY, rotate: reelRotate }} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}>
           <div className="relative aspect-video min-h-[320px] bg-black">
             {/* Video Embed */}
             <iframe 
@@ -645,17 +638,6 @@ export default function Home() {
               }}
               title="Portfolio Showreel"
             />
-            
-            {/* Info Overlay */}
-            <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-6 md:p-8">
-              <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/50 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Main Reel 2024</div>
-              <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end h-full">
-                <div className="mt-auto">
-                  <h3 className="font-display text-lg md:text-xl font-black uppercase leading-none tracking-[-0.05em] text-white drop-shadow-lg">Reel</h3>
-                  <p className="mt-2 max-w-lg text-xs md:text-sm text-white/90 drop-shadow-lg">Complete portfolio: animation, editing, VFX & color grading.</p>
-                </div>
-              </div>
-            </div>
           </div>
         </motion.div>
       </section>
