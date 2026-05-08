@@ -14,10 +14,7 @@ const SOCIAL_LINKS = {
 
 const statsTicker = ["48+ Projects Delivered", "12 Brand Clients", "3+ Years Experience", "100% Delivery Rate"];
 
-// ✅✅✅ FRAME.IO LINKS - PUBLIC SHARING! ✅✅✅
-// Client ne yeh link diya hai: https://f.io/Djt3EbVY
-// Agar alag videos hain toh links replace karo
-
+// ✅✅✅ JUMPSHARE/FRAME.IO LINKS ✅✅✅
 const works = [
   {
     title: "Brand Film Burst",
@@ -26,8 +23,8 @@ const works = [
     tone: "Launch visuals with playful transitions, punchy timing, and kinetic typography.",
     gradient: "from-[#ff2f8e] via-[#ff6b2b] to-[#ffd38a]",
     
-    // 👇 FRAME.IO LINK - VIDEO 1
-    videoUrl: "https://f.io/Djt3EbVY",
+    // 👇 JUMPSHARE LINK (ya Frame.io link)
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
   },
   {
     title: "Music Video VFX",
@@ -36,8 +33,8 @@ const works = [
     tone: "Rotoscope layers, glowing trails, atmosphere, and frame-by-frame polish.",
     gradient: "from-[#00d7ff] via-[#7a4cff] to-[#ff2f8e]",
     
-    // 👇 FRAME.IO LINK - VIDEO 2 (AGAR ALAG HAI TOH REPLACE KARO)
-    videoUrl: "https://f.io/Djt3EbVY",
+    // 👇 AGAR ALAG VIDEO HAI TOH LINK REPLACE KARO
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
   },
   {
     title: "Social Ad Pack",
@@ -45,19 +42,15 @@ const works = [
     year: "2023",
     tone: "Fast vertical edits for reels, product reveals, titles, and callouts.",
     gradient: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]",
-    
-    // 👇 FRAME.IO LINK - VIDEO 3
-    videoUrl: "https://f.io/Djt3EbVY",
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
   },
   {
     title: "Character Loop",
     type: "Animation Design",
     year: "2023",
     tone: "Expressive loops built for campaigns, profile films, and explainer cuts.",
-    gradient: "from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
-    
-    // 👇 FRAME.IO LINK - VIDEO 4
-    videoUrl: "https://f.io/Djt3EbVY",
+    gradient:from-[#f8e2b0] via-[#00e5ff] to-[#ff00aa]",
+    embedUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
   },
 ];
 
@@ -66,10 +59,10 @@ const clients = [
 ];
 
 const capabilities = [
-  ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation, and expressive loops."],
-  ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits, and director-style selects."],
-  ["03", "VFX & Compositing", "Rotoscope, clean-up, keying, glow passes, atmosphere, match move looks, and shot finishing."],
-  ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems, HUDs, and transitions."],
+  ["01", "Animation Design", "Frame-by-frame inspired movement, character moments, logo animation."],
+  ["02", "Video Editing", "Story-led pacing, music sync, social cuts, commercial edits."],
+  ["03", "VFX & Compositing", "Rotoscope, clean-up, keying, glow passes, atmosphere."],
+  ["04", "Motion Graphics", "Kinetic type, lower thirds, explainer graphics, brand systems."],
 ];
 
 const tools = [
@@ -81,33 +74,33 @@ const tools = [
 
 const expertiseCards = [
   { num: "01", title: "Storytelling Through Motion", body: "Every edit has a heartbeat — a rhythm that decides how the viewer feels.", accent: "#00dcff", tag: "Pacing & Feel" },
-  { num: "02", title: "VFX That Blend, Not Break", body: "Rotoscope, colour grade, glow passes, clean-up, and compositing that makes VFX look native.", accent: "#ff2f8e", tag: "Visual Effects" },
-  { num: "03", title: "Brand-First Motion Graphics", body: "Titles, lower thirds, kinetic type, HUDs, icon systems — all built on-brand while screaming premium.", accent: "#ff7a1a", tag: "Motion Design" },
-  { num: "04", title: "Social-Ready Delivery", body: "Vertical, horizontal, square — every format at 4K with proper captions and platform-optimised cuts.", accent: "#f7d39c", tag: "Multi-Format" },
+  { num: "02", title: "VFX That Blend, Not Break", body: "Rotoscope, colour grade, glow passes, clean-up, compositing that looks native.", accent: "#ff2f8e", tag: "Visual Effects" },
+  { num: "03", title: "Brand-First Motion Graphics", body: "Titles, lower thirds, kinetic type, HUDs — all built on-brand while premium.", accent: "#ff7a1a", tag: "Motion Design" },
+  { num: "04", title: "Social-Ready Delivery", body: "Every format at 4K with proper captions and platform-optimised cuts.", accent: "#f7d39c", tag: "Multi-Format" },
 ];
 
 const processSteps = [
-  { num: "01", title: "Brief", body: "Share your idea, references, deadline, and vibe. The more details, the better the output.", color: "#00dcff", emoji: "📋" },
-  { num: "02", title: "Concept", body: "Meet maps out the structure, style frames, and a rough timeline. No surprises mid-project.", color: "#ff2f8e", emoji: "🎨" },
-  { num: "03", title: "Build", body: "Animation, editing, VFX, sound sync — built in stages with milestone previews for feedback.", color: "#ff7a1a", emoji: "⚙️" },
-  { num: "04", title: "Deliver", body: "Final export in your format (4K, web, vertical, horizontal) + project files if requested.", color: "#f7d39c", emoji: "🚀" },
+  { num: "01", title: "Brief", body: "Share your idea, references, deadline, and vibe.", color: "#00dcff", emoji: "📋" },
+  { num: "02", title: "Concept", body: "Meet maps out structure, style frames, and timeline.", color: "#ff2f8e", emoji: "🎨" },
+  { num: "03", title: "Build", body: "Animation, editing, VFX, sound sync — built in stages.", color: "#ff7a1a", emoji: "⚙️" },
+  { num: "04", title: "Deliver", body: "Final export in your format + project files if requested.", color: "#f7d39c", emoji: "🚀" },
 ];
 
 const faqs = [
-  ["How long does a project take?", "Quick edits are done in 3–5 days. Full production projects take 7–10 days."],
-  ["How many revisions do I get?", "Standard projects get 2 revision rounds. Premium packages get 4+ rounds."],
-  ["What format will I receive?", "By default: MP4 (H.264, 4K or 1080p). Can also deliver ProRes, MOV."],
-  ["Do you provide project files?", "Project files included in premium packages."],
-  ["How do I share my footage?", "Through Client Portal, WeTransfer, Google Drive, or Frame.io."],
-  ["What if I don't like the output?", "Revision rounds exist exactly for this purpose."],
-  ["Do you work internationally?", "Absolutely. PayPal, Wise, Razorpay accepted."],
+  ["How long does a project take?", "Quick edits: 3–5 days. Full production: 7–10 days."],
+  ["How many revisions?", "Standard: 2 rounds. Premium: 4+ rounds."],
+  ["What format?", "MP4 (H.264) by default. Also ProRes, MOV available."],
+  ["Project files?", "Included in premium packages."],
+  ["How to share footage?", "Client Portal, WeTransfer, Google Drive, or Frame.io/JumpShare."],
+  ["Not happy?", "Revision rounds exist for this purpose."],
+  ["International?", "Yes! PayPal, Wise, Razorpay accepted."],
 ];
 
 const testimonials = [
-  { name: "Aarav Shah", role: "Music Label — Aarav Studios", quote: "Meet delivered 7 projects with us and every single one was better than what we briefed.", color: "#00dcff", initials: "AS", rating: 5 },
-  { name: "Priya Mathur", role: "Founder — Nova Skin", quote: "Our product launch reel got 2M views in 48 hours. Meet's edit made our brand look premium.", color: "#ff2f8e", initials: "PM", rating: 5 },
-  { name: "Kunal Desai", role: "Tech Creator — Flux Motion", quote: "The explainer Meet made is still our best performing video after 18 months.", color: "#ff7a1a", initials: "KD", rating: 5 },
-  { name: "Sneha Pillai", role: "Brand Manager — Vibe Co.", quote: "Turnaround in 4 days, zero revisions needed. Genuinely shocked.", color: "#f7d39c", initials: "SP", rating: 5 },
+  { name: "Aarav Shah", role: "Music Label — Aarav Studios", quote: "Delivered 7 projects, every single one better than briefed.", color: "#00dcff", initials: "AS", rating: 5 },
+  { name: "Priya Mathur", role: "Founder — Nova Skin", quote: "2M views in 48 hours. Made brand look premium.", color: "#ff2f8e", initials: "PM", rating: 5 },
+  { name: "Kunal Desai", role: "Tech Creator — Flux Motion", quote: "Best performing video after 18 months.", color: "#ff7a1a", initials: "KD", rating: 5 },
+  { name: "Sneha Pillai", role: "Brand Manager — Vibe Co.", quote: "Turnaround in 4 days, zero revisions needed.", color: "#f7d39c", initials: SP", rating: 5 },
 ];
 
 const stats = [
@@ -240,85 +233,81 @@ function HiredStamp({ show }: { show: boolean }) {
   return (<AnimatePresence>{show && (<motion.div className="hired-stamp" initial={{ scale: 3.5, rotate: -24, opacity: 0 }} animate={{ scale: 1, rotate: -18, opacity: 1 }} exit={{ scale: 0.6, opacity: 0, y: 40 }} transition={{ type: "spring", stiffness: 500 }}>HIRED!</motion.div>)}</AnimatePresence>);
 }
 
-// ✅✅✅ WORK CARD WITH IFRAME - FRAME.IO SUPPORT! ✅✅✅
+// ✅✅✅ WORK CARD - PROPER IFRAME EMBED WITH ASPECT RATIO! ✅✅✅
 function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.article
       className="project-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717]"
-      initial={{ opacity: 0, y: 55 }} whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 55 }} 
+      whileInView={{ opacity: 1, y: 0 }}
       whileHover={{ y: -14, rotate: index % 2 === 0 ? -1.2 : 1.2, scale: 1.015 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ type: "spring", stiffness: 260, damping: 18, delay: index * 0.08 }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Video Container */}
-      <div className={`relative min-h-[320px] overflow-hidden bg-gradient-to-br ${work.gradient}`}>
+      {/* ✅ VIDEO CONTAINER WITH PROPER ASPECT RATIO */}
+      <div className={`relative overflow-hidden bg-gradient-to-br ${work.gradient}`} style={{ paddingBottom: '56.25%' /* 16:9 ratio */}}>
         
-        {/* ✅ IFRAME FOR FRAME.IO LINKS */}
+        {/* ✅ BACKGROUND (Always visible) */}
+        <div className="absolute inset-0 z-[1]">
+          <div className="absolute inset-0 opacity-30 mix-blend-overlay pattern" />
+          <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45% bg-[#111]/80 blur-[1px]" />
+          
+          {/* Play Button (shown when not hovering) */}
+          {!isHovered && (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 z-10">
+              <motion.div 
+                className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30 cursor-pointer"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Play className="h-7 w-7 fill-current text-white ml-1" />
+              </motion.div>
+              <p className="font-mono text-xs text-white/60 mt-2">Hover to preview</p>
+            </div>
+          )}
+        </div>
+
+        {/* ✅ IFRAME (Shown on hover) - PROPER 16:9 ASPECT RATIO! */}
         {isHovered && (
           <iframe
-            src={work.videoUrl}
-            className="absolute inset-0 w-full h-full border-0"
-            allow="autoplay; encrypted-media; fullscreen; clipboard-write"
+            src={work.embedUrl}
+            className="absolute top-0 left-0 w-full h-full border-0"
+            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+            frameBorder="0"
+            allow="autoplay; encrypted-media; fullscreen"
             allowFullScreen
             title={work.title}
             loading="lazy"
           />
         )}
 
-        {/* Background when not hovering */}
-        {!isHovered && (
-          <>
-            <div className="absolute inset-0 opacity-40 mix-blend-overlay pattern" />
-            <div className="absolute -left-12 top-12 h-52 w-72 rotate-[-18deg] rounded-[45%] bg-[#111]/80 blur-[1px]" />
-            
-            {/* Play Button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div 
-                className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm border border-white/30"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Play className="h-7 w-7 fill-current text-white ml-1" />
-              </motion.div>
-            </div>
-
-            {/* Hover Hint */}
-            <p className="absolute top-4 left-4 font-mono text-xs text-white/60 z-10 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#00dcff] animate-pulse"></span>
-              Hover to preview
-            </p>
-          </>
-        )}
-
-        {/* Dark overlay on hover */}
-        {isHovered && (
-          <div className="absolute inset-0 bg-black/20 pointer-events-none z-[1]" />
-        )}
+        {/* Overlay on hover for text readability */}
+        {isHovered && <div className="absolute inset-0 bg-black/30 pointer-events-none z-[5]" />}
 
         {/* Number Badge */}
-        <div className="absolute right-8 top-8 font-hand text-5xl text-white/90 z-10">
+        <div className="absolute right-4 top-4 font-hand text-4xl md:text-5xl text-white/90 z-20">
           {String(index + 1).padStart(2, "0")}
         </div>
         
-        {/* Info Card */}
-        <div className="absolute bottom-6 left-6 right-6 rounded-[1.4rem] border border-white/20 bg-black/35 p-5 backdrop-blur-md z-10">
-          <p className="font-mono text-xs uppercase tracking-[0.25em] text-[#fff0cf]">
+        {/* Info Card (Always visible) */}
+        <div className="absolute bottom-4 left-4 right-4 rounded-xl border border-white/20 bg-black/40 p-4 backdrop-blur-md z-20">
+          <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-[#fff0cf]">
             {work.type} / {work.year}
           </p>
-          <h3 className="mt-3 font-display text-2xl font-black uppercase leading-none tracking-[-0.04em] text-white md:text-3xl">
+          <h3 className="mt-1 font-display text-lg md:text-2xl font-black uppercase leading-none tracking-[-0.04em] text-white">
             {work.title}
           </h3>
         </div>
       </div>
       
       {/* Card Footer */}
-      <div className="flex items-start justify-between gap-4 p-6">
-        <p className="text-sm text-white/65">{work.tone}</p>
-        <ArrowUpRight className="h-6 w-6 shrink-0 text-[#00dcff] transition group-hover:translate-x-1 group-hover:-translate-y-1" />
+      <div className="flex items-start justify-between gap-4 p-4 md:p-6">
+        <p className="text-xs md:text-sm text-white/65">{work.tone}</p>
+        <ArrowUpRight className="h-5 w-5 md:h-6 shrink-0 text-[#00dcff]" />
       </div>
     </motion.article>
   );
@@ -333,8 +322,6 @@ export default function Home() {
   const scrollBarScale = useSpring(scrollYProgress, { stiffness: 120, damping: 26, restDelta: 0.001 });
   const reelY = useTransform(scrollYProgress, [0.08, 0.45], [90, -70]);
   const reelRotate = useTransform(scrollYProgress, [0.08, 0.45], [-1.6, 1.4]);
-  const floatY = useTransform(scrollYProgress, [0, 1], [0, -260]);
-  const floatReverseY = useTransform(scrollYProgress, [0, 1], [0, 220]);
 
   const [taglineIndex, setTaglineIndex] = useState(0);
   const [mouseNorm, setMouseNorm] = useState({ x: 0, y: 0 });
@@ -361,24 +348,14 @@ export default function Home() {
 
       {/* Progress Bar */}
       <motion.div className="fixed left-0 top-0 z-[70] h-1 origin-left bg-gradient-to-r from-[#ff2f8e] via-[#fff0cf] to-[#00dcff]" style={{ scaleX: scrollBarScale }} />
-      
-      {/* Floating Orbs */}
-      <motion.div className="pointer-events-none fixed left-[6vw] top-[22vh] z-0 hidden h-36 w-36 rounded-[42%] bg-[#ff2f8e]/25 blur-xl lg:block" style={{ y: floatY }} />
-      <motion.div className="pointer-events-none fixed right-[7vw] top-[58vh] z-0 hidden h-44 w-44 rounded-full bg-[#00dcff]/20 blur-xl lg:block" style={{ y: floatReverseY }} />
 
       {/* NAVIGATION */}
       <nav className="fixed left-0 top-0 z-50 flex w-full items-center justify-between px-5 py-4 backdrop-blur-md bg-black/40 border-b border-white/5 md:px-10">
         <a href="#top" className="font-display text-lg font-black uppercase tracking-tight text-[#fff7e8]">Motion<span className="text-[#00dcff]">.VFX</span></a>
         <div className="hidden items-center gap-8 font-mono text-xs uppercase tracking-[0.28em] text-white/70 md:flex">
-          <a href="#expertise" className="transition hover:text-[#00dcff]">Skills</a>
-          <a href="#tools" className="transition hover:text-[#00dcff]">Tools</a>
-          <a href="#clients" className="transition hover:text-[#00dcff]">Clients</a>
-          <a href="#work" className="transition hover:text-[#00dcff]">Work</a>
-          <a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
+          <a href="#expertise" className="transition hover:text-[#00dcff]">Skills</a><a href="#tools" className="transition hover:text-[#00dcff]">Tools</a><a href="#clients" className="transition hover:text-[#00dcff]">Clients</a><a href="#work" className="transition hover:text-[##00dcff]">Work</a><a href="#contact" className="transition hover:text-[#00dcff]">Contact</a>
         </div>
-        <a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#00dcff] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf] hover:scale-105">
-          <FolderOpen className="h-3.5 w-3.5" /> Client Portal
-        </a>
+        <a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-[#00dcff] px-5 py-2.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf] hover:scale-105"><FolderOpen className="h-3.5 w-3.5" /> Client Portal</a>
       </nav>
 
       {/* HERO SECTION */}
@@ -390,21 +367,15 @@ export default function Home() {
         <motion.div style={{ y: coverY, scale: coverScale }} className="relative z-10 mx-auto flex w-full max-w-[1180px] flex-col items-center text-center">
           <motion.div className="hero-script mb-4 font-hand text-3xl text-[#fff7e8] md:text-5xl" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>An Animation</motion.div>
           <div className="portfolio-lockup relative w-full">
-            <Wing side="left" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
-            <Wing side="right" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
+            <Wing side="left" mouseX={mouseNorm.x} mouseY={mouseNorm.y} /><Wing side="right" mouseX={mouseNorm.x} mouseY={mouseNorm.y} />
             <motion.h1 className="relative z-20 font-display text-[16vw] font-black leading-[0.73] tracking-[-0.08em] text-[#fff0cf] md:text-[9rem] lg:text-[11rem]" initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.1 }} whileHover={{ scale: 1.03 }}>Portfolio</motion.h1>
             <motion.div className="absolute left-1/2 top-[18%] z-30 -translate-x-1/2 font-display text-[13vw] font-black leading-none tracking-[-0.08em] text-[#00dcff] mix-blend-screen md:text-[7.5rem] lg:text-[9.5rem]" initial={{ opacity: 0, x: -80 }} animate={{ opacity: 0.9, x: 0 }} transition={{ duration: 1, delay: 0.25 }}>Portfo</motion.div>
           </div>
           <motion.div className="mt-2 flex flex-col items-center gap-4" initial={{ opacity: 0, y: 22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.45 }}>
             <span className="font-hand text-xl text-[#fff7e8]/80 md:text-3xl">of</span>
             <span className="hero-name font-hand text-3xl text-[#fff7e8] md:text-5xl">Meet</span>
-            <AnimatedHand />
-            <Doodle className="h-10 w-32 text-[#f7d39c]" />
-            <div className="tagline-box">
-              <AnimatePresence mode="wait">
-                <motion.p key={taglineIndex} className="font-mono text-xs uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-sm" initial={{ opacity: 0, y: 14, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -14, filter: "blur(4px)" }} transition={{ duration: 0.42 }}>{funnyTaglines[taglineIndex]}</motion.p>
-              </AnimatePresence>
-            </div>
+            <AnimatedHand /><Doodle className="h-10 w-32 text-[#f7d39c]" />
+            <div className="tagline-box"><AnimatePresence mode="wait"><motion.p key={taglineIndex} className="font-mono text-xs uppercase tracking-[0.22em] text-[#fff0cf]/90 md:text-sm" initial={{ opacity: 0, y: 14, filter: "blur(4px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -14, filter: "blur(4px)" }} transition={{ duration: 0.42 }}>{funnyTaglines[taglineIndex]}</motion.p></AnimatePresence></div>
             <p className="max-w-3xl text-balance text-base font-semibold leading-relaxed text-white md:text-lg">An <span className="text-[#f7d39c]">Animation Designer & VFX Editor</span> who builds cinematic films, motion graphics, and scroll-stopping brand visuals.</p>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
               <a href="#showreel" className="group inline-flex items-center gap-3 rounded-full bg-[#00dcff] px-6 py-3.5 font-mono text-xs font-black uppercase tracking-[0.18em] text-black transition hover:bg-[#fff0cf]" onClick={handleConfetti}>View showreel <Play className="h-4 w-4 fill-current transition group-hover:translate-x-1" /></a>
@@ -414,35 +385,30 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* EXPERTISE SECTION */}
+      {/* EXPERTISE */}
       <section id="expertise" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">What makes the difference</p><h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">What I<br />Do Best</h2></div>
-            <p className="max-w-md text-base leading-relaxed text-white/60">Four things that separate a good editor from one that makes clients come back every time.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/60">Four things that separate a good editor from great.</p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
             {expertiseCards.map((card, i) => (
               <motion.div key={card.num} className="expertise-card group relative overflow-hidden rounded-[2rem] border border-white/10 bg-[#171717] p-8" initial={{ opacity: 0, y: 50 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -10, scale: 1.015 }} viewport={{ once: true, margin: "-60px" }} transition={{ type: "spring", stiffness: 200, damping: 22, delay: i * 0.07 }}>
                 <div className="expertise-card-bg" style={{ background: `radial-gradient(circle at 80% 20%, ${card.accent}22, transparent 55%)` }} />
-                <div className="relative z-10">
-                  <div className="mb-5 flex items-start justify-between"><span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span><span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55`, color: card.accent }}>{card.tag}</span></div>
-                  <h3 className="mb-4 font-display text-2xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-3xl">{card.title}</h3>
-                  <p className="text-sm leading-relaxed text-white/60">{card.body}</p>
-                </div>
-                <div className="expertise-corner-line" style={{ borderColor: `${card.accent}40` }} />
+                <div className="relative z-10"><div className="mb-5 flex items-start justify-between"><span className="font-hand text-4xl" style={{ color: card.accent }}>{card.num}</span><span className="rounded-full border px-3 py-1 font-mono text-[10px] uppercase tracking-[0.22em]" style={{ borderColor: `${card.accent}55`, color: card.accent }}>{card.tag}</span></div><h3 className="mb-4 font-display text-2xl font-black uppercase leading-tight tracking-[-0.04em] text-white md:text-3xl">{card.title}</h3><p className="text-sm leading-relaxed text-white/60">{card.body}</p></div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* TOOLS SECTION */}
+      {/* TOOLS */}
       <section id="tools" className="relative overflow-hidden px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
             <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">The arsenal</p><h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">Tools &<br />Software</h2></div>
-            <p className="max-w-md text-base leading-relaxed text-white/60">Industry-standard tools, used daily.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/60">Industry-standard tools.</p>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {tools.map((tool, i) => (
@@ -456,7 +422,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CLIENT PORTAL CTA */}
+      {/* CLIENT PORTAL */}
       <section id="portal" className="px-5 py-10 md:px-10">
         <motion.div className="client-portal-banner mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#00dcff]/30 bg-[#0a0f14]" initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }}>
           <div className="absolute inset-0 pointer-events-none"><div className="absolute left-[-5%] top-[-10%] h-72 w-72 rounded-full bg-[#00dcff]/15 blur-[80px]" /><div className="absolute right-[-5%] bottom-[-10%] h-72 w-72 rounded-full bg-[#ff2f8e]/12 blur-[80px]" /></div>
@@ -464,18 +430,17 @@ export default function Home() {
             <div>
               <div className="mb-3 flex items-center gap-3"><span className="portal-live-dot" /><span className="font-mono text-xs uppercase tracking-[0.3em] text-[#00dcff]">Client Panel — Open for projects</span></div>
               <h2 className="font-display text-3xl font-black uppercase leading-tight tracking-[-0.05em] text-white md:text-5xl lg:text-6xl">Got a project?<br /><span className="text-[#00dcff]">Let's build it.</span></h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60">Submit your project brief through the client portal. Meet reviews every submission personally and responds within 24 hours.</p>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/60">Submit brief through client portal. Response within 24 hours.</p>
               <ul className="mt-6 flex flex-wrap gap-3">{["Brief Submission", "File Handoff", "Revision Tracking", "Final Delivery"].map((item) => (<li key={item} className="rounded-full border border-white/15 bg-white/5 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-white/70">{item}</li>))}</ul>
             </div>
             <div className="flex flex-col items-start gap-4 md:items-end">
               <motion.a href={CLIENT_PORTAL_URL} target="_blank" rel="noopener noreferrer" className="portal-btn" whileHover={{ scale: 1.06, rotate: -1 }} whileTap={{ scale: 0.95 }} onClick={handleConfetti}><FolderOpen className="h-5 w-5" /> Open Client Portal <ExternalLink className="h-4 w-4 opacity-70" /></motion.a>
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/35">Replace link → CLIENT_PORTAL_URL</p>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* ✅ CLIENTS SECTION - PROFILES & REELS HEADING */}
+      {/* ✅ CLIENTS - PROFILES & REELS */}
       <section id="clients" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-end">
@@ -483,14 +448,14 @@ export default function Home() {
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client rooms</p>
               <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Profiles<br />& Reels</h2>
             </div>
-            <p className="max-w-md text-base leading-relaxed text-white/65">Hover each card to reveal client's project list. Go on, try it. 👀</p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">Hover each card to reveal client's project list.</p>
           </div>
           <div className="grid gap-6 lg:grid-cols-3">
             {clients.map((client, index) => (
               <motion.article key={client.name} className="client-card group relative min-h-[520px] overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]" initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }} viewport={{ once: true, margin: "-80px" }} transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}>
                 <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} /><div className="client-card-glow" />
                 <div className="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7">
-                  <div><div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div><div className="mt-7"><p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p><h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3><p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p></div></div>
+                  <div><div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div><div className="mt-7"><p className="font-mono text-xs uppercase tracking-[{0.28em}] text-[#00dcff]">{client.role}</p><h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3><p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p></div></div>
                   <div className="client-project-panel"><div className="mb-4 flex items-center justify-between"><span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Project reels</span><Film className="h-5 w-5 text-[#00dcff]" /></div><div className="grid gap-3">{client.projects.map((project, projectIndex) => (<div key={project} className="client-video-row"><div className="client-video-thumb"><span className={`client-video-orb orb-${projectIndex + 1}`} /><span className="client-video-scan" /><Play className="relative z-10 h-4 w-4 fill-current text-white" /></div><div><p className="font-display text-base font-black uppercase leading-none text-white">{project}</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Looping preview</p></div></div>))}</div></div>
                   <div className="flex items-end justify-between border-t border-white/10 pt-5"><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Hover to reveal</span><ArrowUpRight className="h-6 w-6 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
                 </div>
@@ -504,18 +469,15 @@ export default function Home() {
       <section className="relative overflow-hidden border-y border-white/10 bg-[#fff0cf] py-4 text-black">
         <div className="motion-marquee font-display text-3xl font-black uppercase tracking-[-0.05em] md:text-5xl">
           <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fun">5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
-          <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fun">5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
+          <span>Animation</span><span className="marquee-fun">Send Help 💀</span><span>VFX</span><span>Editing</span><span className="marquee-fen>5AM Renders 😵</span><span>Motion Graphics</span><span>Color Grade</span><span className="marquee-fun">Still Rendering...</span><span>Compositing</span><span className="marquee-fun">Ctrl+Z Everything 🔁</span>
         </div>
       </section>
 
-      {/* ✅ SHOWREEL SECTION - FIRST FRAME SHOULD FEEL HIRED */}
+      {/* SHOWREEL - FIRST FRAME SHOULD FEEL HIRED */}
       <section id="showreel" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-          <div>
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p>
-            <h2 className="font-display text-4xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-6xl lg:text-7xl">First frame should feel hired.</h2>
-          </div>
-          <p className="max-w-2xl text-lg leading-relaxed text-white/70">Use this section for the client's YouTube/Vimeo showreel embed.</p>
+          <div><p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Main reel</p><h2 className="font-display text-4xl font-black uppercase leading-[0.85] tracking-[-0.06em] md:text-6xl lg:text-7xl">First frame should feel hired.</h2></div>
+          <p className="max-w-2xl text-lg leading-relaxed text-white/70">Use this section for YouTube/Vimeo showreel embed.</p>
         </div>
         <motion.div className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black" style={{ y: reelY, rotate: reelRotate }} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}>
           <div className="relative aspect-video min-h-[320px]">
@@ -524,36 +486,39 @@ export default function Home() {
             <div className="absolute inset-6 rounded-[1.5rem] border border-white/15" />
             <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
             <div className="absolute bottom-8 left-8 right-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <div><h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl">Showreel</h3><p className="mt-4 max-w-xl text-base text-white/70">Editing, animation, compositing, transitions, and color finishing.</p></div>
+              <div><h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl">Showreel</h3><p className="mt-4 max-w-xl text-base text-white/70">Editing, animation, compositing, transitions.</p></div>
               <motion.button className="group flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black" aria-label="Play showreel" whileHover={{ scale: 1.18, rotate: [0, -8, 8, -4, 0] }} whileTap={{ scale: 0.88 }} transition={{ type: "spring", stiffness: 400, damping: 14 }}><Play className="ml-1 h-7 w-7 fill-current" /></motion.button>
             </div>
           </div>
         </motion.div>
       </section>
 
-      {/* ✅ WORK SECTION - FRAME.IO VIDEOS WITH IFRAME! */}
+      {/* ✅ WORK SECTION - JUMPSHARE/FRAME.IO IFRAME VERSION! */}
       <section id="work" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-center">
             <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Selected<br />Frames</h2>
-            <p className="max-w-md text-base leading-relaxed text-white/65">Portfolio pieces — visual first, service tags last.<br/><br/>💡 <strong style={{color: '#00dcff'}}>Hover on any card to preview video from Frame.io!</strong></p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">
+              💡 <strong style={{color: '#00dcff'}}>Hover any card below to preview video!</strong><br/>
+              <span className="text-sm text-white/40">(Video loads from Frame.io/JumpShare)</span>
+            </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2">{works.map((work, index) => (<WorkCard key={work.title} work={work} index={index} />))}</div>
         </div>
       </section>
 
-      {/* ABOUT SECTION */}
+      {/* ABOUT */}
       <section id="about" className="relative px-5 py-24 md:px-10">
         <div className="mx-auto grid max-w-7xl gap-10 rounded-[2.5rem] border border-white/10 bg-[#fff0cf] p-7 text-black md:p-12 lg:grid-cols-[0.95fr_1.05fr]">
           <div><p className="font-hand text-4xl text-[#ff2f8e] md:text-6xl">About the artist</p><h2 className="mt-6 font-display text-4xl font-black uppercase leading-[0.9] tracking-[-0.06em] md:text-6xl lg:text-7xl">Creative cuts with animated soul.</h2></div>
           <div className="space-y-7 text-base font-semibold leading-relaxed text-black/75">
-            <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals — powered by creativity, caffeine, and questionable render times.</p>
+            <p>Meet turns raw ideas into energetic films, VFX moments, motion graphics, and scroll-stopping brand visuals.</p>
             <div className="grid gap-4 sm:grid-cols-2">{stats.map((stat, i) => (<motion.div key={stat.label} whileHover={{ scale: 1.06, rotate: i % 2 === 0 ? -2 : 2 }} transition={{ type: "spring", stiffness: 300, damping: 14 }} className="rounded-3xl bg-black p-5" style={{ color: stat.color }}><strong className="block font-display text-3xl"><AnimatedCounter value={stat.value} suffix={stat.suffix} /></strong><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/60">{stat.label}</span></motion.div>))}</div>
           </div>
         </div>
       </section>
 
-      {/* SERVICES SECTION */}
+      {/* SERVICES */}
       <section id="services" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 flex items-end justify-between gap-8">
@@ -564,7 +529,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* PROCESS STEPS */}
+      {/* PROCESS */}
       <section id="process" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
@@ -610,11 +575,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* FAQ SECTION */}
+      {/* FAQ */}
       <section id="faq" className="px-5 py-24 md:px-10">
         <div className="mx-auto max-w-5xl">
           <div className="mb-12 flex flex-col gap-4 border-b border-white/10 pb-8 md:flex-row md:items-end md:justify-between">
-            <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Before you ask</p><h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">FAQs</h2></div>
+            <div><p className="mb-3 font-mo no text-xs uppercase tracking-[0.35em] text-[#00dcff]">Before you ask</p><h2 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.06em] md:text-6xl lg:text-7xl">FAQs</h2></div>
             <p className="max-w-md text-base leading-relaxed text-white/60">Common questions answered.</p>
           </div>
           <FaqList />
@@ -626,11 +591,11 @@ export default function Home() {
         <div className="stats-ticker-track">{[...statsTicker, ...statsTicker].map((item, i) => (<span key={i} className="inline-flex items-center gap-4 px-8 font-display text-xl font-black uppercase tracking-[-0.03em] text-white/25 md:text-2xl">{item}<span className="h-1.5 w-1.5 rounded-full bg-[#00dcff]/60 shrink-0" /></span>))}</div>
       </div>
 
-      {/* SOCIAL / CONNECT */}
+      {/* SOCIAL */}
       <section id="connect" className="px-5 py-20 md:px-10">
         <div className="mx-auto max-w-7xl">
-          <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border-white/10 bg-[#171717] px-8 py-14 text-center">
-            <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p><h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] md:text-6xl">Follow the<br />Work</h2><p className="mx-auto mt-5 max-w-lg text-sm text-white/55">Behind-the-scenes, reels, and experiments across every platform.</p></div>
+          <div className="flex flex-col items-center gap-10 rounded-[2.5rem] border border white/10 bg-[#171717] px-8 py-14 text-center">
+            <div><p className="mb-3 font-mono text-xs uppercase tracking-[0.35em] text-[#ff2f8e]">Find Meet everywhere</p><h2 className="font-display text-4xl font-black uppercase leading-tight tracking-[-0.05em] md:text-6xl">Follow the<br />Work</h2><p className="mx-auto mt-5 max-w-lg text-sm text-white/55">Behind-the-scenes, reels, experiments across platforms.</p></div>
             <div className="flex flex-wrap justify-center gap-3">
               <motion.a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}><Instagram className="h-4 w-4" /> Instagram</motion.a>
               <motion.a href={SOCIAL_LINKS.youtube} target="_blank" rel="noopener noreferrer" className="social-link-pill" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.96 }}><Youtube className="h-4 w-4" /> YouTube</motion.a>
@@ -642,7 +607,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CONTACT SECTION */}
+      {/* CONTACT */}
       <section id="contact" className="px-5 pb-10 pt-24 md:px-10">
         <div className="relative mx-auto overflow-hidden rounded-[2.5rem] bg-[#0a0a0a] p-8 text-center md:p-16">
           <div className="absolute left-[-8%] top-[10%] h-64 w-64 rounded-full bg-[#ff2f8e] blur-[90px]" /><div className="absolute bottom-[-8%] right-[-8%] h-72 w-72 rounded-full bg-[#00dcff] blur-[95px]" />
@@ -661,7 +626,7 @@ export default function Home() {
         <footer className="mx-auto flex max-w-7xl flex-col justify-between gap-4 py-8 font-mono text-xs uppercase tracking-[0.22em] text-white/45 md:flex-row"><span>Motion.VFX Portfolio 2024 · Meet</span><span>Behance / Vimeo / Instagram / WhatsApp</span></footer>
       </section>
 
-      {/* WHATSAPP FLOATING BUTTON */}
+      {/* WHATSAPP FLOAT */}
       <motion.a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="whatsapp-float" initial={{ opacity: 0, scale: 0.6, y: 30 }} animate={{ opacity: 1, scale: 1, y: 0 }} transition={{ delay: 3, type: "spring", stiffness: 280, damping: 18 }} whileHover={{ scale: 1.08, y: -3 }} whileTap={{ scale: 0.94 }}><MessageCircle className="h-4 w-4 fill-current" /> Chat on WhatsApp</motion.a>
     </main>
   );
