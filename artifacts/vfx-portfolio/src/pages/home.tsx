@@ -53,7 +53,33 @@ const works = [
 // ... rest of the code remains same (clients, capabilities, tools, etc.)
 
 const clients = [
-  { name: "Dev Agarwal", role: "Content Creater", stats: "38 projects", avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]", initials: "DA", projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"] }
+  { 
+    name: "Dev Agarwal", 
+    role: "Content Creator", 
+    stats: "38 projects", 
+    avatar: "from-[#ff2f8e] via-[#ff7a1a] to-[#fff0cf]", 
+    initials: "DA", 
+    videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
+    projects: ["Neon Intro", "Lyric Visualizer", "Stage Promo"] 
+  },
+  { 
+    name: "Priya Mathur", 
+    role: "Brand Director", 
+    stats: "24 projects", 
+    avatar: "from-[#00dcff] via-[#7a4cff] to-[#ff2f8e]", 
+    initials: "PM", 
+    videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
+    projects: ["Brand Film", "Social Pack", "Explainer"] 
+  },
+  { 
+    name: "Kunal Desai", 
+    role: "Tech Founder", 
+    stats: "15 projects", 
+    avatar: "from-[#ffe6a8] via-[#ff8a00] to-[#ff006a]", 
+    initials: "KD", 
+    videoUrl: "https://jumpshare.com/embed/RAEhsNiIiof866uriT9g",
+    projects: ["Tech Demo", "Tutorial Series", "Product Launch"] 
+  }
 ];
 
 const capabilities = [
@@ -447,7 +473,7 @@ export default function Home() {
               <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client rooms</p>
               <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Profiles<br />& Reels</h2>
             </div>
-            <p className="max-w-md text-base leading-relaxed text-white/65">Hover each card to reveal client's project list.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">Hover each card to see client's video reel.</p>
           </div>
           <div className="grid gap-6 lg:grid-cols-3">
             {clients.map((client, index) => (
@@ -455,8 +481,31 @@ export default function Home() {
                 <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} /><div className="client-card-glow" />
                 <div className="relative z-10 flex h-full min-h-[520px] flex-col justify-between p-7">
                   <div><div className={`client-avatar bg-gradient-to-br ${client.avatar}`}><span>{client.initials}</span></div><div className="mt-7"><p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p><h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3><p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p></div></div>
-                  <div className="client-project-panel"><div className="mb-4 flex items-center justify-between"><span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Project reels</span><Film className="h-5 w-5 text-[#00dcff]" /></div><div className="grid gap-3">{client.projects.map((project, projectIndex) => (<div key={project} className="client-video-row"><div className="client-video-thumb"><span className={`client-video-orb orb-${projectIndex + 1}`} /><span className="client-video-scan" /><Play className="relative z-10 h-4 w-4 fill-current text-white" /></div><div><p className="font-display text-base font-black uppercase leading-none text-white">{project}</p><p className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Looping preview</p></div></div>))}</div></div>
-                  <div className="flex items-end justify-between border-t border-white/10 pt-5"><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Hover to reveal</span><ArrowUpRight className="h-6 w-6 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
+                  
+                  {/* Video Preview Section */}
+                  <div className="client-project-panel">
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Portfolio reel</span>
+                      <Film className="h-5 w-5 text-[#00dcff]" />
+                    </div>
+                    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black" style={{ paddingBottom: "56.25%", height: 0 }}>
+                      <iframe 
+                        src={client.videoUrl}
+                        frameBorder="0"
+                        allowFullScreen
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%"
+                        }}
+                        title={`${client.name} Reel`}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-end justify-between border-t border-white/10 pt-5"><span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Click to play</span><ArrowUpRight className="h-6 w-6 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" /></div>
                 </div>
               </motion.article>
             ))}
@@ -483,14 +532,33 @@ export default function Home() {
           <p className="max-w-2xl text-lg leading-relaxed text-white/70">Use this section for YouTube/Vimeo showreel embed.</p>
         </div>
         <motion.div className="reel-card mx-auto mt-14 max-w-7xl overflow-hidden rounded-[2rem] border border-white/10 bg-black" style={{ y: reelY, rotate: reelRotate }} initial={{ opacity: 0, y: 70 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-120px" }} transition={{ duration: 0.8 }}>
-          <div className="relative aspect-video min-h-[320px]">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_22%_18%,#ff2f8e_0,transparent_26%),radial-gradient(circle_at_82%_70%,#00dcff_0,transparent_28%),linear-gradient(135deg,#160b0d,#111_48%,#2a081b)]" />
-            <div className="motion-video-loop absolute inset-0"><span className="loop-shape loop-a" /><span className="loop-shape loop-b" /><span className="loop-shape loop-c" /><span className="loop-shape loop-d" /><span className="loop-frame loop-frame-one" /><span className="loop-frame loop-frame-two" /><span className="loop-scan" /></div>
-            <div className="absolute inset-6 rounded-[1.5rem] border border-white/15" />
-            <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/35 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
-            <div className="absolute bottom-8 left-8 right-8 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <div><h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl">Showreel</h3><p className="mt-4 max-w-xl text-base text-white/70">Editing, animation, compositing, transitions, and color finishing.</p></div>
-              <motion.button className="group flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[#fff0cf] text-black" aria-label="Play showreel" whileHover={{ scale: 1.18, rotate: [0, -8, 8, -4, 0] }} whileTap={{ scale: 0.88 }} transition={{ type: "spring", stiffness: 400, damping: 14 }}><Play className="ml-1 h-7 w-7 fill-current" /></motion.button>
+          <div className="relative aspect-video min-h-[320px] bg-black">
+            {/* Video Embed */}
+            <iframe 
+              id="js_video_iframe" 
+              src="https://jumpshare.com/embed/RAEhsNiIiof866uriT9g" 
+              frameBorder="0" 
+              allowFullScreen
+              style={{ 
+                position: "absolute", 
+                top: 0, 
+                left: 0, 
+                width: "100%", 
+                height: "100%",
+                borderRadius: "1rem"
+              }}
+              title="Portfolio Showreel"
+            />
+            
+            {/* Info Overlay */}
+            <div className="absolute inset-0 pointer-events-none flex flex-col justify-between p-6 md:p-8">
+              <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/50 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Animation portfolio 2024</div>
+              <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end h-full">
+                <div className="mt-auto">
+                  <h3 className="font-display text-4xl font-black uppercase leading-none tracking-[-0.05em] md:text-6xl text-white drop-shadow-lg">Showreel</h3>
+                  <p className="mt-4 max-w-xl text-base text-white/90 drop-shadow-lg">Editing, animation, compositing, transitions, and color finishing.</p>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
