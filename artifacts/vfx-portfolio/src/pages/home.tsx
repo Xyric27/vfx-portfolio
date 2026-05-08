@@ -335,7 +335,6 @@ function WorkCard({ work, index }: { work: typeof works[0]; index: number }) {
 
 export default function Home() {
   const [loaded, setLoaded] = useState(false);
-  const [selectedClientIndex, setSelectedClientIndex] = useState(0);
   const { scrollYProgress } = useScroll();
   const coverY = useTransform(scrollYProgress, [0, 0.35], [0, -160]);
   const coverScale = useTransform(scrollYProgress, [0, 0.35], [1, 0.9]);
@@ -471,166 +470,86 @@ export default function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mb-12 flex flex-col justify-between gap-6 border-y border-white/10 py-8 md:flex-row md:items-end">
             <div>
-              <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client showcase</p>
+              <p className="mb-4 font-mono text-xs uppercase tracking-[0.35em] text-[#00dcff]">Client Reels</p>
               <h2 className="font-display text-5xl font-black uppercase leading-none tracking-[-0.06em] md:text-7xl lg:text-8xl">Profiles<br />& Reels</h2>
             </div>
-            <p className="max-w-md text-base leading-relaxed text-white/65">Hover any client to see their portfolio reel & projects.</p>
+            <p className="max-w-md text-base leading-relaxed text-white/65">Each client card showcases their portfolio reel & projects.</p>
           </div>
-
-          {/* Client Showcase Grid */}
-          <div className="grid gap-8 lg:grid-cols-[1fr_1.4fr]">
-            {/* LEFT: Client List */}
-            <div className="space-y-4">
-              {clients.map((client, index) => (
-                <motion.div
-                  key={client.name}
-                  className={`client-list-item group cursor-pointer relative overflow-hidden rounded-2xl border transition p-6 ${
-                    selectedClientIndex === index 
-                      ? 'border-[#00dcff] bg-[#00dcff]/10' 
-                      : 'border-white/10 bg-[#1a1a1a] hover:border-white/30 hover:bg-[#232323]'
-                  }`}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  whileHover={{ scale: 1.02, x: 8 }}
-                  viewport={{ once: true, margin: "-60px" }}
-                  transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.05 }}
-                  onClick={() => setSelectedClientIndex(index)}
-                >
-                  <div className={`absolute -right-12 -top-12 h-32 w-32 rounded-full bg-gradient-to-br ${client.avatar} opacity-10 blur-2xl transition group-hover:opacity-20`} />
-                  
-                  <div className="relative z-10 flex items-start gap-4">
-                    {/* Avatar */}
-                    <div className={`client-avatar-small bg-gradient-to-br ${client.avatar} shrink-0 h-14 w-14 rounded-xl flex items-center justify-center font-display text-lg font-black text-white`}>
+          <div className="grid gap-6 lg:grid-cols-3">
+            {clients.map((client, index) => (
+              <motion.article
+                key={client.name}
+                className="client-card group relative overflow-hidden rounded-[2.2rem] border border-white/10 bg-[#171717]"
+                initial={{ opacity: 0, y: 70 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                whileHover={{ y: -18, rotate: index === 1 ? 0 : index === 0 ? -1.2 : 1.2, scale: 1.02 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ type: "spring", stiffness: 220, damping: 20, delay: index * 0.08 }}
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${client.avatar} opacity-20 transition duration-700 group-hover:opacity-45`} />
+                <div className="client-card-glow" />
+                <div className="relative z-10 flex h-full flex-col justify-between p-7">
+                  {/* Header */}
+                  <div>
+                    <div className={`client-avatar bg-gradient-to-br ${client.avatar} h-16 w-16 rounded-2xl flex items-center justify-center font-display text-2xl font-black text-white`}>
                       {client.initials}
                     </div>
-                    
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-display text-xl font-black uppercase leading-tight tracking-[-0.03em] text-white truncate">{client.name}</h3>
-                      <p className={`font-mono text-xs uppercase tracking-[0.2em] mt-1 ${selectedClientIndex === index ? 'text-[#00dcff]' : 'text-[#ff2f8e]'}`}>{client.role}</p>
-                      <p className="font-mono text-xs uppercase tracking-[0.2em] text-white/50 mt-2">{client.stats}</p>
+                    <div className="mt-7">
+                      <p className="font-mono text-xs uppercase tracking-[0.28em] text-[#00dcff]">{client.role}</p>
+                      <h3 className="mt-3 font-display text-3xl font-black uppercase leading-none tracking-[-0.05em] text-[#fff0cf]">{client.name}</h3>
+                      <p className="mt-4 inline-flex rounded-full border border-white/15 px-4 py-2 font-mono text-xs uppercase tracking-[0.2em] text-white/70">{client.stats}</p>
                     </div>
-                    
-                    <ArrowUpRight className={`h-5 w-5 shrink-0 transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1 ${selectedClientIndex === index ? 'text-[#00dcff]' : 'text-[#ff2f8e]'}`} />
                   </div>
-                </motion.div>
-              ))}
-            </div>
 
-            {/* RIGHT: Video Preview + Projects */}
-            <motion.div
-              className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#0a0a0a] p-8"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5 }}
-              key={selectedClientIndex}
-            >
-              {/* Background Glow */}
-              <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute left-0 top-0 h-40 w-40 rounded-full bg-[#ff2f8e]/10 blur-[60px]" />
-                <div className="absolute right-0 bottom-0 h-40 w-40 rounded-full bg-[#00dcff]/10 blur-[60px]" />
-              </div>
-
-              <div className="relative z-10">
-                {/* Video Preview */}
-                <motion.div 
-                  className="mb-8 relative overflow-hidden rounded-2xl border border-white/10 bg-black" 
-                  style={{ paddingBottom: "56.25%", height: 0 }}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <iframe 
-                    src={clients[selectedClientIndex].videoUrl}
-                    frameBorder="0"
-                    allowFullScreen
-                    style={{
-                      position: "absolute",
-                      top: 0,
-                      left: 0,
-                      width: "100%",
-                      height: "100%"
-                    }}
-                    title={`${clients[selectedClientIndex].name} Portfolio`}
-                  />
-                </motion.div>
-
-                {/* Client Header */}
-                <motion.div 
-                  className="mb-6 flex items-start justify-between gap-4"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
-                >
-                  <div>
-                    <h3 className="font-display text-2xl md:text-3xl font-black uppercase leading-tight tracking-[-0.04em] text-white">{clients[selectedClientIndex].name}</h3>
-                    <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#00dcff] mt-2">{clients[selectedClientIndex].role}</p>
+                  {/* Video Reel Preview */}
+                  <div className="my-6">
+                    <div className="mb-4 flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-[0.28em] text-[#fff0cf]">Portfolio reel</span>
+                      <Film className="h-5 w-5 text-[#00dcff]" />
+                    </div>
+                    <div className="relative overflow-hidden rounded-xl border border-white/10 bg-black" style={{ paddingBottom: "56.25%", height: 0 }}>
+                      <iframe
+                        src={client.videoUrl}
+                        frameBorder="0"
+                        allowFullScreen
+                        style={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%"
+                        }}
+                        title={`${client.name} Reel`}
+                      />
+                    </div>
                   </div>
-                  <div className={`client-avatar-large bg-gradient-to-br ${clients[selectedClientIndex].avatar} shrink-0 h-16 w-16 rounded-2xl flex items-center justify-center font-display text-2xl font-black text-white`}>
-                    {clients[selectedClientIndex].initials}
-                  </div>
-                </motion.div>
 
-                {/* Projects */}
-                <motion.div 
-                  className="border-t border-white/10 pt-6"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.15 }}
-                >
-                  <p className="font-mono text-xs uppercase tracking-[0.28em] text-white/60 mb-4 flex items-center gap-2">
-                    <Film className="h-4 w-4 text-[#00dcff]" /> Portfolio Projects ({clients[selectedClientIndex].projects.length})
-                  </p>
-                  <div className="grid gap-3">
-                    {clients[selectedClientIndex].projects.map((project, projectIndex) => (
-                      <motion.div
-                        key={project}
-                        className="group cursor-pointer rounded-lg border border-white/10 bg-white/5 p-3 transition hover:border-white/30 hover:bg-white/10"
-                        whileHover={{ x: 4 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.2, delay: projectIndex * 0.05 }}
-                      >
-                        <div className="flex items-center gap-3">
-                          <div className="h-2 w-2 rounded-full bg-[#ff2f8e] flex-shrink-0" />
-                          <p className="font-display text-sm font-black uppercase leading-none text-white">{project}</p>
-                          <ChevronDown className="h-4 w-4 text-white/40 ml-auto transition group-hover:translate-x-0.5" style={{ transform: "rotate(-90deg)" }} />
-                        </div>
-                      </motion.div>
-                    ))}
+                  {/* Projects List */}
+                  <div className="border-t border-white/10 pt-5">
+                    <p className="font-mono text-xs uppercase tracking-[0.28em] text-white/60 mb-3">Projects</p>
+                    <div className="space-y-2">
+                      {client.projects.map((project, projectIndex) => (
+                        <motion.div
+                          key={project}
+                          className="group cursor-pointer flex items-center gap-2 rounded-lg p-2 transition hover:bg-white/5"
+                          whileHover={{ x: 4 }}
+                        >
+                          <div className="h-1.5 w-1.5 rounded-full bg-[#ff2f8e] flex-shrink-0" />
+                          <p className="font-display text-xs font-black uppercase leading-none text-white flex-1 truncate">{project}</p>
+                          <ChevronDown className="h-3 w-3 text-white/40 transition group-hover:translate-x-0.5" style={{ transform: "rotate(-90deg)" }} />
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                </motion.div>
 
-                {/* All Clients Preview */}
-                <motion.div 
-                  className="mt-6 border-t border-white/10 pt-6"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                >
-                  <p className="font-mono text-xs uppercase tracking-[0.28em] text-white/60 mb-3">Switch client</p>
-                  <div className="flex gap-2 flex-wrap">
-                    {clients.map((c, idx) => (
-                      <motion.div
-                        key={c.name}
-                        className={`bg-gradient-to-br ${c.avatar} h-10 w-10 rounded-lg flex items-center justify-center font-display text-xs font-black text-white cursor-pointer border transition ${
-                          selectedClientIndex === idx 
-                            ? 'border-white/60 ring-2 ring-[#00dcff]' 
-                            : 'border-white/20 hover:border-white/40'
-                        }`}
-                        whileHover={{ scale: 1.1 }}
-                        onClick={() => setSelectedClientIndex(idx)}
-                        title={c.name}
-                      >
-                        {c.initials}
-                      </motion.div>
-                    ))}
+                  {/* Footer */}
+                  <div className="flex items-center justify-between border-t border-white/10 pt-5 mt-5">
+                    <span className="font-mono text-xs uppercase tracking-[0.2em] text-white/45">Click to play</span>
+                    <ArrowUpRight className="h-5 w-5 text-[#ff2f8e] transition duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
                   </div>
-                </motion.div>
-              </div>
-            </motion.div>
+                </div>
+              </motion.article>
+            ))}
           </div>
         </div>
       </section>
@@ -677,8 +596,8 @@ export default function Home() {
               <div className="absolute left-6 top-6 rounded-full border border-white/15 bg-black/50 px-4 py-2 font-mono text-xs uppercase tracking-[0.28em] text-white/80 backdrop-blur">Main Reel 2024</div>
               <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end h-full">
                 <div className="mt-auto">
-                  <h3 className="font-display text-2xl font-black uppercase leading-none tracking-[-0.05em] md:text-4xl text-white drop-shadow-lg">Portfolio Reel</h3>
-                  <p className="mt-3 max-w-lg text-sm md:text-base text-white/90 drop-shadow-lg">Complete showreel: animation, editing, VFX, color grading & motion design.</p>
+                  <h3 className="font-display text-lg md:text-xl font-black uppercase leading-none tracking-[-0.05em] text-white drop-shadow-lg">Reel</h3>
+                  <p className="mt-2 max-w-lg text-xs md:text-sm text-white/90 drop-shadow-lg">Complete portfolio: animation, editing, VFX & color grading.</p>
                 </div>
               </div>
             </div>
